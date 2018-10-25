@@ -9,15 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
+@class LSAVCommand;
+typedef void(^processResult)(LSAVCommand* avCommand);
+
 @interface LSAVCommand : NSObject
 
 @property (nonatomic, strong) AVMutableComposition* mutableComposition;
 @property (nonatomic, strong) AVMutableVideoComposition* mutableVideoComposition;
 @property (nonatomic, strong) AVMutableAudioMix* mutableAudioMix;
-@property (nonatomic, strong) CALayer* watermarkLayer;
+
+// The execution state of the command
+@property (nonatomic, assign) BOOL executeStatus;
 
 - (instancetype)initWithComposition:(AVMutableComposition *)composition videoComposition:(AVMutableVideoComposition *)videoComposition audioMix:(AVMutableAudioMix *)audioMix;
 
-- (void)performWithAsset:(AVAsset *)asset;
+- (void)performWithAsset:(AVAsset *)asset completion:(processResult)block;
 
 @end

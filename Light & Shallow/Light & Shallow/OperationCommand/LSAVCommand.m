@@ -15,11 +15,12 @@
         self.mutableComposition = composition;
         self.mutableVideoComposition = videoComposition;
         self.mutableAudioMix = audioMix;
+        self.executeStatus = YES;
     }
     return self;
 }
 
-- (void)performWithAsset:(AVAsset *)asset{
+- (void)performWithAsset:(AVAsset *)asset completion:(processResult)block{
     //If the subclass does not implement this method, the program will throw an exception.
     [self doesNotRecognizeSelector:_cmd];
 }

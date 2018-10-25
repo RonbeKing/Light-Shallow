@@ -5,18 +5,16 @@
 //  Created by 王珑宾 on 2018/10/24.
 //  Copyright © 2018年 Ronb X. All rights reserved.
 //
-//*****************************************************************
-//Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
-//*****************************************************************
+//  ******************************************************
+//  * Disclaimer: IMPORTANT:  This idea comes from Apple *
+//  ******************************************************
 
 #import "LSAVAddWatermarkCommand.h"
 #import <UIKit/UIKit.h>
 
 @implementation LSAVAddWatermarkCommand
 
-- (void)performWithAsset:(AVAsset*)asset{
-    self.watermarkLayer = nil;
-    CGSize videoSize;
+- (void)performWithAsset:(AVAsset*)asset completion:(processResult)block{
     
     AVAssetTrack *assetVideoTrack = nil;
     AVAssetTrack *assetAudioTrack = nil;
@@ -71,30 +69,44 @@
             
         }
         
-        videoSize = self.mutableVideoComposition.renderSize;
-        self.watermarkLayer = [self watermarkLayerForSize:videoSize];
+        CGSize videoSize = self.mutableVideoComposition.renderSize;
+        [self watermarkWithType:LSWatermarkTypeImage videosize:videoSize position:CGRectZero];
     }
     
     // Step 3
-    // Notify AVSEViewController about add watermark operation completion
-    //[[NSNotificationCenter defaultCenter] postNotificationName:AVSEEditCommandCompletionNotification object:self];
+    // finish block
+    if (block) {
+        block(self);
+    }
 }
 
-- (CALayer *)watermarkLayerForSize:(CGSize)videoSize{
-    // Create a layer for the title
-    CALayer *_watermarkLayer = [CALayer layer];
+- (void)watermarkWithType:(LSWatermarkType)watermarkType videosize:(CGSize)videoSize position:(CGRect)position{
     
-    // Create a layer for the text of the title.
-    CATextLayer *titleLayer = [CATextLayer layer];
-    titleLayer.string = @"AVSE";
-    titleLayer.foregroundColor = [[UIColor whiteColor] CGColor];
-    titleLayer.shadowOpacity = 0.5;
-    titleLayer.alignmentMode = kCAAlignmentCenter;
-    titleLayer.bounds = CGRectMake(0, 0, videoSize.width/2, videoSize.height/2);
+    CALayer* watermarkLayer = [CALayer layer];
+    watermarkLayer.bounds = CGRectMake(0, 0, 256*1.0, 256*1.0);
     
-    // Add it to the overall layer.
-    [_watermarkLayer addSublayer:titleLayer];
+    if (watermarkType == LSWatermarkTypeText) {
+        CATextLayer *titleLayer = [CATextLayer layer];
+        titleLayer.string = @"LSAV";
+        titleLayer.foregroundColor = [[UIColor whiteColor] CGColor];
+        titleLayer.shadowOpacity = 0.5;
+        titleLayer.alignmentMode = kCAAlignmentCenter;
+        titleLayer.bounds = CGRectMake(0, 0, videoSize.width/2, videoSize.height/2);
+        titleLayer.backgroundColor = [UIColor blueColor].CGColor;
+        // Add it to the overall layer.
+        [watermarkLayer addSublayer:titleLayer];
+    }else if (watermarkType == LSWatermarkTypeImage){
+        watermarkLayer.contents = CFBridgingRelease([UIImage imageNamed:@"waterMark"].CGImage);
+    }
     
-    return _watermarkLayer;
+    CALayer *parentLayer = [CALayer layer];
+    CALayer *videoLayer = [CALayer layer];
+    parentLayer.frame = CGRectMake(0, 0, self.mutableVideoComposition.renderSize.width, self.mutableVideoComposition.renderSize.height);
+    videoLayer.frame = CGRectMake(0, 0, self.mutableVideoComposition.renderSize.width, self.mutableVideoComposition.renderSize.height);
+    [parentLayer addSublayer:videoLayer];
+    watermarkLayer.position = CGPointMake(self.mutableVideoComposition.renderSize.width - 132, self.mutableVideoComposition.renderSize.height - 52);
+    [parentLayer addSublayer:watermarkLayer];
+    self.mutableVideoComposition.animationTool = [AVVideoCompositionCoreAnimationTool videoCompositionCoreAnimationToolWithPostProcessingAsVideoLayer:videoLayer inLayer:parentLayer];
 }
+
 @end

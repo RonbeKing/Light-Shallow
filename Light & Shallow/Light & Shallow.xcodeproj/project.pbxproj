@@ -16,11 +16,12 @@
 		CAFB70E521806F8B00755998 /* Light___ShallowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70E421806F8B00755998 /* Light___ShallowTests.m */; };
 		CAFB70F021806F8B00755998 /* Light___ShallowUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70EF21806F8B00755998 /* Light___ShallowUITests.m */; };
 		CAFB710921806FCF00755998 /* RealtimeFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70FE21806FCD00755998 /* RealtimeFilterViewController.m */; };
-		CAFB710A21806FCF00755998 /* LSAVCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB710121806FCE00755998 /* LSAVCommand.m */; };
-		CAFB710B21806FCF00755998 /* LSAVAddWatermarkCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB710221806FCE00755998 /* LSAVAddWatermarkCommand.m */; };
 		CAFB710C21806FCF00755998 /* AssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB710521806FCE00755998 /* AssetManager.m */; };
 		CAFB710D21806FCF00755998 /* CaptureSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB710621806FCE00755998 /* CaptureSessionManager.m */; };
 		CAFB710E21806FCF00755998 /* videoPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB710821806FCF00755998 /* videoPreview.m */; };
+		CAFB71212181B05600755998 /* LSAVAddWatermarkCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB711B2181B05600755998 /* LSAVAddWatermarkCommand.m */; };
+		CAFB71222181B05600755998 /* LSAVExportCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB711D2181B05600755998 /* LSAVExportCommand.m */; };
+		CAFB71232181B05600755998 /* LSAVCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB71202181B05600755998 /* LSAVCommand.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,16 +60,21 @@
 		CAFB70F121806F8B00755998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CAFB70FD21806FCD00755998 /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetManager.h; sourceTree = "<group>"; };
 		CAFB70FE21806FCD00755998 /* RealtimeFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealtimeFilterViewController.m; sourceTree = "<group>"; };
-		CAFB70FF21806FCE00755998 /* LSAVCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSAVCommand.h; sourceTree = "<group>"; };
-		CAFB710021806FCE00755998 /* LSAVAddWatermarkCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSAVAddWatermarkCommand.h; sourceTree = "<group>"; };
-		CAFB710121806FCE00755998 /* LSAVCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSAVCommand.m; sourceTree = "<group>"; };
-		CAFB710221806FCE00755998 /* LSAVAddWatermarkCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSAVAddWatermarkCommand.m; sourceTree = "<group>"; };
 		CAFB710321806FCE00755998 /* CaptureSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSessionManager.h; sourceTree = "<group>"; };
 		CAFB710421806FCE00755998 /* RealtimeFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealtimeFilterViewController.h; sourceTree = "<group>"; };
 		CAFB710521806FCE00755998 /* AssetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetManager.m; sourceTree = "<group>"; };
 		CAFB710621806FCE00755998 /* CaptureSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureSessionManager.m; sourceTree = "<group>"; };
 		CAFB710721806FCF00755998 /* videoPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = videoPreview.h; sourceTree = "<group>"; };
 		CAFB710821806FCF00755998 /* videoPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = videoPreview.m; sourceTree = "<group>"; };
+		CAFB71172181AF2900755998 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		CAFB71182181AF5100755998 /* LSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSConstants.h; sourceTree = "<group>"; };
+		CAFB71192181AF5100755998 /* LSTypedef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSTypedef.h; sourceTree = "<group>"; };
+		CAFB711B2181B05600755998 /* LSAVAddWatermarkCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSAVAddWatermarkCommand.m; sourceTree = "<group>"; };
+		CAFB711C2181B05600755998 /* LSAVExportCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSAVExportCommand.h; sourceTree = "<group>"; };
+		CAFB711D2181B05600755998 /* LSAVExportCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSAVExportCommand.m; sourceTree = "<group>"; };
+		CAFB711E2181B05600755998 /* LSAVAddWatermarkCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSAVAddWatermarkCommand.h; sourceTree = "<group>"; };
+		CAFB711F2181B05600755998 /* LSAVCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSAVCommand.h; sourceTree = "<group>"; };
+		CAFB71202181B05600755998 /* LSAVCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSAVCommand.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,14 +125,11 @@
 		CAFB70CA21806F8900755998 /* Light & Shallow */ = {
 			isa = PBXGroup;
 			children = (
+				CAFB711A2181B01200755998 /* OperationCommand */,
 				CAFB70FD21806FCD00755998 /* AssetManager.h */,
 				CAFB710521806FCE00755998 /* AssetManager.m */,
 				CAFB710321806FCE00755998 /* CaptureSessionManager.h */,
 				CAFB710621806FCE00755998 /* CaptureSessionManager.m */,
-				CAFB710021806FCE00755998 /* LSAVAddWatermarkCommand.h */,
-				CAFB710221806FCE00755998 /* LSAVAddWatermarkCommand.m */,
-				CAFB70FF21806FCE00755998 /* LSAVCommand.h */,
-				CAFB710121806FCE00755998 /* LSAVCommand.m */,
 				CAFB710421806FCE00755998 /* RealtimeFilterViewController.h */,
 				CAFB70FE21806FCD00755998 /* RealtimeFilterViewController.m */,
 				CAFB710721806FCF00755998 /* videoPreview.h */,
@@ -135,6 +138,9 @@
 				CAFB70CC21806F8900755998 /* AppDelegate.m */,
 				CAFB70CE21806F8900755998 /* ViewController.h */,
 				CAFB70CF21806F8900755998 /* ViewController.m */,
+				CAFB71182181AF5100755998 /* LSConstants.h */,
+				CAFB71192181AF5100755998 /* LSTypedef.h */,
+				CAFB71172181AF2900755998 /* PrefixHeader.pch */,
 				CAFB70D121806F8900755998 /* Main.storyboard */,
 				CAFB70D421806F8B00755998 /* Assets.xcassets */,
 				CAFB70D621806F8B00755998 /* LaunchScreen.storyboard */,
@@ -160,6 +166,19 @@
 				CAFB70F121806F8B00755998 /* Info.plist */,
 			);
 			path = "Light & ShallowUITests";
+			sourceTree = "<group>";
+		};
+		CAFB711A2181B01200755998 /* OperationCommand */ = {
+			isa = PBXGroup;
+			children = (
+				CAFB711F2181B05600755998 /* LSAVCommand.h */,
+				CAFB71202181B05600755998 /* LSAVCommand.m */,
+				CAFB711E2181B05600755998 /* LSAVAddWatermarkCommand.h */,
+				CAFB711B2181B05600755998 /* LSAVAddWatermarkCommand.m */,
+				CAFB711C2181B05600755998 /* LSAVExportCommand.h */,
+				CAFB711D2181B05600755998 /* LSAVExportCommand.m */,
+			);
+			path = OperationCommand;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,15 +311,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAFB71212181B05600755998 /* LSAVAddWatermarkCommand.m in Sources */,
 				CAFB70D021806F8900755998 /* ViewController.m in Sources */,
 				CAFB710921806FCF00755998 /* RealtimeFilterViewController.m in Sources */,
-				CAFB710B21806FCF00755998 /* LSAVAddWatermarkCommand.m in Sources */,
 				CAFB710C21806FCF00755998 /* AssetManager.m in Sources */,
 				CAFB70DB21806F8B00755998 /* main.m in Sources */,
 				CAFB710E21806FCF00755998 /* videoPreview.m in Sources */,
+				CAFB71222181B05600755998 /* LSAVExportCommand.m in Sources */,
 				CAFB710D21806FCF00755998 /* CaptureSessionManager.m in Sources */,
 				CAFB70CD21806F8900755998 /* AppDelegate.m in Sources */,
-				CAFB710A21806FCF00755998 /* LSAVCommand.m in Sources */,
+				CAFB71232181B05600755998 /* LSAVCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +491,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AMT5E8JS33;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Light & Shallow/PrefixHeader.pch";
 				INFOPLIST_FILE = "Light & Shallow/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -488,6 +510,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AMT5E8JS33;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Light & Shallow/PrefixHeader.pch";
 				INFOPLIST_FILE = "Light & Shallow/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

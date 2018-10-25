@@ -10,7 +10,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import "videoPreview.h"
 #import "AssetManager.h"
+#import "LSAVCommand.h"
 #import "LSAVAddWatermarkCommand.h"
+#import "LSAVExportCommand.h"
 
 #define KScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define KScreenHeight  [UIScreen mainScreen].bounds.size.height
@@ -62,7 +64,7 @@
     btn2.backgroundColor = [UIColor blueColor];
     [btn2 setTitle:@"flip" forState:UIControlStateNormal];
     [self.view addSubview:btn2];
-    [btn2 addTarget:self action:@selector(switchCamera) forControlEvents:UIControlEventTouchUpInside];
+    [btn2 addTarget:self action:@selector(exitVC) forControlEvents:UIControlEventTouchUpInside];
     
     __block int count = 0;
     NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:2 repeats:YES block:^(NSTimer * _Nonnull timer) {
@@ -74,6 +76,10 @@
     }];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     [UIApplication sharedApplication].idleTimerDisabled = YES;
+}
+
+- (void)exitVC{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)initCaptureSession{
@@ -198,9 +204,6 @@
         
         [self.assetWriter startWriting];
         [self.assetWriter startSessionAtSourceTime:self.currentSampleTime];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            self.needWrite = YES;
-//        });
         self.needWrite = YES;
         
         NSLog(@"record began");
@@ -212,19 +215,15 @@
     [self.assetWriter finishWritingWithCompletionHandler:^{
         NSLog(@"record ended");
         
-//        AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:self.videoPath] options:nil];
-//
-//        NSLog(@"%@",asset);
-//
-//        LSAVAddWatermarkCommand* watermarkCommand = [[LSAVAddWatermarkCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];
-//        [watermarkCommand performWithAsset:asset];
+        AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:self.videoPath] options:nil];
+
+        LSAVAddWatermarkCommand* watermarkCommand = [[LSAVAddWatermarkCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];
         
-        [AssetManager saveVideo:self.videoPath toAlbum:@"RXAlbum" completion:^(NSURL *url, NSError *error) {
-            if (error) {
-                NSLog(@"save to album failed");
-            }else{
-                NSLog(@"save to album success");
-            }
+        [watermarkCommand performWithAsset:asset completion:^(LSAVCommand *avCommand) {
+            LSAVExportCommand* exportCommand = [[LSAVExportCommand alloc] initWithComposition:avCommand.mutableComposition videoComposition:avCommand.mutableVideoComposition audioMix:avCommand.mutableAudioMix];
+            [exportCommand performWithAsset:nil completion:^(LSAVCommand *avCommand) {
+                NSLog(@"export successfully");
+            }];
         }];
     }];
 }
