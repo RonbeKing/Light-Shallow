@@ -193,11 +193,7 @@
         return;
     }
     if ([self createWriter]) {
-        
-        [self.assetWriter startWriting];
-        [self.assetWriter startSessionAtSourceTime:self.currentSampleTime];
         self.needWrite = YES;
-        
         NSLog(@"record began");
     }
 }
@@ -348,6 +344,11 @@
         image = self.filter.outputImage;
         
         if (self.needWrite) {
+            if (self.assetWriter.status != AVAssetWriterStatusWriting) {
+                [self.assetWriter startWriting];
+                [self.assetWriter startSessionAtSourceTime:self.currentSampleTime];
+            }
+            
             if (self.inputPixelBufferAdptor.assetWriterInput.isReadyForMoreMediaData && self.assetWriter.status == AVAssetWriterStatusWriting) {
                 
                 CVPixelBufferRef newPixelBuffer = NULL;
