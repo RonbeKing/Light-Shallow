@@ -69,7 +69,8 @@
 
 - (void) pinchView:(UIPinchGestureRecognizer *)pinchGestureRecognizer{
     if (pinchGestureRecognizer.state == UIGestureRecognizerStateBegan || pinchGestureRecognizer.state == UIGestureRecognizerStateChanged) {
-        float currentScale = _lastScale - (1 - pinchGestureRecognizer.scale);
+        float currentScale = _lastScale - (1 - pinchGestureRecognizer.scale)*0.1;
+
         if (currentScale < DEFAULT_VIDEO_ZOOM_FACTOR_MIN) {
             currentScale = DEFAULT_VIDEO_ZOOM_FACTOR_MIN;
         }
@@ -119,7 +120,7 @@
 -(void)layoutSubviews{
     self.previewLayer.frame = self.bounds;
     if (self.bounds.size.width >self.bounds.size.height) {
-        self.slider.center = CGPointMake(self.bounds.size.width - 40, self.bounds.size.height/2 + 20);
+        self.slider.center = CGPointMake(40, self.bounds.size.height/2 + 20);
     }else{
         self.slider.center = CGPointMake(40, self.bounds.size.height/2 + 20);
     }
@@ -156,7 +157,7 @@
 }
 
 - (void)sliderValueChanged:(UISlider *)slider{
-    NSLog(@"slilder.value = %f ",slider.value);
+//    NSLog(@"slilder.value = %f ",slider.value);
     self.focalizeAdjustmentBlock(slider.value);
 }
 
