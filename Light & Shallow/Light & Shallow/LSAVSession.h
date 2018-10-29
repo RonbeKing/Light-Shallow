@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 @class LSVideoPreview;
 @interface LSAVSession : NSObject
@@ -18,4 +19,6 @@
 - (void)startRecord;
 - (void)stopRecord;
 
+- (void)changeTorchMode:(AVCaptureTorchMode)torchMode;
+- (void)switchCamera;
 @end

@@ -155,6 +155,14 @@
     }
 }
 
+- (void)changeTorchMode:(AVCaptureTorchMode)torchMode{
+    [self changeVideoDevicePropertyInSafety:^(AVCaptureDevice *captureDevice) {
+        if ([self.videoDevice isTorchModeSupported:torchMode]) {
+            [self.videoDevice setTorchMode:torchMode];
+        }
+    }];
+}
+
 - (void)switchCamera{
     self.isSwitchingCamera = YES;
     CATransition* transition = [CATransition animation];

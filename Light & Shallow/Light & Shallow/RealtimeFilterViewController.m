@@ -42,7 +42,7 @@
     btn2.backgroundColor = [UIColor blueColor];
     [btn2 setTitle:@"flip" forState:UIControlStateNormal];
     [self.view addSubview:btn2];
-    [btn2 addTarget:self action:@selector(exitVC) forControlEvents:UIControlEventTouchUpInside];
+    [btn2 addTarget:self action:@selector(switchCamera) forControlEvents:UIControlEventTouchUpInside];
     
     //    __block int count = 0;
     //    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:2 repeats:YES block:^(NSTimer * _Nonnull timer) {
@@ -68,6 +68,10 @@
 
 - (void)exitVC{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)switchCamera{
+    [[LSAVSession sharedInstance] switchCamera];
 }
 
 - (void)recordVideo{
