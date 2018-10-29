@@ -139,7 +139,10 @@
     };
     self.videoPreview.focalizeAdjustmentBlock = ^(CGFloat scale) {
         [weakSelf changeVideoDevicePropertyInSafety:^(AVCaptureDevice *captureDevice) {
-            [weakSelf.videoDevice rampToVideoZoomFactor:scale withRate:3.f];
+            if([weakSelf.videoDevice isRampingVideoZoom]){
+                [weakSelf.videoDevice cancelVideoZoomRamp];
+            }
+            [weakSelf.videoDevice rampToVideoZoomFactor:scale withRate:100.f];
         }];
     };
     
@@ -337,6 +340,8 @@
         [connection setVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
     }else if (orientation == UIDeviceOrientationLandscapeRight) {
         [connection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
+    }else{
+        [connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
     }
     
     @autoreleasepool{

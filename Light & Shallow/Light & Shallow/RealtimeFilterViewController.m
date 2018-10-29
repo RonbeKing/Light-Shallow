@@ -79,7 +79,7 @@
 }
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
-    self.videoPreview.frame = CGRectMake(0, 0, size.width, size.height);
-    [self.videoPreview setNeedsLayout];
+//    self.videoPreview.frame = CGRectMake(0, 0, size.width, size.height);
+//    [self.videoPreview setNeedsLayout];
 }
 @end
