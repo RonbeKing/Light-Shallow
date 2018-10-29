@@ -9,5 +9,6 @@
 #ifndef LSConstants_h
 #define LSConstants_h
 
+#define DEFAULT_VIDEO_ZOOM_FACTOR 3.0f
 
 #endif /* LSConstants_h */
