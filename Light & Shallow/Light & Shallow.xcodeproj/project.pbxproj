@@ -105,6 +105,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA903D6A2186B6F4005758F9 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				CAFB71182181AF5100755998 /* LSConstants.h */,
+				CAFB71192181AF5100755998 /* LSTypedef.h */,
+				CAFB71172181AF2900755998 /* PrefixHeader.pch */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		CAFB70BF21806F8900755998 = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +138,7 @@
 		CAFB70CA21806F8900755998 /* Light & Shallow */ = {
 			isa = PBXGroup;
 			children = (
+				CA903D6A2186B6F4005758F9 /* Config */,
 				CAFB711A2181B01200755998 /* OperationCommand */,
 				CAFB70FD21806FCD00755998 /* AssetManager.h */,
 				CAFB710521806FCE00755998 /* AssetManager.m */,
@@ -141,9 +152,6 @@
 				CAFB70CF21806F8900755998 /* ViewController.m */,
 				CA903D672186B057005758F9 /* LSVideoPreview.h */,
 				CA903D682186B057005758F9 /* LSVideoPreview.m */,
-				CAFB71182181AF5100755998 /* LSConstants.h */,
-				CAFB71192181AF5100755998 /* LSTypedef.h */,
-				CAFB71172181AF2900755998 /* PrefixHeader.pch */,
 				CA903D642186B001005758F9 /* LSAVSession.h */,
 				CA903D652186B001005758F9 /* LSAVSession.m */,
 				CAFB70D121806F8900755998 /* Main.storyboard */,
@@ -498,7 +506,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AMT5E8JS33;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Light & Shallow/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Light & Shallow/Config/PrefixHeader.pch";
 				INFOPLIST_FILE = "Light & Shallow/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -517,7 +525,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AMT5E8JS33;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Light & Shallow/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Light & Shallow/Config/PrefixHeader.pch";
 				INFOPLIST_FILE = "Light & Shallow/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
