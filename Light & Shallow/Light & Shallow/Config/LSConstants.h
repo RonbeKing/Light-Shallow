@@ -11,4 +11,6 @@
 
 #define DEFAULT_VIDEO_ZOOM_FACTOR 3.0f
 
+#define DEFAULT_VIDEO_ZOOM_FACTOR_MIN 1.0f
+#define DEFAULT_VIDEO_ZOOM_FACTOR_MAX 2.0f
 #endif /* LSConstants_h */

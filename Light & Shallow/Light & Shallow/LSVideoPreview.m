@@ -7,10 +7,17 @@
 //
 
 #import "LSVideoPreview.h"
+#import "LSSliderView.h"
+#import "LSConstants.h"
+
+#define KScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define KScreenHeight  [UIScreen mainScreen].bounds.size.height
 
 @interface LSVideoPreview ()
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer* previewLayer;
 @property (nonatomic, strong) UIView* focusView;
+@property (nonatomic, strong) LSSliderView * slider;
+@property (nonatomic, assign) CGFloat lastScale;
 @end
 
 @implementation LSVideoPreview
@@ -39,6 +46,46 @@
     
     UITapGestureRecognizer* focusGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(focusGesture:)];
     [self addGestureRecognizer:focusGest];
+    _lastScale = 1.0;
+    [self initSliderView];
+    [self initGester];
+}
+
+- (void)initSliderView{
+    [self addSubview:self.slider];
+    self.slider.frame = CGRectMake(0, 0, KScreenWidth - 80, 50);
+    self.slider.center = CGPointMake(40, KScreenHeight/2 -20);
+    self.slider.transform = CGAffineTransformMakeRotation(-90*M_PI/180);
+}
+
+- (void)initGester{
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] init];
+    [tapGesture addTarget:self action:@selector(tapViewAction)];
+    [self addGestureRecognizer:tapGesture];
+
+    UIPinchGestureRecognizer * pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchView:)];
+    [self addGestureRecognizer:pinchGesture];
+}
+
+- (void) pinchView:(UIPinchGestureRecognizer *)pinchGestureRecognizer{
+    if (pinchGestureRecognizer.state == UIGestureRecognizerStateBegan || pinchGestureRecognizer.state == UIGestureRecognizerStateChanged) {
+        float currentScale = _lastScale - (1 - pinchGestureRecognizer.scale);
+        if (currentScale < DEFAULT_VIDEO_ZOOM_FACTOR_MIN) {
+            currentScale = DEFAULT_VIDEO_ZOOM_FACTOR_MIN;
+        }
+        if (currentScale > DEFAULT_VIDEO_ZOOM_FACTOR_MAX) {
+            currentScale = DEFAULT_VIDEO_ZOOM_FACTOR_MAX;
+        }
+        if (currentScale >= DEFAULT_VIDEO_ZOOM_FACTOR_MIN && currentScale <= DEFAULT_VIDEO_ZOOM_FACTOR_MAX) {
+            self.slider.value = currentScale;
+            self.focalizeAdjustmentBlock(currentScale);
+            _lastScale = currentScale;
+        }
+    }
+}
+
+- (void)tapViewAction{
+    self.slider.hidden = !self.slider.hidden;
 }
 
 - (void) focusGesture:(UITapGestureRecognizer*)gesture{
@@ -71,6 +118,11 @@
 
 -(void)layoutSubviews{
     self.previewLayer.frame = self.bounds;
+    if (self.bounds.size.width >self.bounds.size.height) {
+        self.slider.center = CGPointMake(self.bounds.size.width - 40, self.bounds.size.height/2 + 20);
+    }else{
+        self.slider.center = CGPointMake(40, self.bounds.size.height/2 + 20);
+    }
 }
 
 -(void)setImageContents:(id)imageContents{
@@ -81,9 +133,46 @@
     if (!_focusView) {
         _focusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
         _focusView.layer.borderColor = [UIColor greenColor].CGColor;
-        _focusView.layer.borderWidth = 1.0f;
+        _focusView.layer.borderWidth = DEFAULT_VIDEO_ZOOM_FACTOR_MIN;
         _focusView.hidden = YES;
     }
     return _focusView;
 }
+
+- (LSSliderView *)slider{
+    if (!_slider) {
+        _slider = [[LSSliderView alloc] init];
+        _slider.hidden = NO;
+        _slider.minimumValue = DEFAULT_VIDEO_ZOOM_FACTOR_MIN;
+        _slider.maximumValue = DEFAULT_VIDEO_ZOOM_FACTOR_MAX;
+        [_slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+        [_slider setThumbImage:[UIImage imageNamed:@"球"] forState:UIControlStateNormal];
+        [_slider setThumbImage:[UIImage imageNamed:@"球"] forState:UIControlStateHighlighted];
+        UIImage * image = [self createImageWithColor:[UIColor colorWithWhite:1 alpha:0.4]];
+        [self.slider setMaximumTrackImage:image forState:UIControlStateNormal];
+        [self.slider setMinimumTrackImage:image forState:UIControlStateNormal];
+    }
+    return _slider;
+}
+
+- (void)sliderValueChanged:(UISlider *)slider{
+    NSLog(@"slilder.value = %f ",slider.value);
+    self.focalizeAdjustmentBlock(slider.value);
+}
+
+- (UIImage*) createImageWithColor:(UIColor*)color{
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 1);
+    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    CGContextStrokePath(context);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
+}
+
+
 @end
