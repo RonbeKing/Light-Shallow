@@ -1,5 +1,5 @@
 //
-//  videoPreview.h
+//  LSVideoPreview.h
 //  coreImg
 //
 //  Created by 王珑宾 on 2018/10/11.
@@ -12,7 +12,7 @@
 typedef void (^FocusBlock) (CGPoint point);
 typedef void (^ExposureBlock) (CGPoint point);
 
-@interface videoPreview : UIView
+@interface LSVideoPreview : UIView
 @property (nonatomic, strong, readonly) AVCaptureVideoPreviewLayer* previewLayer;
 @property (nonatomic, strong) id imageContents;
 @property (nonatomic,   copy) FocusBlock focusBlock;

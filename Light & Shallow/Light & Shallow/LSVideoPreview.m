@@ -1,19 +1,19 @@
 //
-//  videoPreview.m
+//  LSVideoPreview.m
 //  coreImg
 //
 //  Created by 王珑宾 on 2018/10/11.
 //  Copyright © 2018年 Ronb X. All rights reserved.
 //
 
-#import "videoPreview.h"
+#import "LSVideoPreview.h"
 
-@interface videoPreview ()
+@interface LSVideoPreview ()
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer* previewLayer;
 @property (nonatomic, strong) UIView* focusView;
 @end
 
-@implementation videoPreview
+@implementation LSVideoPreview
 
 - (instancetype)init{
     if (self = [super init]) {
