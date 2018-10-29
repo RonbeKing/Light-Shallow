@@ -13,14 +13,13 @@
 
 
 #import "LSAVSession.h"
+#import "LSSliderView.h"
 
 #define KScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define KScreenHeight  [UIScreen mainScreen].bounds.size.height
 
 @interface RealtimeFilterViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate,AVCaptureAudioDataOutputSampleBufferDelegate>
-
 @property (nonatomic, strong) LSVideoPreview* videoPreview;
-
 @end
 
 @implementation RealtimeFilterViewController
@@ -79,5 +78,4 @@
     self.videoPreview.frame = CGRectMake(0, 0, size.width, size.height);
     [self.videoPreview setNeedsLayout];
 }
-
 @end

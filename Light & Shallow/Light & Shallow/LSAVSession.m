@@ -139,7 +139,7 @@
     };
     self.videoPreview.focalizeAdjustmentBlock = ^(CGFloat scale) {
         [weakSelf changeVideoDevicePropertyInSafety:^(AVCaptureDevice *captureDevice) {
-            [weakSelf.videoDevice rampToVideoZoomFactor:scale withRate:10.f];
+            [weakSelf.videoDevice rampToVideoZoomFactor:scale withRate:3.f];
         }];
     };
     
