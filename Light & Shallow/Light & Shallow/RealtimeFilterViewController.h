@@ -1,6 +1,6 @@
 //
 //  realtimeFilterViewController.h
-//  coreImg
+//  Light & Shallow
 //
 //  Created by 王珑宾 on 2018/10/9.
 //  Copyright © 2018年 Ronb X. All rights reserved.

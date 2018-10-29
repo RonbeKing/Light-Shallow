@@ -1,6 +1,6 @@
 //
 //  LSAVExportCommand.m
-//  coreImg
+//  Light & Shallow
 //
 //  Created by 王珑宾 on 2018/10/24.
 //  Copyright © 2018年 Ronb X. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "LSAVExportCommand.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "AssetManager.h"
+#import "LSAssetManager.h"
 
 @implementation LSAVExportCommand
 
@@ -63,7 +63,7 @@
 }
 
 - (void)writeVideoToPhotoLibrary:(NSString *)url{
-    [AssetManager saveVideo:url toAlbum:@"RXAlbum" completion:^(NSURL *url, NSError *error) {
+    [LSAssetManager saveVideo:url toAlbum:@"RXAlbum" completion:^(NSURL *url, NSError *error) {
         if (error) {
             NSLog(@"save to album failed");
         }else{

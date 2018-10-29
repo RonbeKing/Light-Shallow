@@ -18,7 +18,7 @@
 		CAFB70E521806F8B00755998 /* Light___ShallowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70E421806F8B00755998 /* Light___ShallowTests.m */; };
 		CAFB70F021806F8B00755998 /* Light___ShallowUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70EF21806F8B00755998 /* Light___ShallowUITests.m */; };
 		CAFB710921806FCF00755998 /* RealtimeFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70FE21806FCD00755998 /* RealtimeFilterViewController.m */; };
-		CAFB710C21806FCF00755998 /* AssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB710521806FCE00755998 /* AssetManager.m */; };
+		CAFB710C21806FCF00755998 /* LSAssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB710521806FCE00755998 /* LSAssetManager.m */; };
 		CAFB710D21806FCF00755998 /* CaptureSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB710621806FCE00755998 /* CaptureSessionManager.m */; };
 		CAFB71212181B05600755998 /* LSAVAddWatermarkCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB711B2181B05600755998 /* LSAVAddWatermarkCommand.m */; };
 		CAFB71222181B05600755998 /* LSAVExportCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB711D2181B05600755998 /* LSAVExportCommand.m */; };
@@ -63,11 +63,11 @@
 		CAFB70EB21806F8B00755998 /* Light & ShallowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Light & ShallowUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFB70EF21806F8B00755998 /* Light___ShallowUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Light___ShallowUITests.m"; sourceTree = "<group>"; };
 		CAFB70F121806F8B00755998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CAFB70FD21806FCD00755998 /* AssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetManager.h; sourceTree = "<group>"; };
+		CAFB70FD21806FCD00755998 /* LSAssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSAssetManager.h; sourceTree = "<group>"; };
 		CAFB70FE21806FCD00755998 /* RealtimeFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealtimeFilterViewController.m; sourceTree = "<group>"; };
 		CAFB710321806FCE00755998 /* CaptureSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSessionManager.h; sourceTree = "<group>"; };
 		CAFB710421806FCE00755998 /* RealtimeFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealtimeFilterViewController.h; sourceTree = "<group>"; };
-		CAFB710521806FCE00755998 /* AssetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetManager.m; sourceTree = "<group>"; };
+		CAFB710521806FCE00755998 /* LSAssetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSAssetManager.m; sourceTree = "<group>"; };
 		CAFB710621806FCE00755998 /* CaptureSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureSessionManager.m; sourceTree = "<group>"; };
 		CAFB71172181AF2900755998 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		CAFB71182181AF5100755998 /* LSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSConstants.h; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 			children = (
 				CA903D6A2186B6F4005758F9 /* Config */,
 				CAFB711A2181B01200755998 /* OperationCommand */,
-				CAFB70FD21806FCD00755998 /* AssetManager.h */,
-				CAFB710521806FCE00755998 /* AssetManager.m */,
+				CAFB70FD21806FCD00755998 /* LSAssetManager.h */,
+				CAFB710521806FCE00755998 /* LSAssetManager.m */,
 				CAFB710321806FCE00755998 /* CaptureSessionManager.h */,
 				CAFB710621806FCE00755998 /* CaptureSessionManager.m */,
 				CAFB710421806FCE00755998 /* RealtimeFilterViewController.h */,
@@ -327,7 +327,7 @@
 				CAFB71212181B05600755998 /* LSAVAddWatermarkCommand.m in Sources */,
 				CAFB70D021806F8900755998 /* ViewController.m in Sources */,
 				CAFB710921806FCF00755998 /* RealtimeFilterViewController.m in Sources */,
-				CAFB710C21806FCF00755998 /* AssetManager.m in Sources */,
+				CAFB710C21806FCF00755998 /* LSAssetManager.m in Sources */,
 				CA903D662186B001005758F9 /* LSAVSession.m in Sources */,
 				CAFB70DB21806F8B00755998 /* main.m in Sources */,
 				CA903D692186B057005758F9 /* LSVideoPreview.m in Sources */,

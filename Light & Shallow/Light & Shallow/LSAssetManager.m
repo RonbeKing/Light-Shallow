@@ -1,16 +1,16 @@
 //
-//  AssetManager.m
-//  coreImg
+//  LSAssetManager.m
+//  Light & Shallow
 //
 //  Created by 王珑宾 on 2018/10/23.
 //  Copyright © 2018年 Ronb X. All rights reserved.
 //
 
-#import "AssetManager.h"
+#import "LSAssetManager.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/Photos.h>
 
-@implementation AssetManager
+@implementation LSAssetManager
 
 #pragma mark -- save video to custom album
 + (void)saveVideo:(NSString *)videoUrl toAlbum:(NSString *)albumName completion:(void (^)(NSURL* url, NSError* error))block{
