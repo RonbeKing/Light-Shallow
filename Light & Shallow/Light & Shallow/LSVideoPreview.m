@@ -13,7 +13,7 @@
 #define KScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define KScreenHeight  [UIScreen mainScreen].bounds.size.height
 
-@interface LSVideoPreview ()
+@interface LSVideoPreview ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer* previewLayer;
 @property (nonatomic, strong) UIView* focusView;
 @property (nonatomic, strong) LSSliderView * slider;
@@ -64,13 +64,15 @@
     [self addGestureRecognizer:tapGesture];
 
     UIPinchGestureRecognizer * pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchView:)];
+    pinchGesture.delegate = self;
     [self addGestureRecognizer:pinchGesture];
 }
 
 - (void) pinchView:(UIPinchGestureRecognizer *)pinchGestureRecognizer{
+    NSLog(@"1===%f",pinchGestureRecognizer.scale);
     if (pinchGestureRecognizer.state == UIGestureRecognizerStateBegan || pinchGestureRecognizer.state == UIGestureRecognizerStateChanged) {
-        float currentScale = _lastScale - (1 - pinchGestureRecognizer.scale)*0.1;
-
+        float currentScale = _lastScale - (1 - pinchGestureRecognizer.scale)*0.05;
+        NSLog(@"2===%f",currentScale);
         if (currentScale < DEFAULT_VIDEO_ZOOM_FACTOR_MIN) {
             currentScale = DEFAULT_VIDEO_ZOOM_FACTOR_MIN;
         }
@@ -175,5 +177,7 @@
     return theImage;
 }
 
-
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return ![gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
+}
 @end
