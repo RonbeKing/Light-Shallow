@@ -122,25 +122,37 @@
     // video preview
     __weak typeof(self) weakSelf = self;
     videoPreview.focusBlock = ^(CGPoint point) {
-        if ([weakSelf.videoDevice lockForConfiguration:nil]) {
-            if ([weakSelf.videoDevice isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
-                [weakSelf.videoDevice setFocusMode:AVCaptureFocusModeAutoFocus];
-                [weakSelf.videoDevice setFocusPointOfInterest:point];
+        [weakSelf changeVideoDevicePropertyInSafety:^(AVCaptureDevice *captureDevice) {
+            if ([captureDevice isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
+                [captureDevice setFocusMode:AVCaptureFocusModeAutoFocus];
+                [captureDevice setFocusPointOfInterest:point];
             }
-        }
-        [weakSelf.videoDevice unlockForConfiguration];
+        }];
     };
     self.videoPreview.exposureBlock = ^(CGPoint point) {
-        if ([weakSelf.videoDevice lockForConfiguration:nil]) {
-            if ([weakSelf.videoDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
-                [weakSelf.videoDevice setExposureMode:AVCaptureExposureModeAutoExpose];
-                [weakSelf.videoDevice setExposurePointOfInterest:point];
+        [weakSelf changeVideoDevicePropertyInSafety:^(AVCaptureDevice *captureDevice) {
+            if ([captureDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
+                [captureDevice setExposureMode:AVCaptureExposureModeAutoExpose];
+                [captureDevice setExposurePointOfInterest:point];
             }
-        }
-        [weakSelf.videoDevice unlockForConfiguration];
+        }];
     };
-
+    self.videoPreview.focalizeAdjustmentBlock = ^(CGFloat scale) {
+        [weakSelf changeVideoDevicePropertyInSafety:^(AVCaptureDevice *captureDevice) {
+            [weakSelf.videoDevice rampToVideoZoomFactor:scale withRate:10.f];
+        }];
+    };
+    
     [self.captureSession startRunning];
+}
+
+- (void)changeVideoDevicePropertyInSafety:(void(^)(AVCaptureDevice* captureDevice))propertyChange{
+    __weak typeof(self) weakSelf = self;
+    AVCaptureDevice* videoCaptureDevice = weakSelf.videoDevice;
+    if ([videoCaptureDevice lockForConfiguration:nil]) {
+        propertyChange(videoCaptureDevice);
+        [videoCaptureDevice unlockForConfiguration];
+    }
 }
 
 - (void)switchCamera{
