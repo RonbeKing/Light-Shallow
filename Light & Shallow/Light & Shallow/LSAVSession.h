@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@class LSVideoPreview;
+@class LSVideoPreview,LSAVCommand;
 @interface LSAVSession : NSObject
 
 + (instancetype)sharedInstance;
@@ -21,4 +21,7 @@
 
 - (void)changeTorchMode:(AVCaptureTorchMode)torchMode;
 - (void)switchCamera;
+
+- (void)addWatermark:(LSWatermarkType)watermarkType inAsset:(AVAsset*)asset completion:(void(^)(LSAVCommand *avCommand))block;
+- (void)exportAsset:(AVAsset*)asset useCommand:(LSAVCommand*)avCommand;
 @end

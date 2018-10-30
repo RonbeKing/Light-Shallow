@@ -18,7 +18,7 @@ typedef void(^processResult)(LSAVCommand* avCommand);
 @property (nonatomic, strong) AVMutableVideoComposition* mutableVideoComposition;
 @property (nonatomic, strong) AVMutableAudioMix* mutableAudioMix;
 
-// The execution state of the command
+// The execution state of the command / success or not
 @property (nonatomic, assign) BOOL executeStatus;
 
 - (instancetype)initWithComposition:(AVMutableComposition *)composition videoComposition:(AVMutableVideoComposition *)videoComposition audioMix:(AVMutableAudioMix *)audioMix;

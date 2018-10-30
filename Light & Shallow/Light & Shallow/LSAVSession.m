@@ -149,6 +149,8 @@
     [self.captureSession startRunning];
 }
 
+#pragma mark -- change capture session property
+
 - (void)changeVideoDevicePropertyInSafety:(void(^)(AVCaptureDevice* captureDevice))propertyChange{
     __weak typeof(self) weakSelf = self;
     AVCaptureDevice* videoCaptureDevice = weakSelf.videoDevice;
@@ -210,21 +212,39 @@
 }
 
 - (void)stopRecord{
+    self.needWrite = NO;
+    __weak typeof(self) weakSelf = self;
     
     [self.assetWriter finishWritingWithCompletionHandler:^{
-        self.needWrite = NO;
         NSLog(@"record ended");
-        
         AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:self.videoPath] options:nil];
         
-        LSAVAddWatermarkCommand* watermarkCommand = [[LSAVAddWatermarkCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];
-        
-        [watermarkCommand performWithAsset:asset completion:^(LSAVCommand *avCommand) {
-            LSAVExportCommand* exportCommand = [[LSAVExportCommand alloc] initWithComposition:avCommand.mutableComposition videoComposition:avCommand.mutableVideoComposition audioMix:avCommand.mutableAudioMix];
-            [exportCommand performWithAsset:nil completion:^(LSAVCommand *avCommand) {
-                NSLog(@"export successfully");
-            }];
+        [self addWatermark:LSWatermarkTypeImage inAsset:asset completion:^(LSAVCommand *avCommand) {
+            [weakSelf exportAsset:asset useCommand:avCommand];
         }];
+    }];
+}
+
+#pragma mark -- Video editor
+
+- (void)addWatermark:(LSWatermarkType)watermarkType inAsset:(AVAsset *)asset completion:(void (^)(LSAVCommand *))block{
+    LSAVAddWatermarkCommand* watermarkCommand = [[LSAVAddWatermarkCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];
+    [watermarkCommand performWithAsset:asset completion:^(LSAVCommand *avCommand) {
+        if (block) {
+            block(avCommand);
+        }
+    }];
+}
+
+- (void)exportAsset:(AVAsset*)asset useCommand:(LSAVCommand*)avCommand{
+    LSAVExportCommand* exportCommand = [[LSAVExportCommand alloc] initWithComposition:avCommand.mutableComposition videoComposition:avCommand.mutableVideoComposition audioMix:avCommand.mutableAudioMix];
+    
+    [exportCommand performWithAsset:asset completion:^(LSAVCommand *avCommand) {
+        if (avCommand.executeStatus) {
+            NSLog(@"export successfully");
+        }else{
+            NSLog(@"export fail");
+        }
     }];
 }
 
