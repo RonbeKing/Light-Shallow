@@ -10,6 +10,13 @@
 
 @implementation LSAVConfiguration
 
-
++(instancetype)defaultConfiguration{
+    LSAVConfiguration* configuration = [[LSAVConfiguration alloc] init];
+    configuration.sessionPreset = AVCaptureSessionPreset1280x720;
+    configuration.frameRate = 30;
+    configuration.videoCodec = LSVideoCodecH264;
+    configuration.audioCodec = LSAudioCodecISAC;
+    return configuration;
+}
 
 @end

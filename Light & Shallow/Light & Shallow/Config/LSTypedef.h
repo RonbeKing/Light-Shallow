@@ -19,4 +19,20 @@ typedef NS_ENUM(NSUInteger, LSWatermarkType)
     LSWatermarkTypeText = 1
 };
 
+typedef NS_ENUM(NSUInteger, LSVideoCodec)
+{
+    /* Stable, software VP8 encode & decode via libvpx */
+    LSVideoCodecVP8 = 0,
+    /* Experimental, hardware H.264 encode & decode via VideoToolbox. */
+    LSVideoCodecH264 = 1
+};
+
+typedef NS_ENUM(NSUInteger, LSAudioCodec)
+{
+    /* The Opus audio codec is wideband, and higher quality. */
+    LSAudioCodecOpus = 0,
+    /* ISAC is lower quality, but more compatible. */
+    LSAudioCodecISAC = 1
+};
+
 #endif /* LSTypedef_h */

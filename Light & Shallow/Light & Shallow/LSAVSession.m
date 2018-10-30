@@ -210,8 +210,9 @@
 }
 
 - (void)stopRecord{
-    self.needWrite = NO;
+    
     [self.assetWriter finishWritingWithCompletionHandler:^{
+        self.needWrite = NO;
         NSLog(@"record ended");
         
         AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:self.videoPath] options:nil];
@@ -267,15 +268,21 @@
       AVVideoProfileLevelKey:AVVideoProfileLevelH264BaselineAutoLevel
       };
     
+    AVVideoCodecType type;
+    if (@available(iOS 11.0, *)){
+        type = AVVideoCodecTypeH264;
+    }else{
+        type = AVVideoCodecH264;
+    }
     NSDictionary* outputSettings =
     @{
-      AVVideoCodecKey:AVVideoCodecTypeH264,
+      AVVideoCodecKey:type,
       AVVideoWidthKey:@720,
       AVVideoHeightKey:@1280,
-      AVVideoScalingModeKey:AVVideoScalingModeResizeAspectFill,
+      AVVideoScalingModeKey:AVVideoScalingModeResizeAspect,
       AVVideoCompressionPropertiesKey:compressionProperties
       };
-    
+
     AVAssetWriterInput* assetWriterVideoInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:outputSettings];
     assetWriterVideoInput.expectsMediaDataInRealTime = YES;
     self.assetWriterVideoInput = assetWriterVideoInput;
@@ -369,9 +376,11 @@
                 [self.context render:image toCVPixelBuffer:newPixelBuffer bounds:image.extent colorSpace:nil];
                 
                 if (newPixelBuffer) {
-                    BOOL success = [self.inputPixelBufferAdptor appendPixelBuffer:newPixelBuffer withPresentationTime:self.currentSampleTime];
-                    if (!success) {
-                        NSLog(@"append pixel buffer failed");
+                    if (self.assetWriter.status == AVAssetWriterStatusWriting) {
+                        BOOL success = [self.inputPixelBufferAdptor appendPixelBuffer:newPixelBuffer withPresentationTime:self.currentSampleTime];
+                        if (!success) {
+                            NSLog(@"append pixel buffer failed");
+                        }
                     }
                     CFRelease(newPixelBuffer);
                 }else{

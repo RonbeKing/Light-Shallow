@@ -11,6 +11,15 @@
 
 @interface LSAVConfiguration : NSObject
 
-@property (nonatomic, copy) AVCaptureSessionPreset sessionPreset;
-//@property (nonatomic, assign) 
+@property (nonatomic,   copy) AVCaptureSessionPreset sessionPreset;
+@property (nonatomic, assign) NSInteger frameRate;
+@property (nonatomic, assign) LSVideoCodec videoCodec;
+@property (nonatomic, assign) LSAudioCodec audioCodec;
+
+/*
+ LSAudioCodecISAC
+ LSVideoCodecH264
+ 1280x720   @ 30 fps
+ */
++ (instancetype)defaultConfiguration;
 @end
