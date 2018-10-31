@@ -13,4 +13,8 @@
 
 #define DEFAULT_VIDEO_ZOOM_FACTOR_MIN 1.0f
 #define DEFAULT_VIDEO_ZOOM_FACTOR_MAX 3.0f
+
+#define KScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define KScreenHeight  [UIScreen mainScreen].bounds.size.height
+
 #endif /* LSConstants_h */

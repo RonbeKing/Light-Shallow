@@ -19,6 +19,8 @@
 @property (nonatomic, strong) AVAsset* asset;
 @property (nonatomic, strong) NSURL* videoURL;
 
+@property (nonatomic, assign) LSPlayerState playerState;
+
 @end
 
 @implementation LSVideoPlayerView
@@ -26,21 +28,10 @@
 - (instancetype)initWithAsset:(AVAsset *)asset frame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor blackColor];
-        
         self.asset = asset;
         self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-        
-        self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-        self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        
-        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-        [self.layer insertSublayer:self.playerLayer atIndex:0];
-        
+        [self configPlayer];
         self.playerLayer.frame = frame;
-        
-        //[self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
-        //[self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
     }
     return self;
 }
@@ -48,28 +39,52 @@
 - (instancetype)initWithVideoURL:(NSURL *)videoURL frame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor blackColor];
-        
         self.videoURL = videoURL;
         self.playerItem = [AVPlayerItem playerItemWithURL:videoURL];
-        
-        self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-        self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        
-        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-        [self.layer insertSublayer:self.playerLayer atIndex:0];
-        self.frame = frame;
+        [self configPlayer];
         self.playerLayer.frame = frame;
     }
     return self;
 }
 
+- (void)configPlayer{
+    
+    self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    
+    self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+    [self.layer insertSublayer:self.playerLayer atIndex:0];
+    
+    self.playerState = LSPlayerStateReadyToPlay;
+    
+    //[self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+    //[self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    
+    // Add gestures
+    UITapGestureRecognizer* doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self addGestureRecognizer:doubleTap];
+}
+
 - (void)play{
     [self.player play];
-    NSLog(@"开始播放");
+    self.playerState = LSPlayerStatePlaying;
 }
 
 - (void)pause{
     [self.player pause];
+    self.playerState = LSPlayerStateStop;
+}
+
+- (void)replaceItemWithAsset:(AVAsset *)asset{
+    self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+    
+    //[self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+    //[self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    [self play];
 }
 
 - (void)moviePlayDidEnd:(NSNotification*)notification{
@@ -83,6 +98,14 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     
+}
+
+- (void)doubleTap:(UITapGestureRecognizer*)tap{
+    if (self.playerState != LSPlayerStatePlaying) {
+        [self play];
+    }else{
+        [self pause];
+    }
 }
 
 -(void)dealloc{

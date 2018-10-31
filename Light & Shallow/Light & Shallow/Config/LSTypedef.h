@@ -35,4 +35,14 @@ typedef NS_ENUM(NSUInteger, LSAudioCodec)
     LSAudioCodecISAC = 1
 };
 
+#pragma mark -- player Status
+
+typedef NS_ENUM(NSUInteger, LSPlayerState)
+{
+    LSPlayerStateReadyToPlay = 0,
+    LSPlayerStatePlaying     = 1,
+    LSPlayerStateStop        = 2,
+    LSPlayerStateFailed      = 3
+};
+
 #endif /* LSTypedef_h */

@@ -10,5 +10,6 @@
 #define PrefixHeader_pch
 
 #import "LSTypedef.h"
+#import "LSConstants.h"
 
 #endif /* PrefixHeader_pch */

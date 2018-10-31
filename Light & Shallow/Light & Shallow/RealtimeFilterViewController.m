@@ -16,9 +16,6 @@
 
 #import "LSVideoEditorViewController.h"
 
-#define KScreenWidth  [UIScreen mainScreen].bounds.size.width
-#define KScreenHeight  [UIScreen mainScreen].bounds.size.height
-
 @interface RealtimeFilterViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate,AVCaptureAudioDataOutputSampleBufferDelegate>
 @property (nonatomic, strong) LSVideoPreview* videoPreview;
 @end

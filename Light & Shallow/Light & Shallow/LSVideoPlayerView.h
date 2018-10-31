@@ -21,4 +21,5 @@
 - (void)play;
 - (void)pause;
 
+- (void)replaceItemWithAsset:(AVAsset *)asset;
 @end
