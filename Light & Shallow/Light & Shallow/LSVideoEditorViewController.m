@@ -41,6 +41,11 @@
     [addWatermarkBtn addTarget:self action:@selector(addWatermark) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addWatermarkBtn];
     
+    UIButton* exportBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    exportBtn.frame = CGRectMake(KScreenWidth - 135, KScreenHeight - 90, 100, 45);
+    [exportBtn setTitle:@"export" forState:UIControlStateNormal];
+    [exportBtn addTarget:self action:@selector(export) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:exportBtn];
 }
 
 - (void)addMusic{
@@ -53,6 +58,10 @@
     [[LSAVSession sharedInstance] addWatermark:LSWatermarkTypeImage inAsset:self.asset completion:^(LSAVCommand *avCommand) {
         [self.player replaceItemWithAsset:avCommand.mutableComposition];
     }];
+}
+
+- (void)export{
+    [[LSAVSession sharedInstance] exportAsset:nil];
 }
 
 - (void)didReceiveMemoryWarning {

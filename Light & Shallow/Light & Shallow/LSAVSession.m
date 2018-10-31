@@ -49,6 +49,8 @@
 @property (nonatomic, strong) AVMutableVideoComposition* mutableVideoComposition;
 @property (nonatomic, strong) AVMutableAudioMix* mutableAudioMix;
 
+@property (nonatomic, strong) LSAVCommand* avCommand;
+
 #pragma mark --
 
 @property (nonatomic, assign) BOOL needWrite;
@@ -231,7 +233,7 @@
 //        }];
         
         [self addMusicToAsset:asset completion:^(LSAVCommand *avCommand) {
-            [weakSelf exportAsset:avCommand.mutableComposition useCommand:avCommand];
+            [weakSelf exportAsset:avCommand.mutableComposition];
         }];
     }];
 }
@@ -251,8 +253,9 @@
 #pragma mark -- Video editor
 
 - (void)addMusicToAsset:(AVAsset *)asset completion:(void (^)(LSAVCommand *))block{
-    LSAVAddMusicCommand* musicCommand = [[LSAVAddMusicCommand alloc] initWithComposition:self.mutableComposition videoComposition:self.mutableVideoComposition audioMix:self.mutableAudioMix];
+    LSAVAddMusicCommand* musicCommand = [[LSAVAddMusicCommand alloc] initWithComposition:self.avCommand.mutableComposition videoComposition:self.avCommand.mutableVideoComposition audioMix:self.avCommand.mutableAudioMix];
     [musicCommand performWithAsset:asset completion:^(LSAVCommand *avCommand) {
+        self.avCommand = avCommand;
         if (block) {
             block(avCommand);
         }
@@ -260,16 +263,17 @@
 }
 
 - (void)addWatermark:(LSWatermarkType)watermarkType inAsset:(AVAsset *)asset completion:(void (^)(LSAVCommand *))block{
-    LSAVAddWatermarkCommand* watermarkCommand = [[LSAVAddWatermarkCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];
+    LSAVAddWatermarkCommand* watermarkCommand = [[LSAVAddWatermarkCommand alloc] initWithComposition:self.avCommand.mutableComposition videoComposition:self.avCommand.mutableVideoComposition audioMix:self.avCommand.mutableAudioMix];
     [watermarkCommand performWithAsset:asset completion:^(LSAVCommand *avCommand) {
+        self.avCommand = avCommand;
         if (block) {
             block(avCommand);
         }
     }];
 }
 
-- (void)exportAsset:(AVAsset*)asset useCommand:(LSAVCommand*)avCommand{
-    LSAVExportCommand* exportCommand = [[LSAVExportCommand alloc] initWithComposition:avCommand.mutableComposition videoComposition:avCommand.mutableVideoComposition audioMix:avCommand.mutableAudioMix];
+- (void)exportAsset:(AVAsset*)asset{
+    LSAVExportCommand* exportCommand = [[LSAVExportCommand alloc] initWithComposition:self.avCommand.mutableComposition videoComposition:self.avCommand.mutableVideoComposition audioMix:self.avCommand.mutableAudioMix];
     
     [exportCommand performWithAsset:asset completion:^(LSAVCommand *avCommand) {
         if (avCommand.executeStatus) {

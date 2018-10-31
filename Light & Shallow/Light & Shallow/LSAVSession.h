@@ -25,5 +25,6 @@
 
 - (void)addMusicToAsset:(AVAsset*)asset completion:(void(^)(LSAVCommand*avCommand))block;
 - (void)addWatermark:(LSWatermarkType)watermarkType inAsset:(AVAsset*)asset completion:(void(^)(LSAVCommand *avCommand))block;
-- (void)exportAsset:(AVAsset*)asset useCommand:(LSAVCommand*)avCommand;
+- (void)exportAsset:(AVAsset*)asset;
+
 @end
