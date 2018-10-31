@@ -13,6 +13,7 @@
 #import "LSVideoPreview.h"
 
 #import "LSAVCommand.h"
+#import "LSAVAddMusicCommand.h"
 #import "LSAVAddWatermarkCommand.h"
 #import "LSAVExportCommand.h"
 
@@ -41,6 +42,12 @@
 @property (nonatomic, strong) AVAssetWriterInputPixelBufferAdaptor* inputPixelBufferAdptor;
 @property (nonatomic, assign) CMTime currentSampleTime;
 @property (nonatomic, assign) CMVideoDimensions currentVideoDimensions;
+
+#pragma mark -- video composition
+
+@property (nonatomic, strong) AVMutableComposition* mutableComposition;
+@property (nonatomic, strong) AVMutableVideoComposition* mutableVideoComposition;
+@property (nonatomic, strong) AVMutableAudioMix* mutableAudioMix;
 
 #pragma mark --
 
@@ -219,13 +226,26 @@
         NSLog(@"record ended");
         AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:self.videoPath] options:nil];
         
-        [self addWatermark:LSWatermarkTypeImage inAsset:asset completion:^(LSAVCommand *avCommand) {
-            [weakSelf exportAsset:asset useCommand:avCommand];
+//        [self addWatermark:LSWatermarkTypeImage inAsset:asset completion:^(LSAVCommand *avCommand) {
+//            [weakSelf exportAsset:avCommand.mutableComposition useCommand:avCommand];
+//        }];
+        
+        [self addMusicToAsset:asset completion:^(LSAVCommand *avCommand) {
+            [weakSelf exportAsset:avCommand.mutableComposition useCommand:avCommand];
         }];
     }];
 }
 
 #pragma mark -- Video editor
+
+- (void)addMusicToAsset:(AVAsset *)asset completion:(void (^)(LSAVCommand *))block{
+    LSAVAddMusicCommand* musicCommand = [[LSAVAddMusicCommand alloc] initWithComposition:self.mutableComposition videoComposition:self.mutableVideoComposition audioMix:self.mutableAudioMix];
+    [musicCommand performWithAsset:asset completion:^(LSAVCommand *avCommand) {
+        if (block) {
+            block(avCommand);
+        }
+    }];
+}
 
 - (void)addWatermark:(LSWatermarkType)watermarkType inAsset:(AVAsset *)asset completion:(void (^)(LSAVCommand *))block{
     LSAVAddWatermarkCommand* watermarkCommand = [[LSAVAddWatermarkCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];

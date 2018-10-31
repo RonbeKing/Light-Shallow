@@ -11,6 +11,8 @@
 		CA903D662186B001005758F9 /* LSAVSession.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D652186B001005758F9 /* LSAVSession.m */; };
 		CA903D692186B057005758F9 /* LSVideoPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D682186B057005758F9 /* LSVideoPreview.m */; };
 		CA903D6D2186EB50005758F9 /* LSAVConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D6C2186EB50005758F9 /* LSAVConfiguration.m */; };
+		CA903D702188639C005758F9 /* LSAVAddMusicCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D6F2188639C005758F9 /* LSAVAddMusicCommand.m */; };
+		CA903D7221895CF1005758F9 /* Music.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CA903D7121895CF1005758F9 /* Music.m4a */; };
 		CAFB70CD21806F8900755998 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70CC21806F8900755998 /* AppDelegate.m */; };
 		CAFB70D021806F8900755998 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70CF21806F8900755998 /* ViewController.m */; };
 		CAFB70D321806F8900755998 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAFB70D121806F8900755998 /* Main.storyboard */; };
@@ -53,6 +55,9 @@
 		CA903D682186B057005758F9 /* LSVideoPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSVideoPreview.m; sourceTree = "<group>"; };
 		CA903D6B2186EB50005758F9 /* LSAVConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSAVConfiguration.h; sourceTree = "<group>"; };
 		CA903D6C2186EB50005758F9 /* LSAVConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSAVConfiguration.m; sourceTree = "<group>"; };
+		CA903D6E2188639C005758F9 /* LSAVAddMusicCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSAVAddMusicCommand.h; sourceTree = "<group>"; };
+		CA903D6F2188639C005758F9 /* LSAVAddMusicCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSAVAddMusicCommand.m; sourceTree = "<group>"; };
+		CA903D7121895CF1005758F9 /* Music.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Music.m4a; sourceTree = "<group>"; };
 		CAFB70C821806F8900755998 /* Light & Shallow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light & Shallow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFB70CB21806F8900755998 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CAFB70CC21806F8900755998 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -154,6 +159,7 @@
 				CA903D652186B001005758F9 /* LSAVSession.m */,
 				CA903D6B2186EB50005758F9 /* LSAVConfiguration.h */,
 				CA903D6C2186EB50005758F9 /* LSAVConfiguration.m */,
+				CA903D7121895CF1005758F9 /* Music.m4a */,
 				CAFB70D121806F8900755998 /* Main.storyboard */,
 				CAFB70D421806F8B00755998 /* Assets.xcassets */,
 				CAFB70D621806F8B00755998 /* LaunchScreen.storyboard */,
@@ -194,6 +200,8 @@
 			children = (
 				CAFB711F2181B05600755998 /* LSAVCommand.h */,
 				CAFB71202181B05600755998 /* LSAVCommand.m */,
+				CA903D6E2188639C005758F9 /* LSAVAddMusicCommand.h */,
+				CA903D6F2188639C005758F9 /* LSAVAddMusicCommand.m */,
 				CAFB711E2181B05600755998 /* LSAVAddWatermarkCommand.h */,
 				CAFB711B2181B05600755998 /* LSAVAddWatermarkCommand.m */,
 				CAFB711C2181B05600755998 /* LSAVExportCommand.h */,
@@ -309,6 +317,7 @@
 			files = (
 				CAFB70D821806F8B00755998 /* LaunchScreen.storyboard in Resources */,
 				CAFB70D521806F8B00755998 /* Assets.xcassets in Resources */,
+				CA903D7221895CF1005758F9 /* Music.m4a in Resources */,
 				CAFB70D321806F8900755998 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +348,7 @@
 				CAFB70D021806F8900755998 /* ViewController.m in Sources */,
 				C2A974802186DAF400A6B193 /* LSSliderView.m in Sources */,
 				CAFB710921806FCF00755998 /* RealtimeFilterViewController.m in Sources */,
+				CA903D702188639C005758F9 /* LSAVAddMusicCommand.m in Sources */,
 				CAFB710C21806FCF00755998 /* LSAssetManager.m in Sources */,
 				CA903D662186B001005758F9 /* LSAVSession.m in Sources */,
 				CAFB70DB21806F8B00755998 /* main.m in Sources */,
