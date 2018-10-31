@@ -18,6 +18,7 @@
 //- (void)stopCapture;
 - (void)startRecord;
 - (void)stopRecord;
+- (void)finishRecord:(void(^)(AVAsset* asset))block;
 
 - (void)changeTorchMode:(AVCaptureTorchMode)torchMode;
 - (void)switchCamera;

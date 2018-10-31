@@ -11,9 +11,10 @@
 #import "LSVideoPreview.h"
 #import "LSAssetManager.h"
 
-
 #import "LSAVSession.h"
 #import "LSSliderView.h"
+
+#import "LSVideoEditorViewController.h"
 
 #define KScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define KScreenHeight  [UIScreen mainScreen].bounds.size.height
@@ -42,7 +43,7 @@
     btn2.backgroundColor = [UIColor blueColor];
     [btn2 setTitle:@"flip" forState:UIControlStateNormal];
     [self.view addSubview:btn2];
-    [btn2 addTarget:self action:@selector(switchCamera) forControlEvents:UIControlEventTouchUpInside];
+    [btn2 addTarget:self action:@selector(finishRecord) forControlEvents:UIControlEventTouchUpInside];
     
     //    __block int count = 0;
     //    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:2 repeats:YES block:^(NSTimer * _Nonnull timer) {
@@ -76,6 +77,16 @@
 
 - (void)recordVideo{
     [[LSAVSession sharedInstance] startRecord];
+}
+
+- (void)finishRecord{
+    [[LSAVSession sharedInstance] finishRecord:^(AVAsset *asset) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            LSVideoEditorViewController* videoEditor = [[LSVideoEditorViewController alloc] init];
+            videoEditor.asset = asset;
+            [self presentViewController:videoEditor animated:YES completion:nil];
+        });
+    }];
 }
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{

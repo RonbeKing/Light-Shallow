@@ -236,6 +236,18 @@
     }];
 }
 
+- (void)finishRecord:(void (^)(AVAsset *))block{
+    self.needWrite = NO;
+    
+    [self.assetWriter finishWritingWithCompletionHandler:^{
+        NSLog(@"record ended");
+        AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:self.videoPath] options:nil];
+        if (block) {
+            block(asset);
+        }
+    }];
+}
+
 #pragma mark -- Video editor
 
 - (void)addMusicToAsset:(AVAsset *)asset completion:(void (^)(LSAVCommand *))block{
