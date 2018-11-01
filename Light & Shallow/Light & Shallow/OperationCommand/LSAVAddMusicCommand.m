@@ -44,11 +44,11 @@
         [customAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, [self.mutableComposition duration]) ofTrack:newAudioTrack atTime:kCMTimeZero error:&error];
     }
     
-    AVMutableAudioMixInputParameters* mixParameters = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:newAudioTrack];
+    //AVMutableAudioMixInputParameters* mixParameters = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:newAudioTrack];
     //[mixParameters setVolumeRampFromStartVolume:1 toEndVolume:0 timeRange:CMTimeRangeMake(kCMTimeZero, self.mutableComposition.duration)];
     
     self.mutableAudioMix = [AVMutableAudioMix audioMix];
-    self.mutableAudioMix.inputParameters = @[mixParameters];
+    //self.mutableAudioMix.inputParameters = @[mixParameters];
     
     
     if (block) {

@@ -8,6 +8,10 @@
 
 #import "ViewController.h"
 #import "RealtimeFilterViewController.h"
+#import <AVFoundation/AVFoundation.h>
+
+#import "LSAVCommand.h"
+#import "LSAVExtractAudioCommand.h"
 
 @interface ViewController ()
 
@@ -26,8 +30,16 @@
 }
 
 - (void) jump{
-    RealtimeFilterViewController* vc = [[RealtimeFilterViewController alloc] init];
-    [self presentViewController:vc animated:YES completion:nil];
+//    RealtimeFilterViewController* vc = [[RealtimeFilterViewController alloc] init];
+//    [self presentViewController:vc animated:YES completion:nil];
+    
+    NSString* audioURL = [[NSBundle mainBundle] pathForResource:@"nnn" ofType:@"mp4"];
+    AVAsset* audioAsset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:audioURL] options:nil];
+    
+    LSAVExtractAudioCommand* audioCommand = [[LSAVExtractAudioCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];
+    [audioCommand performWithAsset:audioAsset completion:^(LSAVCommand *avCommand) {
+        
+    }];
 }
 
 
