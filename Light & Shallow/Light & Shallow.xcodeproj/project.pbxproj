@@ -20,6 +20,8 @@
 		CA903D8C218AB1E9005758F9 /* wantMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CA903D87218AB1E9005758F9 /* wantMusic.m4a */; };
 		CA903D8D218AB1E9005758F9 /* captureMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = CA903D88218AB1E9005758F9 /* captureMusic.m4a */; };
 		CA903D8E218AB1E9005758F9 /* nnn.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA903D89218AB1E9005758F9 /* nnn.mp4 */; };
+		CA903D93218ACDA8005758F9 /* LSVideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D92218ACDA8005758F9 /* LSVideoEditor.m */; };
+		CA903D96218ADA41005758F9 /* LSAVCompositionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D95218ADA41005758F9 /* LSAVCompositionCommand.m */; };
 		CAFB70CD21806F8900755998 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70CC21806F8900755998 /* AppDelegate.m */; };
 		CAFB70D021806F8900755998 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70CF21806F8900755998 /* ViewController.m */; };
 		CAFB70D321806F8900755998 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAFB70D121806F8900755998 /* Main.storyboard */; };
@@ -75,6 +77,10 @@
 		CA903D87218AB1E9005758F9 /* wantMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = wantMusic.m4a; sourceTree = "<group>"; };
 		CA903D88218AB1E9005758F9 /* captureMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = captureMusic.m4a; sourceTree = "<group>"; };
 		CA903D89218AB1E9005758F9 /* nnn.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = nnn.mp4; sourceTree = "<group>"; };
+		CA903D91218ACDA8005758F9 /* LSVideoEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSVideoEditor.h; sourceTree = "<group>"; };
+		CA903D92218ACDA8005758F9 /* LSVideoEditor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSVideoEditor.m; sourceTree = "<group>"; };
+		CA903D94218ADA41005758F9 /* LSAVCompositionCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSAVCompositionCommand.h; sourceTree = "<group>"; };
+		CA903D95218ADA41005758F9 /* LSAVCompositionCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSAVCompositionCommand.m; sourceTree = "<group>"; };
 		CAFB70C821806F8900755998 /* Light & Shallow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light & Shallow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFB70CB21806F8900755998 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CAFB70CC21806F8900755998 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -147,9 +153,9 @@
 			isa = PBXGroup;
 			children = (
 				CA903D85218AB1E9005758F9 /* Music.m4a */,
-				CA903D86218AB1E9005758F9 /* video.mp4 */,
 				CA903D87218AB1E9005758F9 /* wantMusic.m4a */,
 				CA903D88218AB1E9005758F9 /* captureMusic.m4a */,
+				CA903D86218AB1E9005758F9 /* video.mp4 */,
 				CA903D89218AB1E9005758F9 /* nnn.mp4 */,
 			);
 			path = Resource;
@@ -166,6 +172,19 @@
 				CAFB70CF21806F8900755998 /* ViewController.m */,
 			);
 			path = SampleCode;
+			sourceTree = "<group>";
+		};
+		CA903D90218ACCD0005758F9 /* VideoView */ = {
+			isa = PBXGroup;
+			children = (
+				CA903D672186B057005758F9 /* LSVideoPreview.h */,
+				CA903D682186B057005758F9 /* LSVideoPreview.m */,
+				CA903D76218994C5005758F9 /* LSVideoPlayerView.h */,
+				CA903D77218994C5005758F9 /* LSVideoPlayerView.m */,
+				C2A9747F2186DAF400A6B193 /* LSSliderView.h */,
+				C2A9747E2186DAF400A6B193 /* LSSliderView.m */,
+			);
+			path = VideoView;
 			sourceTree = "<group>";
 		};
 		CAFB70BF21806F8900755998 = {
@@ -191,18 +210,17 @@
 		CAFB70CA21806F8900755998 /* Light & Shallow */ = {
 			isa = PBXGroup;
 			children = (
+				CA903D90218ACCD0005758F9 /* VideoView */,
 				CA903D8F218AB2AE005758F9 /* SampleCode */,
 				CA903D84218AB1E9005758F9 /* Resource */,
 				CA903D6A2186B6F4005758F9 /* Config */,
 				CAFB711A2181B01200755998 /* OperationCommand */,
 				CAFB70FD21806FCD00755998 /* LSAssetManager.h */,
 				CAFB710521806FCE00755998 /* LSAssetManager.m */,
-				CA903D672186B057005758F9 /* LSVideoPreview.h */,
-				CA903D682186B057005758F9 /* LSVideoPreview.m */,
-				CA903D76218994C5005758F9 /* LSVideoPlayerView.h */,
-				CA903D77218994C5005758F9 /* LSVideoPlayerView.m */,
 				CA903D642186B001005758F9 /* LSAVSession.h */,
 				CA903D652186B001005758F9 /* LSAVSession.m */,
+				CA903D91218ACDA8005758F9 /* LSVideoEditor.h */,
+				CA903D92218ACDA8005758F9 /* LSVideoEditor.m */,
 				CA903D6B2186EB50005758F9 /* LSAVConfiguration.h */,
 				CA903D6C2186EB50005758F9 /* LSAVConfiguration.m */,
 				CAFB70D121806F8900755998 /* Main.storyboard */,
@@ -241,6 +259,8 @@
 			children = (
 				CAFB711F2181B05600755998 /* LSAVCommand.h */,
 				CAFB71202181B05600755998 /* LSAVCommand.m */,
+				CA903D94218ADA41005758F9 /* LSAVCompositionCommand.h */,
+				CA903D95218ADA41005758F9 /* LSAVCompositionCommand.m */,
 				CA903D79218A9416005758F9 /* LSAVExtractAudioCommand.h */,
 				CA903D7A218A9416005758F9 /* LSAVExtractAudioCommand.m */,
 				CA903D6E2188639C005758F9 /* LSAVAddMusicCommand.h */,
@@ -249,8 +269,6 @@
 				CAFB711B2181B05600755998 /* LSAVAddWatermarkCommand.m */,
 				CAFB711C2181B05600755998 /* LSAVExportCommand.h */,
 				CAFB711D2181B05600755998 /* LSAVExportCommand.m */,
-				C2A9747F2186DAF400A6B193 /* LSSliderView.h */,
-				C2A9747E2186DAF400A6B193 /* LSSliderView.m */,
 			);
 			path = OperationCommand;
 			sourceTree = "<group>";
@@ -397,6 +415,7 @@
 				CAFB70D021806F8900755998 /* ViewController.m in Sources */,
 				C2A974802186DAF400A6B193 /* LSSliderView.m in Sources */,
 				CAFB710921806FCF00755998 /* RealtimeFilterViewController.m in Sources */,
+				CA903D93218ACDA8005758F9 /* LSVideoEditor.m in Sources */,
 				CA903D702188639C005758F9 /* LSAVAddMusicCommand.m in Sources */,
 				CAFB710C21806FCF00755998 /* LSAssetManager.m in Sources */,
 				CA903D662186B001005758F9 /* LSAVSession.m in Sources */,
@@ -404,6 +423,7 @@
 				CA903D692186B057005758F9 /* LSVideoPreview.m in Sources */,
 				CAFB71222181B05600755998 /* LSAVExportCommand.m in Sources */,
 				CA903D78218994C5005758F9 /* LSVideoPlayerView.m in Sources */,
+				CA903D96218ADA41005758F9 /* LSAVCompositionCommand.m in Sources */,
 				CAFB710D21806FCF00755998 /* CaptureSessionManager.m in Sources */,
 				CAFB70CD21806F8900755998 /* AppDelegate.m in Sources */,
 				CAFB71232181B05600755998 /* LSAVCommand.m in Sources */,

@@ -23,8 +23,9 @@
 - (void)changeTorchMode:(AVCaptureTorchMode)torchMode;
 - (void)switchCamera;
 
-- (void)addMusicToAsset:(AVAsset*)asset completion:(void(^)(LSAVCommand*avCommand))block;
-- (void)addWatermark:(LSWatermarkType)watermarkType inAsset:(AVAsset*)asset completion:(void(^)(LSAVCommand *avCommand))block;
-- (void)exportAsset:(AVAsset*)asset;
+- (void)composeAsset1:(AVAsset *)asset1 mediaType:(AVMediaType)mediaType1 asset2:(AVAsset *)asset2 mediaType:(AVMediaType)mediaType2;
+- (void)addMusicToAsset:(AVAsset *)asset completion:(void(^)(LSAVCommand* avCommand))block;
+- (void)addWatermark:(LSWatermarkType)watermarkType inAsset:(AVAsset *)asset completion:(void(^)(LSAVCommand *avCommand))block;
+- (void)exportAsset:(AVAsset *)asset;
 
 @end

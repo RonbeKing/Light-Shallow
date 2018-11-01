@@ -56,6 +56,7 @@
 
 - (void)addWatermark{
     [[LSAVSession sharedInstance] addWatermark:LSWatermarkTypeImage inAsset:self.asset completion:^(LSAVCommand *avCommand) {
+        //we have to create a layer manually added to the playerview, otherwise it will not show
         [self.player replaceItemWithAsset:avCommand.mutableComposition];
     }];
 }

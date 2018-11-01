@@ -284,6 +284,10 @@
     }];
 }
 
+- (void)composeAsset1:(AVAsset *)asset1 mediaType:(AVMediaType)mediaType1 asset2:(AVAsset *)asset2 mediaType:(AVMediaType)mediaType2{
+    
+}
+
 #pragma mark -- create AVAssetWriter
 
 - (NSString *)createFilePath{
