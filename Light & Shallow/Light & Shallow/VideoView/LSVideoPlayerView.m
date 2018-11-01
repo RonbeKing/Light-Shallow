@@ -16,10 +16,8 @@
 @property (nonatomic, assign) CMTime duration;
 @property (nonatomic, assign) CMTime currentTime;
 
-@property (nonatomic, strong) AVAsset* asset;
-@property (nonatomic, strong) NSURL* videoURL;
-
 @property (nonatomic, assign) LSPlayerState playerState;
+
 
 @end
 
@@ -31,7 +29,6 @@
         self.asset = asset;
         self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
         [self configPlayer];
-        self.playerLayer.frame = frame;
     }
     return self;
 }
@@ -42,7 +39,6 @@
         self.videoURL = videoURL;
         self.playerItem = [AVPlayerItem playerItemWithURL:videoURL];
         [self configPlayer];
-        self.playerLayer.frame = frame;
     }
     return self;
 }
@@ -51,7 +47,7 @@
     
     self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-    
+    self.playerLayer.frame = self.bounds;
     self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     [self.layer insertSublayer:self.playerLayer atIndex:0];
     
@@ -112,6 +108,18 @@
     //[self.playerItem removeObserver:self forKeyPath:@"status" context:nil];
     //[self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+}
+
+-(void)setVideoURL:(NSURL *)videoURL{
+    _videoURL = videoURL;
+    self.playerItem = [AVPlayerItem playerItemWithURL:videoURL];
+    [self configPlayer];
+}
+
+-(void)setAsset:(AVAsset *)asset{
+    _asset = asset;
+    self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+    [self configPlayer];
 }
 
 @end

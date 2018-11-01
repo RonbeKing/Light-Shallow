@@ -11,6 +11,9 @@
 
 @interface LSVideoPlayerView : UIView
 
+@property (nonatomic, strong) AVAsset* asset;
+@property (nonatomic, strong) NSURL* videoURL;
+
 @property (nonatomic, assign) BOOL autoPlay;
 @property (nonatomic, assign) BOOL circlePlay;
 

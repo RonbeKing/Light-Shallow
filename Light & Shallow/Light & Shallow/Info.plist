@@ -20,6 +20,12 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>need your camera permission</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>need your microphone permission</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>need your photo library permission</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -28,6 +34,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
@@ -41,11 +49,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>need your microphone permission</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>need your photo library permission</string>
-	<key>NSCameraUsageDescription</key>
-	<string>need your camera permission</string>
 </dict>
 </plist>
