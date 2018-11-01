@@ -13,6 +13,4 @@
 
 + (void)saveVideo:(NSString *)videoUrl toAlbum:(NSString *)albumName completion:(void (^)(NSURL* url, NSError* error))block;
 
-//+ (void)addWaterMark:(UIImage *)waterMark toAsset:(AVAsset *)videoAsset inRect:(CGRect)rect;
-
 @end

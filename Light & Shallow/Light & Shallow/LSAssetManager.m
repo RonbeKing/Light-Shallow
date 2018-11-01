@@ -63,9 +63,4 @@
     }
 }
 
-#pragma mark -- add watermark
-
-+(void)addWaterMark:(UIImage *)waterMark toAsset:(id)videoAsset inRect:(CGRect)rect{
-    
-}
 @end

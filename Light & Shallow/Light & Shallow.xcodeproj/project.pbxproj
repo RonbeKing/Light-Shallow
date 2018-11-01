@@ -155,6 +155,19 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		CA903D8F218AB2AE005758F9 /* SampleCode */ = {
+			isa = PBXGroup;
+			children = (
+				CAFB710421806FCE00755998 /* RealtimeFilterViewController.h */,
+				CAFB70FE21806FCD00755998 /* RealtimeFilterViewController.m */,
+				CA903D7321898360005758F9 /* LSVideoEditorViewController.h */,
+				CA903D7421898360005758F9 /* LSVideoEditorViewController.m */,
+				CAFB70CE21806F8900755998 /* ViewController.h */,
+				CAFB70CF21806F8900755998 /* ViewController.m */,
+			);
+			path = SampleCode;
+			sourceTree = "<group>";
+		};
 		CAFB70BF21806F8900755998 = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +191,7 @@
 		CAFB70CA21806F8900755998 /* Light & Shallow */ = {
 			isa = PBXGroup;
 			children = (
+				CA903D8F218AB2AE005758F9 /* SampleCode */,
 				CA903D84218AB1E9005758F9 /* Resource */,
 				CA903D6A2186B6F4005758F9 /* Config */,
 				CAFB711A2181B01200755998 /* OperationCommand */,
@@ -196,14 +210,8 @@
 				CAFB70D621806F8B00755998 /* LaunchScreen.storyboard */,
 				CAFB710321806FCE00755998 /* CaptureSessionManager.h */,
 				CAFB710621806FCE00755998 /* CaptureSessionManager.m */,
-				CAFB710421806FCE00755998 /* RealtimeFilterViewController.h */,
-				CAFB70FE21806FCD00755998 /* RealtimeFilterViewController.m */,
-				CA903D7321898360005758F9 /* LSVideoEditorViewController.h */,
-				CA903D7421898360005758F9 /* LSVideoEditorViewController.m */,
 				CAFB70CB21806F8900755998 /* AppDelegate.h */,
 				CAFB70CC21806F8900755998 /* AppDelegate.m */,
-				CAFB70CE21806F8900755998 /* ViewController.h */,
-				CAFB70CF21806F8900755998 /* ViewController.m */,
 				CAFB70D921806F8B00755998 /* Info.plist */,
 				CAFB70DA21806F8B00755998 /* main.m */,
 			);
