@@ -433,7 +433,13 @@
                 
                 CVPixelBufferRef newPixelBuffer = NULL;
                 CVPixelBufferPoolCreatePixelBuffer(NULL, self.inputPixelBufferAdptor.pixelBufferPool, &newPixelBuffer);
-                [self.context render:image toCVPixelBuffer:newPixelBuffer bounds:image.extent colorSpace:nil];
+                
+                CGRect rect = image.extent;
+                CGRect rect1 = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height/2);
+                CGRect rect2 = CGRectMake(rect.origin.x, rect.size.height/2, rect.size.width, rect.size.height/2);
+                
+                [self.context render:image toCVPixelBuffer:newPixelBuffer bounds:rect1 colorSpace:nil];
+                [self.context render:image toCVPixelBuffer:newPixelBuffer bounds:rect2 colorSpace:nil];
                 
                 if (newPixelBuffer) {
                     if (self.assetWriter.status == AVAssetWriterStatusWriting) {

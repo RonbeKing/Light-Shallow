@@ -34,6 +34,9 @@
 @end
 
 @implementation LSCompositionViewController
+- (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (IBAction)btn1tap:(id)sender {
     [self presentViewController:self.picker animated:YES completion:nil];

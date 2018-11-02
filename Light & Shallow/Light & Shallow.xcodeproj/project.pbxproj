@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C2A974802186DAF400A6B193 /* LSSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A9747E2186DAF400A6B193 /* LSSliderView.m */; };
+		CA2FC300218BE94400C1A55D /* LSImageProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2FC2FF218BE94400C1A55D /* LSImageProcessViewController.m */; };
 		CA903D662186B001005758F9 /* LSAVSession.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D652186B001005758F9 /* LSAVSession.m */; };
 		CA903D692186B057005758F9 /* LSVideoPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D682186B057005758F9 /* LSVideoPreview.m */; };
 		CA903D6D2186EB50005758F9 /* LSAVConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D6C2186EB50005758F9 /* LSAVConfiguration.m */; };
@@ -59,6 +60,8 @@
 /* Begin PBXFileReference section */
 		C2A9747E2186DAF400A6B193 /* LSSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSSliderView.m; sourceTree = "<group>"; };
 		C2A9747F2186DAF400A6B193 /* LSSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSSliderView.h; sourceTree = "<group>"; };
+		CA2FC2FE218BE94400C1A55D /* LSImageProcessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSImageProcessViewController.h; sourceTree = "<group>"; };
+		CA2FC2FF218BE94400C1A55D /* LSImageProcessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSImageProcessViewController.m; sourceTree = "<group>"; };
 		CA903D642186B001005758F9 /* LSAVSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSAVSession.h; sourceTree = "<group>"; };
 		CA903D652186B001005758F9 /* LSAVSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSAVSession.m; sourceTree = "<group>"; };
 		CA903D672186B057005758F9 /* LSVideoPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSVideoPreview.h; sourceTree = "<group>"; };
@@ -175,6 +178,8 @@
 				CAFB70CF21806F8900755998 /* ViewController.m */,
 				CAD04ABC218AF3A100EF760B /* LSCompositionViewController.h */,
 				CAD04ABD218AF3A100EF760B /* LSCompositionViewController.m */,
+				CA2FC2FE218BE94400C1A55D /* LSImageProcessViewController.h */,
+				CA2FC2FF218BE94400C1A55D /* LSImageProcessViewController.m */,
 			);
 			path = SampleCode;
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 				CA903D78218994C5005758F9 /* LSVideoPlayerView.m in Sources */,
 				CA903D96218ADA41005758F9 /* LSAVCompositionCommand.m in Sources */,
 				CAFB710D21806FCF00755998 /* CaptureSessionManager.m in Sources */,
+				CA2FC300218BE94400C1A55D /* LSImageProcessViewController.m in Sources */,
 				CAFB70CD21806F8900755998 /* AppDelegate.m in Sources */,
 				CAFB71232181B05600755998 /* LSAVCommand.m in Sources */,
 			);

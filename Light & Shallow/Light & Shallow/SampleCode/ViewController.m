@@ -16,6 +16,7 @@
 #import "LSAVExportCommand.h"
 
 #import "LSCompositionViewController.h"
+#import "LSImageProcessViewController.h"
 
 @interface ViewController ()
 
@@ -44,21 +45,21 @@
     [btn3 setTitle:@"图片处理" forState:UIControlStateNormal];
     [self.view addSubview:btn3];
     btn3.backgroundColor = [UIColor blueColor];
-    [btn3 addTarget:self action:@selector(compose) forControlEvents:UIControlEventTouchUpInside];
+    [btn3 addTarget:self action:@selector(toImageProcess) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
 - (void) jump{
-//    RealtimeFilterViewController* vc = [[RealtimeFilterViewController alloc] init];
-//    [self presentViewController:vc animated:YES completion:nil];
+    RealtimeFilterViewController* vc = [[RealtimeFilterViewController alloc] init];
+    [self presentViewController:vc animated:YES completion:nil];
     
-    NSString* audioURL = [[NSBundle mainBundle] pathForResource:@"nnn" ofType:@"mp4"];
-    AVAsset* audioAsset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:audioURL] options:nil];
-    
-    LSAVExtractAudioCommand* audioCommand = [[LSAVExtractAudioCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];
-    [audioCommand performWithAsset:audioAsset completion:^(LSAVCommand *avCommand) {
-        
-    }];
+//    NSString* audioURL = [[NSBundle mainBundle] pathForResource:@"nnn" ofType:@"mp4"];
+//    AVAsset* audioAsset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:audioURL] options:nil];
+//
+//    LSAVExtractAudioCommand* audioCommand = [[LSAVExtractAudioCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];
+//    [audioCommand performWithAsset:audioAsset completion:^(LSAVCommand *avCommand) {
+//
+//    }];
 }
 
 - (void)compose{
@@ -81,6 +82,11 @@
 //            NSLog(@"ddddd");
 //        }];
 //    }];
+}
+
+- (void)toImageProcess{
+    LSImageProcessViewController* imgPro = [[LSImageProcessViewController alloc] init];
+    [self presentViewController:imgPro animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
