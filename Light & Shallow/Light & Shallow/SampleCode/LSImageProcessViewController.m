@@ -7,6 +7,7 @@
 //
 
 #import "LSImageProcessViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface LSImageProcessViewController ()
 
@@ -17,6 +18,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    NSString *secondVideoPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
+    NSString *firstVideoPath = [[NSBundle mainBundle] pathForResource:@"nnn" ofType:@"mp4"];
+    
+    
+    AVPlayerItem *firstVideoItem = [AVPlayerItem playerItemWithURL:[NSURL fileURLWithPath:firstVideoPath]];
+    AVPlayerItem *secondVideoItem = [AVPlayerItem playerItemWithURL:[NSURL fileURLWithPath:secondVideoPath]];
+    
+    AVQueuePlayer* queuePlayer = [AVQueuePlayer queuePlayerWithItems:[NSArray arrayWithObjects:firstVideoItem, secondVideoItem,nil]];
+    
+    AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:queuePlayer];
+    queuePlayer.actionAtItemEnd = AVPlayerActionAtItemEndAdvance;
+    layer.frame = self.view.layer.frame;
+    
+    [self.view.layer addSublayer:layer];
+    
+    [queuePlayer play];
 }
 
 - (void)didReceiveMemoryWarning {
