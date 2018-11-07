@@ -7,7 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+
+@class LSVideoPreview;
+
+@protocol CaptureSessionManagerDelegate <NSObject>
+
+- (void)videoCaptureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection;
+
+- (void)audioCaptureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection;
+
+@end
 
 @interface CaptureSessionManager : NSObject
+
+- (void)startCaptureWithVideoPreview:(LSVideoPreview *)videoPreview;
+
+- (void)changeTorchMode:(AVCaptureTorchMode)torchMode;
+
+- (void)switchCamera;
+
+- (void)startRecord;
+
+- (void)stopRecord;
+- (void)finishRecord:(void (^)(AVAsset *))block;
 
 @end

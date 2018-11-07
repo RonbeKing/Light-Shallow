@@ -18,6 +18,8 @@
 #import "LSCompositionViewController.h"
 #import "LSImageProcessViewController.h"
 
+#import "LSVideoEditorViewController.h"
+
 @interface ViewController ()
 
 @end
@@ -45,7 +47,7 @@
     [btn3 setTitle:@"图片处理" forState:UIControlStateNormal];
     [self.view addSubview:btn3];
     btn3.backgroundColor = [UIColor blueColor];
-    [btn3 addTarget:self action:@selector(toImageProcess) forControlEvents:UIControlEventTouchUpInside];
+    [btn3 addTarget:self action:@selector(toVideoEditor) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -87,6 +89,29 @@
 - (void)toImageProcess{
     LSImageProcessViewController* imgPro = [[LSImageProcessViewController alloc] init];
     [self presentViewController:imgPro animated:YES completion:nil];
+}
+
+- (void)toVideoEditor{
+    LSVideoEditorViewController* videoEditor = [[LSVideoEditorViewController alloc] init];
+    
+    NSString* filePath = [NSString stringWithFormat:@"%@%@",NSHomeDirectory(),@"/Documents/videoTemp"];
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    BOOL isDirectory = YES;
+    if (![fileManager fileExistsAtPath:filePath isDirectory:&isDirectory]) {
+        [fileManager createDirectoryAtPath:filePath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSString* theFilePath = [filePath stringByAppendingString:@"/test.mp4"];
+    
+    AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:theFilePath] options:nil];
+    
+    
+    NSString *secondVideoPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
+    AVAsset* asset2 = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:secondVideoPath] options:nil];
+    
+    videoEditor.asset = asset2;
+    [self presentViewController:videoEditor animated:YES completion:nil];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

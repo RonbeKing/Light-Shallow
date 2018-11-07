@@ -49,8 +49,8 @@
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     self.playerLayer.frame = self.bounds;
     self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-    [self.layer insertSublayer:self.playerLayer atIndex:0];
-    
+    //[self.layer insertSublayer:self.playerLayer atIndex:0];
+    [self.layer addSublayer:self.playerLayer];
     self.playerState = LSPlayerStateReadyToPlay;
     
     //[self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];

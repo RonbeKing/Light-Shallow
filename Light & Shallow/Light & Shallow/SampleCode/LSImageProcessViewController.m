@@ -34,6 +34,8 @@
     
     [self.view.layer addSublayer:layer];
     
+    
+    
     [queuePlayer play];
 }
 

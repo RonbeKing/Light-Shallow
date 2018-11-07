@@ -608,7 +608,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AMT5E8JS33;
+				DEVELOPMENT_TEAM = G6S3USNXX8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Light & Shallow/Config/PrefixHeader.pch";
 				INFOPLIST_FILE = "Light & Shallow/Info.plist";
@@ -628,7 +628,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AMT5E8JS33;
+				DEVELOPMENT_TEAM = G6S3USNXX8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Light & Shallow/Config/PrefixHeader.pch";
 				INFOPLIST_FILE = "Light & Shallow/Info.plist";
