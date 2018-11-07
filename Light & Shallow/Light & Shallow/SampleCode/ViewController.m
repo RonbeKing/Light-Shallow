@@ -110,8 +110,6 @@
     
     videoEditor.asset = asset2;
     [self presentViewController:videoEditor animated:YES completion:nil];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {

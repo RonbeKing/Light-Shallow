@@ -42,6 +42,13 @@
     [self.view addSubview:btn2];
     [btn2 addTarget:self action:@selector(finishRecord) forControlEvents:UIControlEventTouchUpInside];
     
+    UIButton* backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.frame = CGRectMake(15, 20, 45, 45);
+    [backBtn setTitle:@"back" forState:UIControlStateNormal];
+    [backBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backBtn];
+    
     //    __block int count = 0;
     //    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:2 repeats:YES block:^(NSTimer * _Nonnull timer) {
     //        count++;
@@ -52,6 +59,10 @@
     //    }];
     //    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     [UIApplication sharedApplication].idleTimerDisabled = YES;
+}
+
+- (void)back{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)initCaptureSession{
