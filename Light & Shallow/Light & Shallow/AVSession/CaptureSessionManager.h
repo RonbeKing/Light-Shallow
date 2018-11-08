@@ -21,6 +21,8 @@
 
 @interface CaptureSessionManager : NSObject
 
+@property (nonatomic, weak) id <CaptureSessionManagerDelegate> delegate;
+
 - (void)startCaptureWithVideoPreview:(LSVideoPreview *)videoPreview;
 
 - (void)changeTorchMode:(AVCaptureTorchMode)torchMode;

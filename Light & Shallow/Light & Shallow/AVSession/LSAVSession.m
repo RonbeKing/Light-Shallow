@@ -49,6 +49,7 @@
 - (instancetype)init{
     if (self = [super init]) {
         self.captureSessionManager = [[CaptureSessionManager alloc] init];
+        self.captureSessionManager.delegate = self;
     }
     return self;
 }

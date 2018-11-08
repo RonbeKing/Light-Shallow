@@ -333,6 +333,11 @@
 }
 
 - (void)videoCaptureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
+    
+    if ([self.delegate respondsToSelector:@selector(videoCaptureOutput:didOutputSampleBuffer:fromConnection:)]) {
+        [self.delegate videoCaptureOutput:output didOutputSampleBuffer:sampleBuffer fromConnection:connection];
+    }
+    
     if (self.isSwitchingCamera) {
         return;
     }
@@ -399,6 +404,11 @@
 }
 
 - (void)audioCaptureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
+    
+    if ([self.delegate respondsToSelector:@selector(audioCaptureOutput:didOutputSampleBuffer:fromConnection:)]) {
+        [self.delegate audioCaptureOutput:output didOutputSampleBuffer:sampleBuffer fromConnection:connection];
+    }
+    
     if (self.needWrite) {
         //@synchronized(self){
         if (self.assetWriterAudioInput.readyForMoreMediaData && self.assetWriter.status == AVAssetWriterStatusWriting) {

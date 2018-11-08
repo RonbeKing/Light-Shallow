@@ -238,13 +238,13 @@
 			isa = PBXGroup;
 			children = (
 				CA903D8F218AB2AE005758F9 /* SampleCode */,
-				CAF261DC2192CCA800B70B73 /* AVSession */,
 				CA903D90218ACCD0005758F9 /* VideoView */,
-				CA903D84218AB1E9005758F9 /* Resource */,
+				CAF261DC2192CCA800B70B73 /* AVSession */,
 				CA903D6A2186B6F4005758F9 /* Config */,
 				CAFB711A2181B01200755998 /* OperationCommand */,
-				CAFB70D121806F8900755998 /* Main.storyboard */,
+				CA903D84218AB1E9005758F9 /* Resource */,
 				CAFB70D421806F8B00755998 /* Assets.xcassets */,
+				CAFB70D121806F8900755998 /* Main.storyboard */,
 				CAFB70D621806F8B00755998 /* LaunchScreen.storyboard */,
 				CAFB70CB21806F8900755998 /* AppDelegate.h */,
 				CAFB70CC21806F8900755998 /* AppDelegate.m */,

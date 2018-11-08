@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @class LSVideoPreview,LSAVCommand;
+
 @interface LSAVSession : NSObject
 
 + (instancetype)sharedInstance;

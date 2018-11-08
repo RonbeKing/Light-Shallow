@@ -4,19 +4,18 @@
 //
 //  Created by 王珑宾 on 2018/10/9.
 //  Copyright © 2018年 Ronb X. All rights reserved.
-//
+//  *****************************************
+//  * view controller added realtime-filter *
+//  *****************************************
 
 #import "RealtimeFilterViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "LSVideoEditorViewController.h"
 #import "LSVideoPreview.h"
 #import "LSAssetManager.h"
-
 #import "LSAVSession.h"
-#import "LSSliderView.h"
 
-#import "LSVideoEditorViewController.h"
-
-@interface RealtimeFilterViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate,AVCaptureAudioDataOutputSampleBufferDelegate>
+@interface RealtimeFilterViewController ()
 @property (nonatomic, strong) LSVideoPreview* videoPreview;
 @end
 
@@ -48,16 +47,6 @@
     [backBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backBtn];
-    
-    //    __block int count = 0;
-    //    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:2 repeats:YES block:^(NSTimer * _Nonnull timer) {
-    //        count++;
-    //        if (count == 4) {
-    //            count = 0;
-    //        }
-    //        self.filter = [CIFilter filterWithName:self.filterNames[count]];
-    //    }];
-    //    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 
@@ -66,17 +55,11 @@
 }
 
 - (void)initCaptureSession{
-    // init capture session
-    
     // video preview
     self.videoPreview = [[LSVideoPreview alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight)];
     [self.view addSubview:self.videoPreview];
     
     [[LSAVSession sharedInstance] startCaptureWithVideoPreview:self.videoPreview];
-}
-
-- (void)exitVC{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)switchCamera{
@@ -100,5 +83,9 @@
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
     self.videoPreview.frame = CGRectMake(0, 0, size.width, size.height);
     [self.videoPreview setNeedsLayout];
+}
+
+- (void)exitVC{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
