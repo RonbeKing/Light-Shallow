@@ -63,8 +63,18 @@
     [self addGestureRecognizer:doubleTap];
 }
 
+- (void)enableAudioTracks:(BOOL)enable inPlayerItem:(AVPlayerItem*)playerItem{
+    for (AVPlayerItemTrack *track in playerItem.tracks){
+        if ([track.assetTrack.mediaType isEqual:AVMediaTypeAudio]){
+            track.enabled = enable;
+        }
+    }
+}
+
 - (void)play{
     [self.player play];
+    self.player.currentItem.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
+    self.player.rate = 1;
     self.playerState = LSPlayerStatePlaying;
 }
 
