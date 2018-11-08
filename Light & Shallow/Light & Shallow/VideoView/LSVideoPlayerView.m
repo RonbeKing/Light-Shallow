@@ -123,12 +123,14 @@
 -(void)setVideoURL:(NSURL *)videoURL{
     _videoURL = videoURL;
     self.playerItem = [AVPlayerItem playerItemWithURL:videoURL];
+    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
     [self configPlayer];
 }
 
 -(void)setAsset:(AVAsset *)asset{
     _asset = asset;
     self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
     [self configPlayer];
 }
 
