@@ -73,12 +73,12 @@
     self.picker = [[UIImagePickerController alloc] init];
     _picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     _picker.delegate = self;
-    _picker.mediaTypes = @[@"public.movie",@"public.image"];
+    _picker.mediaTypes = @[@"public.movie"];
     
     self.picker2 = [[UIImagePickerController alloc] init];
     _picker2.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     _picker2.delegate = self;
-    _picker2.mediaTypes = @[@"public.movie",@"public.image"];
+    _picker2.mediaTypes = @[@"public.movie"];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
