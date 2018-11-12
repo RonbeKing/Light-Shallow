@@ -32,6 +32,6 @@
 - (void)startRecord;
 
 - (void)stopRecord;
-- (void)finishRecord:(void (^)(AVAsset *))block;
+- (void)finishRecord:(void (^)(AVAsset *asset))block;
 
 @end

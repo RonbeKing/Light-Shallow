@@ -189,7 +189,10 @@
 
 - (void)startRecord{
     if (self.needWrite) {
-        [self stopRecord];
+        //[self stopRecord];
+        [self finishRecord:^(AVAsset *asset) {
+            
+        }];
         return;
     }
     if ([self createWriter]) {
@@ -200,11 +203,11 @@
 
 - (void)stopRecord{
     self.needWrite = NO;
-    __weak typeof(self) weakSelf = self;
+    //__weak typeof(self) weakSelf = self;
     
     [self.assetWriter finishWritingWithCompletionHandler:^{
         NSLog(@"record ended");
-        AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:self.videoPath] options:nil];
+        //AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:self.videoPath] options:nil];
         
         //        [self addWatermark:LSWatermarkTypeImage inAsset:asset completion:^(LSAVCommand *avCommand) {
         //            [weakSelf exportAsset:avCommand.mutableComposition useCommand:avCommand];
