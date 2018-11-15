@@ -23,6 +23,7 @@
 		CA903D8E218AB1E9005758F9 /* nnn.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA903D89218AB1E9005758F9 /* nnn.mp4 */; };
 		CA903D93218ACDA8005758F9 /* LSVideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D92218ACDA8005758F9 /* LSVideoEditor.m */; };
 		CA903D96218ADA41005758F9 /* LSAVCompositionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D95218ADA41005758F9 /* LSAVCompositionCommand.m */; };
+		CAA7A7EF219D746D00368C74 /* LSOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7A7EE219D746D00368C74 /* LSOperationView.m */; };
 		CAD04ABE218AF3A100EF760B /* LSCompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD04ABD218AF3A100EF760B /* LSCompositionViewController.m */; };
 		CAFB70CD21806F8900755998 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70CC21806F8900755998 /* AppDelegate.m */; };
 		CAFB70D021806F8900755998 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70CF21806F8900755998 /* ViewController.m */; };
@@ -85,6 +86,8 @@
 		CA903D92218ACDA8005758F9 /* LSVideoEditor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSVideoEditor.m; sourceTree = "<group>"; };
 		CA903D94218ADA41005758F9 /* LSAVCompositionCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSAVCompositionCommand.h; sourceTree = "<group>"; };
 		CA903D95218ADA41005758F9 /* LSAVCompositionCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSAVCompositionCommand.m; sourceTree = "<group>"; };
+		CAA7A7ED219D746D00368C74 /* LSOperationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSOperationView.h; sourceTree = "<group>"; };
+		CAA7A7EE219D746D00368C74 /* LSOperationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSOperationView.m; sourceTree = "<group>"; };
 		CAD04ABC218AF3A100EF760B /* LSCompositionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSCompositionViewController.h; sourceTree = "<group>"; };
 		CAD04ABD218AF3A100EF760B /* LSCompositionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSCompositionViewController.m; sourceTree = "<group>"; };
 		CAFB70C821806F8900755998 /* Light & Shallow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light & Shallow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +192,8 @@
 			children = (
 				CA903D672186B057005758F9 /* LSVideoPreview.h */,
 				CA903D682186B057005758F9 /* LSVideoPreview.m */,
+				CAA7A7ED219D746D00368C74 /* LSOperationView.h */,
+				CAA7A7EE219D746D00368C74 /* LSOperationView.m */,
 				CA903D76218994C5005758F9 /* LSVideoPlayerView.h */,
 				CA903D77218994C5005758F9 /* LSVideoPlayerView.m */,
 				C2A9747F2186DAF400A6B193 /* LSSliderView.h */,
@@ -427,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA903D6D2186EB50005758F9 /* LSAVConfiguration.m in Sources */,
+				CAA7A7EF219D746D00368C74 /* LSOperationView.m in Sources */,
 				CAFB71212181B05600755998 /* LSAVAddWatermarkCommand.m in Sources */,
 				CA903D7B218A9416005758F9 /* LSAVExtractAudioCommand.m in Sources */,
 				CA903D7521898360005758F9 /* LSVideoEditorViewController.m in Sources */,

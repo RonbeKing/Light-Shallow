@@ -45,4 +45,12 @@ typedef NS_ENUM(NSUInteger, LSPlayerState)
     LSPlayerStateFailed      = 3
 };
 
+typedef NS_ENUM(NSUInteger, LSCanvasRatio)
+{
+    LSCanvasRatio16X9     = 0,
+    LSCanvasRatio9X16     = 1,
+    LSCanvasRatio1X1      = 2,
+    LSCanvasRatio4X3      = 3
+};
+
 #endif /* LSTypedef_h */

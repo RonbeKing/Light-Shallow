@@ -14,7 +14,8 @@ typedef void (^ExposureBlock) (CGPoint point);
 typedef void(^FocalizeAdjustmentBlock)(CGFloat scale);
 
 @interface LSVideoPreview : UIView
-@property (nonatomic, strong, readonly) AVCaptureVideoPreviewLayer* previewLayer;
+@property (nonatomic, strong, readonly) CALayer* previewLayer;
+@property (nonatomic, assign) LSCanvasRatio canvasRatio;
 @property (nonatomic, strong) id imageContents;
 @property (nonatomic,   copy) FocusBlock focusBlock;
 @property (nonatomic,   copy) ExposureBlock exposureBlock;

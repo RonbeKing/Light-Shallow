@@ -14,7 +14,7 @@
 #define KScreenHeight  [UIScreen mainScreen].bounds.size.height
 
 @interface LSVideoPreview ()<UIGestureRecognizerDelegate>
-@property (nonatomic, strong) AVCaptureVideoPreviewLayer* previewLayer;
+@property (nonatomic, strong) CALayer* previewLayer;
 @property (nonatomic, strong) UIView* focusView;
 @property (nonatomic, strong) LSSliderView * slider;
 @property (nonatomic, assign) CGFloat lastScale;
@@ -37,9 +37,11 @@
 }
 
 - (void)initialPreviewLayer{
-    self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] init];
-    self.previewLayer.frame = self.bounds;
-    self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.previewLayer = [[CALayer alloc] init];
+    //self.previewLayer.frame = self.bounds;
+    self.previewLayer.contentsGravity = @"resizeAspectFill";
+    self.previewLayer.masksToBounds = YES;
+    //self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     //self.previewLayer.anchorPoint = CGPointZero;
     [self.layer insertSublayer:self.previewLayer atIndex:0];
     [self addSubview:self.focusView];
@@ -69,10 +71,8 @@
 }
 
 - (void) pinchView:(UIPinchGestureRecognizer *)pinchGestureRecognizer{
-    NSLog(@"1===%f",pinchGestureRecognizer.scale);
     if (pinchGestureRecognizer.state == UIGestureRecognizerStateBegan || pinchGestureRecognizer.state == UIGestureRecognizerStateChanged) {
         float currentScale = _lastScale - (1 - pinchGestureRecognizer.scale)*0.05;
-        NSLog(@"2===%f",currentScale);
         if (currentScale < DEFAULT_VIDEO_ZOOM_FACTOR_MIN) {
             currentScale = DEFAULT_VIDEO_ZOOM_FACTOR_MIN;
         }
@@ -132,6 +132,38 @@
     self.previewLayer.contents = imageContents;
 }
 
+- (void)setCanvasRatio:(LSCanvasRatio)canvasRatio{
+    _canvasRatio = canvasRatio;
+    switch (canvasRatio) {
+        case LSCanvasRatio1X1:
+        {
+            self.frame = CGRectMake(0, 40, KScreenWidth, KScreenWidth);
+            [self layoutSubviews];
+        }
+            break;
+        case LSCanvasRatio16X9:
+        {
+            self.frame = CGRectMake(0, 40, KScreenWidth, KScreenWidth*9/16);
+            [self layoutSubviews];
+        }
+            break;
+        case LSCanvasRatio9X16:
+        {
+            self.frame = CGRectMake(0, 40, KScreenWidth, KScreenWidth*16/9);
+            [self layoutSubviews];
+        }
+            break;
+        case LSCanvasRatio4X3:
+        {
+            self.frame = CGRectMake(0, 40, KScreenWidth, KScreenWidth*3/4);
+            [self layoutSubviews];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 -(UIView *)focusView{
     if (!_focusView) {
         _focusView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
@@ -159,7 +191,6 @@
 }
 
 - (void)sliderValueChanged:(UISlider *)slider{
-//    NSLog(@"slilder.value = %f ",slider.value);
     self.focalizeAdjustmentBlock(slider.value);
 }
 

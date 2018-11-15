@@ -4,6 +4,7 @@
 //
 //  Created by 王珑宾 on 2018/10/9.
 //  Copyright © 2018年 Ronb X. All rights reserved.
+//
 //  *****************************************
 //  * view controller added realtime-filter *
 //  *****************************************
@@ -12,6 +13,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "LSVideoEditorViewController.h"
 #import "LSVideoPreview.h"
+#import "LSOperationView.h"
 #import "LSAssetManager.h"
 #import "LSAVSession.h"
 
@@ -27,24 +29,9 @@
     
     [self initCaptureSession];
     
-    UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(100, 100, 80, 50);
-    btn.backgroundColor = [UIColor blueColor];
-    [btn setTitle:@"record" forState:UIControlStateNormal];
-    [self.view addSubview:btn];
-    [btn addTarget:self action:@selector(recordVideo) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton* btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn2.frame = CGRectMake(230, 100, 80, 50);
-    btn2.backgroundColor = [UIColor blueColor];
-    [btn2 setTitle:@"flip" forState:UIControlStateNormal];
-    [self.view addSubview:btn2];
-    [btn2 addTarget:self action:@selector(finishRecord) forControlEvents:UIControlEventTouchUpInside];
-    
     UIButton* backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    backBtn.frame = CGRectMake(15, 20, 45, 45);
+    backBtn.frame = CGRectMake(15, 10, 45, 20);
     [backBtn setTitle:@"back" forState:UIControlStateNormal];
-    [backBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backBtn];
     [UIApplication sharedApplication].idleTimerDisabled = YES;
@@ -56,29 +43,38 @@
 
 - (void)initCaptureSession{
     // video preview
-    self.videoPreview = [[LSVideoPreview alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight)];
+    self.videoPreview = [[LSVideoPreview alloc] init];
+    self.videoPreview.canvasRatio = LSCanvasRatio1X1;
     [self.view addSubview:self.videoPreview];
-    
     [[LSAVSession sharedInstance] startCaptureWithVideoPreview:self.videoPreview];
+    
+    LSOperationView* operationView = [[LSOperationView alloc] initWithFrame:CGRectMake(0, KScreenHeight - 260, KScreenWidth, 260)];
+    [self.view addSubview:operationView];
+    
+    operationView.beginRecordBlock = ^{
+        [[LSAVSession sharedInstance] startRecord];
+    };
+    
+    operationView.endRecordBlock = ^{
+        [[LSAVSession sharedInstance] finishRecord:^(AVAsset *asset) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                LSVideoEditorViewController* videoEditor = [[LSVideoEditorViewController alloc] init];
+                videoEditor.asset = asset;
+                [self presentViewController:videoEditor animated:YES completion:nil];
+            });
+        }];
+    };
+    
+    operationView.flipCameraBlock = ^{
+        [[LSAVSession sharedInstance] switchCamera];
+    };
+    
+    operationView.ajustCanvasBlock = ^(LSCanvasRatio canvasRatio) {
+        self.videoPreview.canvasRatio = canvasRatio;
+    };
 }
 
-- (void)switchCamera{
-    [[LSAVSession sharedInstance] switchCamera];
-}
 
-- (void)recordVideo{
-    [[LSAVSession sharedInstance] startRecord];
-}
-
-- (void)finishRecord{
-    [[LSAVSession sharedInstance] finishRecord:^(AVAsset *asset) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            LSVideoEditorViewController* videoEditor = [[LSVideoEditorViewController alloc] init];
-            videoEditor.asset = asset;
-            [self presentViewController:videoEditor animated:YES completion:nil];
-        });
-    }];
-}
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
     self.videoPreview.frame = CGRectMake(0, 0, size.width, size.height);

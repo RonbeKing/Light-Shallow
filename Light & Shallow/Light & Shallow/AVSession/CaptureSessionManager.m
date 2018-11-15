@@ -280,9 +280,9 @@
     NSDictionary* outputSettings =
     @{
       AVVideoCodecKey:type,
-      AVVideoWidthKey:@720,
-      AVVideoHeightKey:@1280,
-      AVVideoScalingModeKey:AVVideoScalingModeResizeAspect,
+      AVVideoWidthKey:@480,
+      AVVideoHeightKey:@480,
+      AVVideoScalingModeKey:AVVideoScalingModeResizeAspectFill,
       AVVideoCompressionPropertiesKey:compressionProperties
       };
     
