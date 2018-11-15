@@ -21,4 +21,6 @@
 - (void)addWatermark:(LSWatermarkType)watermarkType inAsset:(AVAsset*)asset completion:(void(^)(LSAVCommand *avCommand))block;
 - (void)exportAsset:(AVAsset*)asset;
 
+- (void)composeVideoWithImages:(NSArray*)images;
+
 @end

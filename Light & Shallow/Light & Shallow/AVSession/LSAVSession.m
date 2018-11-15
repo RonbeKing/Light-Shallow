@@ -18,20 +18,14 @@
 #import "LSAVExportCommand.h"
 
 #import "CaptureSessionManager.h"
+#import "LSVideoEditor.h"
 
 @interface LSAVSession ()<CaptureSessionManagerDelegate>
 
 #pragma mark -- AVCaptureSession
 
 @property (nonatomic, strong) CaptureSessionManager* captureSessionManager;
-
-#pragma mark -- video composition
-
-@property (nonatomic, strong) AVMutableComposition* mutableComposition;
-@property (nonatomic, strong) AVMutableVideoComposition* mutableVideoComposition;
-@property (nonatomic, strong) AVMutableAudioMix* mutableAudioMix;
-
-@property (nonatomic, strong) LSAVCommand* avCommand;
+@property (nonatomic, strong) LSVideoEditor* videoEditor;
 
 @end
 
@@ -50,7 +44,8 @@
     if (self = [super init]) {
         self.captureSessionManager = [[CaptureSessionManager alloc] init];
         self.captureSessionManager.delegate = self;
-    }
+        self.videoEditor = [[LSVideoEditor alloc] init];
+     }
     return self;
 }
 
@@ -87,35 +82,15 @@
 #pragma mark -- Video editor
 
 - (void)addMusicToAsset:(AVAsset *)asset completion:(void (^)(LSAVCommand *))block{
-    LSAVAddMusicCommand* musicCommand = [[LSAVAddMusicCommand alloc] initWithComposition:self.avCommand.mutableComposition videoComposition:self.avCommand.mutableVideoComposition audioMix:self.avCommand.mutableAudioMix];
-    [musicCommand performWithAsset:asset completion:^(LSAVCommand *avCommand) {
-        self.avCommand = avCommand;
-        if (block) {
-            block(avCommand);
-        }
-    }];
+    [self.videoEditor addMusicToAsset:asset completion:block];
 }
 
 - (void)addWatermark:(LSWatermarkType)watermarkType inAsset:(AVAsset *)asset completion:(void (^)(LSAVCommand *))block{
-    LSAVAddWatermarkCommand* watermarkCommand = [[LSAVAddWatermarkCommand alloc] initWithComposition:self.avCommand.mutableComposition videoComposition:self.avCommand.mutableVideoComposition audioMix:self.avCommand.mutableAudioMix];
-    [watermarkCommand performWithAsset:asset completion:^(LSAVCommand *avCommand) {
-        self.avCommand = avCommand;
-        if (block) {
-            block(avCommand);
-        }
-    }];
+    [self.videoEditor addWatermark:watermarkType inAsset:asset completion:block];
 }
 
 - (void)exportAsset:(AVAsset*)asset{
-    LSAVExportCommand* exportCommand = [[LSAVExportCommand alloc] initWithComposition:self.avCommand.mutableComposition videoComposition:self.avCommand.mutableVideoComposition audioMix:self.avCommand.mutableAudioMix];
-    
-    [exportCommand performWithAsset:asset completion:^(LSAVCommand *avCommand) {
-        if (avCommand.executeStatus) {
-            NSLog(@"export successfully");
-        }else{
-            NSLog(@"export fail");
-        }
-    }];
+    [self.videoEditor exportAsset:asset];
 }
 
 - (void)composeAsset1:(AVAsset *)asset1 mediaType:(AVMediaType)mediaType1 asset2:(AVAsset *)asset2 mediaType:(AVMediaType)mediaType2{

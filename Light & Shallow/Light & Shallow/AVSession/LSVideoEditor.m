@@ -48,4 +48,8 @@
     }];
 }
 
+-(void)composeVideoWithImages:(NSArray *)images{
+    
+}
+
 @end
