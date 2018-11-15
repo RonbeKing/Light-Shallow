@@ -69,7 +69,7 @@
 }
 
 - (void)export{
-    [[LSAVSession sharedInstance] exportAsset:nil];
+    [[LSAVSession sharedInstance] exportAsset:self.asset];
 }
 
 - (void)back{

@@ -13,6 +13,33 @@
 @implementation LSAVExportCommand
 
 - (void)performWithAsset:(AVAsset *)asset completion:(processResult)block{
+    
+    AVAssetTrack *assetVideoTrack = nil;
+    AVAssetTrack *assetAudioTrack = nil;
+    // Check if the asset contains video and audio tracks
+    if ([[asset tracksWithMediaType:AVMediaTypeVideo] count] != 0) {
+        assetVideoTrack = [asset tracksWithMediaType:AVMediaTypeVideo][0];
+    }
+    if ([[asset tracksWithMediaType:AVMediaTypeAudio] count] != 0) {
+        assetAudioTrack = [asset tracksWithMediaType:AVMediaTypeAudio][0];
+    }
+    
+    CMTime insertionPoint = kCMTimeZero;
+    NSError *error = nil;
+    
+    if (!self.mutableComposition) {
+        self.mutableComposition  = [AVMutableComposition composition];
+        
+        if (assetVideoTrack != nil) {
+            AVMutableCompositionTrack *compositionVideoTrack = [self.mutableComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+            [compositionVideoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, [asset duration]) ofTrack:assetVideoTrack atTime:insertionPoint error:&error];
+        }
+        if (assetAudioTrack != nil) {
+            AVMutableCompositionTrack *compositionAudioTrack = [self.mutableComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+            [compositionAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, [asset duration]) ofTrack:assetAudioTrack atTime:insertionPoint error:&error];
+        }
+    }
+    
     // Step 1
     // Create an outputURL to which the exported movie will be saved
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -26,6 +53,7 @@
     
     // Step 2
     // Create an export session with the composition and write the exported movie to the photo library
+    
     self.exportSession = [[AVAssetExportSession alloc] initWithAsset:[self.mutableComposition copy] presetName:AVAssetExportPreset1280x720];
     
     self.exportSession.videoComposition = self.mutableVideoComposition;
