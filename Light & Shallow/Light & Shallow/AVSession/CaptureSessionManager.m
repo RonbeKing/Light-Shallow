@@ -13,6 +13,7 @@
 #import "LSVideoPreview.h"
 
 @interface CaptureSessionManager ()<AVCaptureVideoDataOutputSampleBufferDelegate,AVCaptureAudioDataOutputSampleBufferDelegate>
+
 #pragma mark -- AVCaptureSession
 
 @property (nonatomic, strong) AVCaptureSession* captureSession;
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) AVCaptureDeviceInput* videoDeviceInput;
 @property (nonatomic, strong) AVCaptureDevice* audioDevice;
 @property (nonatomic, strong) AVCaptureDeviceInput* audioDeviceInput;
+@property (nonatomic,   copy) dispatch_queue_t recordQueue;
 
 #pragma mark -- Filter
 
@@ -36,7 +38,6 @@
 @property (nonatomic, strong) AVAssetWriterInputPixelBufferAdaptor* inputPixelBufferAdptor;
 @property (nonatomic, assign) CMTime currentSampleTime;
 @property (nonatomic, assign) CMVideoDimensions currentVideoDimensions;
-
 
 #pragma mark --
 
@@ -88,7 +89,7 @@
     if ([self.captureSession canAddOutput:output]) {
         [self.captureSession addOutput:output];
     }
-    [output setSampleBufferDelegate:self queue:dispatch_queue_create("videoOutput", DISPATCH_QUEUE_PRIORITY_DEFAULT)];
+    [output setSampleBufferDelegate:self queue:self.recordQueue];
     
     // audio input
     self.audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
@@ -99,7 +100,7 @@
     
     // audio output
     AVCaptureAudioDataOutput* audioOutput = [[AVCaptureAudioDataOutput alloc] init];
-    [audioOutput setSampleBufferDelegate:self queue:dispatch_queue_create("audioOutput", DISPATCH_QUEUE_PRIORITY_DEFAULT)];
+    [audioOutput setSampleBufferDelegate:self queue:self.recordQueue];
     if ([self.captureSession canAddOutput:audioOutput]) {
         [self.captureSession addOutput:audioOutput];
     }
@@ -189,7 +190,6 @@
 
 - (void)startRecord{
     if (self.needWrite) {
-        //[self stopRecord];
         [self finishRecord:^(AVAsset *asset) {
             
         }];
@@ -203,25 +203,13 @@
 
 - (void)stopRecord{
     self.needWrite = NO;
-    //__weak typeof(self) weakSelf = self;
-    
     [self.assetWriter finishWritingWithCompletionHandler:^{
-        NSLog(@"record ended");
-        //AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:self.videoPath] options:nil];
-        
-        //        [self addWatermark:LSWatermarkTypeImage inAsset:asset completion:^(LSAVCommand *avCommand) {
-        //            [weakSelf exportAsset:avCommand.mutableComposition useCommand:avCommand];
-        //        }];
-        
-//        [self addMusicToAsset:asset completion:^(LSAVCommand *avCommand) {
-//            [weakSelf exportAsset:avCommand.mutableComposition];
-//        }];
+        self.needWrite = NO;
     }];
 }
 
 - (void)finishRecord:(void (^)(AVAsset *))block{
     self.needWrite = NO;
-    
     [self.assetWriter finishWritingWithCompletionHandler:^{
         NSLog(@"record ended");
         AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:self.videoPath] options:nil];
@@ -258,9 +246,9 @@
     }
     
     // codec settings
-    NSInteger pixelSize = 1280*720;
+    NSInteger pixelSize = 480*480;
     
-    CGFloat bitPerPixel = 12.0;
+    CGFloat bitPerPixel = 24.0; //24位真彩色
     NSInteger bitsPerSecond = pixelSize * bitPerPixel;
     
     NSDictionary* compressionProperties =
@@ -307,7 +295,17 @@
         NSLog(@"can't add the asset writer for video input");
     }
     
-    NSDictionary* audioOutputSettings = @{AVEncoderBitRateKey:@(44100),AVFormatIDKey:@(kAudioFormatMPEG4AAC),AVNumberOfChannelsKey:@(1),AVSampleRateKey:@(44100)};
+    NSDictionary* audioOutputSettings = @{AVEncoderBitRateKey:@(128000),AVFormatIDKey:@(kAudioFormatMPEG4AAC),AVNumberOfChannelsKey:@(2),AVSampleRateKey:@(44100),AVEncoderAudioQualityKey:@(AVAudioQualityHigh)};
+    
+    /* 注：
+     <1>AVNumberOfChannelsKey 通道数  1为单通道 2为立体通道
+     <2>AVSampleRateKey 采样率 取值为 8000/44100/96000 影响音频采集的质量
+     <3>AVLinearPCMBitDepthKey 比特率(音频码率) 取值为 8 16 24 32
+     <4>AVEncoderAudioQualityKey 质量
+     <5>AVEncoderBitRateKey 比特采样率 一般是128000
+     */
+    
+    /*另注：aac的音频采样率不支持96000，当我设置成8000时，assetWriter也是报错*/
     
     AVAssetWriterInput* assetWriterAudioInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeAudio outputSettings:audioOutputSettings];
     assetWriterAudioInput.expectsMediaDataInRealTime = YES;
@@ -423,6 +421,13 @@
 
 #pragma mark -- lazy load
 
+- (dispatch_queue_t)recordQueue{
+    if (_recordQueue == nil) {
+        _recordQueue = dispatch_queue_create("videoRecord", DISPATCH_QUEUE_SERIAL);
+    }
+    return _recordQueue;
+}
+
 - (CIFilter *)filter{
     if (_filter == nil) {
         _filter = [CIFilter filterWithName:@"CIPhotoEffectInstant"];
@@ -436,6 +441,10 @@
         _context = [CIContext contextWithOptions:nil];
     }
     return _context;
+}
+
+-(void)dealloc{
+    self.recordQueue = nil;
 }
 
 @end
