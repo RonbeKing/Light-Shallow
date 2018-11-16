@@ -53,4 +53,11 @@ typedef NS_ENUM(NSUInteger, LSCanvasRatio)
     LSCanvasRatio4X3      = 3
 };
 
+typedef NS_ENUM(NSUInteger, LSVideoOrientation)
+{
+    LSVideoOrientationPortrait     = 0,
+    LSVideoOrientationLandscapeRight     = 1,
+    LSVideoOrientationPortraitUpsideDown      = 2,
+    LSVideoOrientationLandscapeLeft      = 3
+};
 #endif /* LSTypedef_h */

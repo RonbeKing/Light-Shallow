@@ -94,12 +94,9 @@
 }
 
 - (void)moviePlayDidEnd:(NSNotification*)notification{
-    NSLog(@"播放完了");
-    
     [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
         [self.player play];
     }];
-    
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
