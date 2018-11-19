@@ -10,11 +10,11 @@
 #import <AVFoundation/AVFoundation.h>
 #import "LSVideoPlayerView.h"
 
-#import "LSAVSession.h"
+#import "LSVideoEditor.h"
 #import "LSAVCommand.h"
 
 @interface LSVideoEditorViewController ()
-
+@property (nonatomic, strong) LSVideoEditor* videoEditor;
 @property (nonatomic, strong) LSVideoPlayerView* player;
 
 @end
@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.videoEditor = [[LSVideoEditor alloc] init];
     
     self.player = [[LSVideoPlayerView alloc] initWithAsset:self.asset frame:self.view.frame];
     [self.view addSubview:self.player];
@@ -56,20 +58,22 @@
 }
 
 - (void)addMusic{
-    [[LSAVSession sharedInstance] addMusicToAsset:self.asset completion:^(LSAVCommand *avCommand) {
-        [self.player replaceItemWithAsset:avCommand.mutableComposition];
+    __weak typeof(self) weakSelf = self;
+    [self.videoEditor addMusicToAsset:self.asset completion:^(LSAVCommand *avCommand) {
+        [weakSelf.player replaceItemWithAsset:avCommand.mutableComposition];
     }];
 }
 
 - (void)addWatermark{
-    [[LSAVSession sharedInstance] addWatermark:LSWatermarkTypeImage inAsset:self.asset completion:^(LSAVCommand *avCommand) {
+    __weak typeof(self) weakSelf = self;
+    [self.videoEditor addWatermark:LSWatermarkTypeImage inAsset:self.asset completion:^(LSAVCommand *avCommand) {
         //we have to create a layer manually added to the playerview, otherwise it will not show
-        [self.player replaceItemWithAsset:avCommand.mutableComposition];
+        [weakSelf.player replaceItemWithAsset:avCommand.mutableComposition];
     }];
 }
 
 - (void)export{
-    [[LSAVSession sharedInstance] exportAsset:self.asset];
+    [self.videoEditor exportAsset:self.asset];
 }
 
 - (void)back{

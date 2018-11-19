@@ -6,13 +6,15 @@
 //  Copyright © 2018年 Ronb X. All rights reserved.
 //
 
-#import "CaptureSessionManager.h"
+#import "LSCaptureSessionManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <CoreImage/CoreImage.h>
 #import "LSVideoPreview.h"
 
-@interface CaptureSessionManager ()<AVCaptureVideoDataOutputSampleBufferDelegate,AVCaptureAudioDataOutputSampleBufferDelegate>
+@interface LSCaptureSessionManager ()<AVCaptureVideoDataOutputSampleBufferDelegate,AVCaptureAudioDataOutputSampleBufferDelegate>
+
+@property (nonatomic, strong) LSAVConfiguration* config;
 
 #pragma mark -- AVCaptureSession
 
@@ -47,7 +49,14 @@
 
 @end
 
-@implementation CaptureSessionManager
+@implementation LSCaptureSessionManager
+
+- (instancetype)initWithConfiguration:(LSAVConfiguration *)config{
+    if (self = [super init]) {
+        self.config = config;
+    }
+    return self;
+}
 
 #pragma mark -- startCapture
 

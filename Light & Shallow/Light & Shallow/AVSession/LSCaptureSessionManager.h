@@ -8,20 +8,24 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import "LSAVConfiguration.h"
 
 @class LSVideoPreview;
 
-@protocol CaptureSessionManagerDelegate <NSObject>
+@protocol LSCaptureSessionManagerDelegate <NSObject>
 
+@optional
 - (void)videoCaptureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection;
 
 - (void)audioCaptureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection;
 
 @end
 
-@interface CaptureSessionManager : NSObject
+@interface LSCaptureSessionManager : NSObject
 
-@property (nonatomic, weak) id <CaptureSessionManagerDelegate> delegate;
+@property (nonatomic, weak) id <LSCaptureSessionManagerDelegate> delegate;
+
+- (instancetype)initWithConfiguration:(LSAVConfiguration *)config;
 
 - (void)startCaptureWithVideoPreview:(LSVideoPreview *)videoPreview;
 

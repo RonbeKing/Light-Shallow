@@ -15,9 +15,12 @@
 #import "LSVideoPreview.h"
 #import "LSOperationView.h"
 #import "LSAssetManager.h"
-#import "LSAVSession.h"
+#import "LSCaptureSessionManager.h"
+#import "LSAVConfiguration.h"
 
 @interface RealtimeFilterViewController ()
+@property (nonatomic, strong) LSCaptureSessionManager* captureSession;
+@property (nonatomic, strong) LSAVConfiguration* AVConfig;
 @property (nonatomic, strong) LSVideoPreview* videoPreview;
 @end
 
@@ -42,21 +45,24 @@
 }
 
 - (void)initCaptureSession{
+    self.AVConfig = [LSAVConfiguration defaultConfiguration];
+    self.captureSession = [[LSCaptureSessionManager alloc] initWithConfiguration:self.AVConfig];
+    
     // video preview
     self.videoPreview = [[LSVideoPreview alloc] init];
     self.videoPreview.canvasRatio = LSCanvasRatio1X1;
     [self.view addSubview:self.videoPreview];
-    [[LSAVSession sharedInstance] startCaptureWithVideoPreview:self.videoPreview];
+    [self.captureSession startCaptureWithVideoPreview:self.videoPreview];
     
     LSOperationView* operationView = [[LSOperationView alloc] initWithFrame:CGRectMake(0, KScreenHeight - 260, KScreenWidth, 260)];
     [self.view addSubview:operationView];
     
     operationView.beginRecordBlock = ^{
-        [[LSAVSession sharedInstance] startRecord];
+        [self.captureSession startRecord];
     };
     
     operationView.endRecordBlock = ^{
-        [[LSAVSession sharedInstance] finishRecord:^(AVAsset *asset) {
+        [self.captureSession finishRecord:^(AVAsset *asset) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 LSVideoEditorViewController* videoEditor = [[LSVideoEditorViewController alloc] init];
                 videoEditor.asset = asset;
@@ -66,15 +72,13 @@
     };
     
     operationView.flipCameraBlock = ^{
-        [[LSAVSession sharedInstance] switchCamera];
+        [self.captureSession switchCamera];
     };
     
     operationView.ajustCanvasBlock = ^(LSCanvasRatio canvasRatio) {
         self.videoPreview.canvasRatio = canvasRatio;
     };
 }
-
-
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
     self.videoPreview.frame = CGRectMake(0, 0, size.width, size.height);
