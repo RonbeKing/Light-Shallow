@@ -13,28 +13,41 @@
 @class LSVideoPreview;
 
 @protocol LSCaptureSessionManagerDelegate <NSObject>
-
 @optional
 - (void)videoCaptureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection;
 
 - (void)audioCaptureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection;
-
 @end
 
 @interface LSCaptureSessionManager : NSObject
 
 @property (nonatomic, weak) id <LSCaptureSessionManagerDelegate> delegate;
 
+/**
+ @brief 初始化capture，用于视频录制
+ @param config 录制时的输入输出参数
+ */
 - (instancetype)initWithConfiguration:(LSAVConfiguration *)config;
 
+/**
+ @brief
+    start capture
+ 
+ @param videoPreview
+    It's a view used to preview
+ */
 - (void)startCaptureWithVideoPreview:(LSVideoPreview *)videoPreview;
 
+/**
+ @brief flashMode and cam orientation
+ */
 - (void)changeTorchMode:(AVCaptureTorchMode)torchMode;
-
 - (void)switchCamera;
 
+/**
+ @brief  start / stop record
+ */
 - (void)startRecord;
-
 - (void)stopRecord;
 - (void)finishRecord:(void (^)(AVAsset *asset))block;
 
