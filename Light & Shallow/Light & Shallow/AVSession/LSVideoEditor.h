@@ -21,6 +21,9 @@
 - (void)addWatermark:(LSWatermarkType)watermarkType inAsset:(AVAsset*)asset completion:(void(^)(LSAVCommand *avCommand))block;
 - (void)exportAsset:(AVAsset*)asset;
 
+/**
+ @brief 制作一个时长为15s的视频，帧率为30
+ */
 - (void)composeVideoWithImages:(NSArray*)images;
 
 @end
