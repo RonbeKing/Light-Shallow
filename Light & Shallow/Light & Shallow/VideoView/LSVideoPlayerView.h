@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+@protocol LSVideoPlayerViewDelegate <NSObject>
+@optional
+- (void)LSVideoPlayerDidPlayedToTime:(CMTime)time;
+@end
+
 @interface LSVideoPlayerView : UIView
 
 @property (nonatomic, strong) AVAsset* asset;
@@ -16,7 +21,7 @@
 
 @property (nonatomic, assign) BOOL autoPlay;
 @property (nonatomic, assign) BOOL circlePlay;
-
+@property (nonatomic,   weak)id <LSVideoPlayerViewDelegate> delegate;
 - (instancetype)initWithAsset:(AVAsset *)asset frame:(CGRect)frame;
 
 - (instancetype)initWithVideoURL:(NSURL*)videoURL frame:(CGRect)frame;

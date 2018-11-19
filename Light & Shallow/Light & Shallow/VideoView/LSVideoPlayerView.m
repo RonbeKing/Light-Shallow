@@ -52,6 +52,12 @@
     //[self.layer insertSublayer:self.playerLayer atIndex:0];
     [self.layer addSublayer:self.playerLayer];
     self.playerState = LSPlayerStateReadyToPlay;
+    __weak typeof(self) weakSelf = self;
+    [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 100) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+        if ([weakSelf.delegate respondsToSelector:@selector(LSVideoPlayerDidPlayedToTime:)]) {
+            [weakSelf.delegate LSVideoPlayerDidPlayedToTime:time];
+        }
+    }];
     
     //[self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     //[self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];

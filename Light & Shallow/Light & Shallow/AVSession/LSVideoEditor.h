@@ -21,6 +21,8 @@
 - (void)addWatermark:(LSWatermarkType)watermarkType inAsset:(AVAsset*)asset completion:(void(^)(LSAVCommand *avCommand))block;
 - (void)exportAsset:(AVAsset*)asset;
 
+- (void)centerFrameImageWithAsset:(AVAsset*)asset completion:(void (^)(UIImage *image))completion;
+
 /**
  @brief 制作一个时长为15s的视频，帧率为30
  */

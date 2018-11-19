@@ -22,6 +22,7 @@
 		CA903D8E218AB1E9005758F9 /* nnn.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CA903D89218AB1E9005758F9 /* nnn.mp4 */; };
 		CA903D93218ACDA8005758F9 /* LSVideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D92218ACDA8005758F9 /* LSVideoEditor.m */; };
 		CA903D96218ADA41005758F9 /* LSAVCompositionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D95218ADA41005758F9 /* LSAVCompositionCommand.m */; };
+		CAA7179321A2CFCE00897079 /* LSDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7179221A2CFCE00897079 /* LSDisplayCell.m */; };
 		CAA7A7EF219D746D00368C74 /* LSOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7A7EE219D746D00368C74 /* LSOperationView.m */; };
 		CAA7A7F2219E704800368C74 /* LSMediaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7A7F1219E704800368C74 /* LSMediaInfo.m */; };
 		CAD04ABE218AF3A100EF760B /* LSCompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD04ABD218AF3A100EF760B /* LSCompositionViewController.m */; };
@@ -84,6 +85,8 @@
 		CA903D92218ACDA8005758F9 /* LSVideoEditor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSVideoEditor.m; sourceTree = "<group>"; };
 		CA903D94218ADA41005758F9 /* LSAVCompositionCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSAVCompositionCommand.h; sourceTree = "<group>"; };
 		CA903D95218ADA41005758F9 /* LSAVCompositionCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSAVCompositionCommand.m; sourceTree = "<group>"; };
+		CAA7179121A2CFCE00897079 /* LSDisplayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSDisplayCell.h; sourceTree = "<group>"; };
+		CAA7179221A2CFCE00897079 /* LSDisplayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSDisplayCell.m; sourceTree = "<group>"; };
 		CAA7A7ED219D746D00368C74 /* LSOperationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSOperationView.h; sourceTree = "<group>"; };
 		CAA7A7EE219D746D00368C74 /* LSOperationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSOperationView.m; sourceTree = "<group>"; };
 		CAA7A7F0219E704800368C74 /* LSMediaInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSMediaInfo.h; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				CAFB70FE21806FCD00755998 /* RealtimeFilterViewController.m */,
 				CA903D7321898360005758F9 /* LSVideoEditorViewController.h */,
 				CA903D7421898360005758F9 /* LSVideoEditorViewController.m */,
+				CAA7179121A2CFCE00897079 /* LSDisplayCell.h */,
+				CAA7179221A2CFCE00897079 /* LSDisplayCell.m */,
 				CAFB70CE21806F8900755998 /* ViewController.h */,
 				CAFB70CF21806F8900755998 /* ViewController.m */,
 				CAD04ABC218AF3A100EF760B /* LSCompositionViewController.h */,
@@ -438,6 +443,7 @@
 				CAA7A7F2219E704800368C74 /* LSMediaInfo.m in Sources */,
 				CA903D7521898360005758F9 /* LSVideoEditorViewController.m in Sources */,
 				CAFB70D021806F8900755998 /* ViewController.m in Sources */,
+				CAA7179321A2CFCE00897079 /* LSDisplayCell.m in Sources */,
 				C2A974802186DAF400A6B193 /* LSSliderView.m in Sources */,
 				CAFB710921806FCF00755998 /* RealtimeFilterViewController.m in Sources */,
 				CA903D93218ACDA8005758F9 /* LSVideoEditor.m in Sources */,
