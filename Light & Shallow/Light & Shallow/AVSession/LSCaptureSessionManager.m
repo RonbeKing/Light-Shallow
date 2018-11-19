@@ -65,8 +65,8 @@
     
     self.captureSession = [[AVCaptureSession alloc] init];
     [self.captureSession beginConfiguration];
-    if ([self.captureSession canSetSessionPreset:AVCaptureSessionPreset1280x720]) {
-        [self.captureSession setSessionPreset:AVCaptureSessionPreset1280x720];
+    if ([self.captureSession canSetSessionPreset:self.config.sessionPreset]) {
+        [self.captureSession setSessionPreset:self.config.sessionPreset];
     }
     
     // video input device
@@ -255,7 +255,7 @@
     }
     
     // codec settings
-    NSInteger pixelSize = 480*480;
+    NSInteger pixelSize = self.config.outputSize.width*self.config.outputSize.height;
     
     CGFloat bitPerPixel = 24.0; //24位真彩色
     NSInteger bitsPerSecond = pixelSize * bitPerPixel;
@@ -263,7 +263,7 @@
     NSDictionary* compressionProperties =
     @{
       AVVideoAverageBitRateKey:@(bitsPerSecond),
-      AVVideoExpectedSourceFrameRateKey:@(30),
+      AVVideoExpectedSourceFrameRateKey:@(self.config.frameRate),
       AVVideoMaxKeyFrameIntervalKey:@(30),
       AVVideoProfileLevelKey:AVVideoProfileLevelH264BaselineAutoLevel
       };
@@ -277,8 +277,8 @@
     NSDictionary* outputSettings =
     @{
       AVVideoCodecKey:type,
-      AVVideoWidthKey:@480,
-      AVVideoHeightKey:@480,
+      AVVideoWidthKey:@(self.config.outputSize.width),
+      AVVideoHeightKey:@(self.config.outputSize.height),
       AVVideoScalingModeKey:AVVideoScalingModeResizeAspectFill,
       AVVideoCompressionPropertiesKey:compressionProperties
       };
