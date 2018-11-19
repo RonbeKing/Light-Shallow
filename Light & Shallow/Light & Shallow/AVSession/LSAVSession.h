@@ -5,6 +5,9 @@
 //  Created by 王珑宾 on 2018/10/25.
 //  Copyright © 2018年 Ronb X. All rights reserved.
 //
+//  **********************************************
+//  * IMPORTANT:  SDK主功能的接口类,提供各种功能的接口 *
+//  **********************************************
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>

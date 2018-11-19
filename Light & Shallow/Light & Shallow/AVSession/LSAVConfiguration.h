@@ -11,7 +11,7 @@
 
 @interface LSAVConfiguration : NSObject
 
-@property (nonatomic,   copy) AVCaptureSessionPreset sessionPreset;
+@property (nonatomic,   copy) AVCaptureSessionPreset sessionPreset; 
 @property (nonatomic, assign) NSInteger frameRate;
 @property (nonatomic, assign) CGSize outputSize;
 @property (nonatomic, assign) LSVideoCodec videoCodec;

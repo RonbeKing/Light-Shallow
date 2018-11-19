@@ -14,6 +14,7 @@
     LSAVConfiguration* configuration = [[LSAVConfiguration alloc] init];
     configuration.sessionPreset = AVCaptureSessionPreset1280x720;
     configuration.frameRate = 30;
+    configuration.outputSize = CGSizeMake(480, 480);
     configuration.videoCodec = LSVideoCodecH264;
     configuration.audioCodec = LSAudioCodecISAC;
     return configuration;
