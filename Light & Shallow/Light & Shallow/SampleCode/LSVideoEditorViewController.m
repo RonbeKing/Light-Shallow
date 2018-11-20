@@ -49,11 +49,11 @@
     self.collectionView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.collectionView.layer.borderWidth = 1;
     self.collectionView.layer.masksToBounds = YES;
-    [self.collectionView setContentOffset:CGPointMake(KScreenWidth/2, 0)];
+    //[self.collectionView setContentOffset:CGPointMake(KScreenWidth/2, 0)];
     [self.collectionView registerClass:[LSDisplayCell class] forCellWithReuseIdentifier:@"cell"];
     self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.bounces = NO;
     
-
     [self.videoEditor centerFrameImageWithAsset:self.asset completion:^(UIImage *image) {
         [self.images addObject:image];
         [self.collectionView reloadData];
@@ -86,9 +86,11 @@
 }
 
 - (void)LSVideoPlayerDidPlayedToTime:(CMTime)time{
-    CGFloat currentTime = time.value*1.0/time.timescale;
-    CGFloat timeLong = self.asset.duration.value*1.0/self.asset.duration.timescale;
-    [self.collectionView setContentOffset:CGPointMake(85*self.images.count*currentTime/timeLong, 0)];
+    if (self.player.playerState == LSPlayerStatePlaying) {
+        CGFloat currentTime = time.value*1.0/time.timescale;
+        CGFloat timeLong = self.asset.duration.value*1.0/self.asset.duration.timescale;
+        [self.collectionView setContentOffset:CGPointMake(85*self.images.count*currentTime/timeLong, 0)];
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -101,6 +103,23 @@
     UIImage* image = self.images[indexPath.row];
     [cell setContentImage:image];
     return cell;
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (self.player.playerState == LSPlayerStateStop) {
+        CGPoint offset = scrollView.contentOffset;
+        NSTimeInterval seconds =  offset.x*CMTimeGetSeconds(self.asset.duration)/(85*self.images.count);
+        CMTime seekTime = CMTimeMakeWithSeconds(seconds, self.player.currentPlayItem.duration.timescale);
+        [self.player seekToTime:seekTime];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.player pause];
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    [self.player play];
 }
 
 - (void)addMusic{

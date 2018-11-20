@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) AVPlayerLayer* playerLayer;
 @property (nonatomic, strong) AVPlayer* player;
-@property (nonatomic, strong) AVPlayerItem* playerItem;
+@property (nonatomic, strong) AVPlayerItem* currentPlayItem;
 @property (nonatomic, assign) CMTime duration;
 @property (nonatomic, assign) CMTime currentTime;
 
@@ -27,7 +27,7 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor blackColor];
         self.asset = asset;
-        self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+        self.currentPlayItem = [AVPlayerItem playerItemWithAsset:asset];
         [self configPlayer];
     }
     return self;
@@ -37,7 +37,7 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor blackColor];
         self.videoURL = videoURL;
-        self.playerItem = [AVPlayerItem playerItemWithURL:videoURL];
+        self.currentPlayItem = [AVPlayerItem playerItemWithURL:videoURL];
         [self configPlayer];
     }
     return self;
@@ -45,7 +45,7 @@
 
 - (void)configPlayer{
     
-    self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+    self.player = [AVPlayer playerWithPlayerItem:self.currentPlayItem];
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     self.playerLayer.frame = self.bounds;
     self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
@@ -61,7 +61,7 @@
     
     //[self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     //[self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.currentPlayItem];
     
     // Add gestures
     UITapGestureRecognizer* doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
@@ -89,13 +89,17 @@
     self.playerState = LSPlayerStateStop;
 }
 
+- (void)seekToTime:(CMTime)time{
+    [self.player seekToTime:time];
+}
+
 - (void)replaceItemWithAsset:(AVAsset *)asset{
-    self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+    self.currentPlayItem = [AVPlayerItem playerItemWithAsset:asset];
+    [self.player replaceCurrentItemWithPlayerItem:self.currentPlayItem];
     
     //[self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     //[self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.currentPlayItem];
     [self play];
 }
 
@@ -120,20 +124,20 @@
 -(void)dealloc{
     //[self.playerItem removeObserver:self forKeyPath:@"status" context:nil];
     //[self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.currentPlayItem];
 }
 
 -(void)setVideoURL:(NSURL *)videoURL{
     _videoURL = videoURL;
-    self.playerItem = [AVPlayerItem playerItemWithURL:videoURL];
-    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+    self.currentPlayItem = [AVPlayerItem playerItemWithURL:videoURL];
+    [self.player replaceCurrentItemWithPlayerItem:self.currentPlayItem];
     [self configPlayer];
 }
 
 -(void)setAsset:(AVAsset *)asset{
     _asset = asset;
-    self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-    [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+    self.currentPlayItem = [AVPlayerItem playerItemWithAsset:asset];
+    [self.player replaceCurrentItemWithPlayerItem:self.currentPlayItem];
     [self configPlayer];
 }
 
