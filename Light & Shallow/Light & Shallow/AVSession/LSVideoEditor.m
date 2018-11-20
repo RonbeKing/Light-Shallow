@@ -49,21 +49,14 @@
     }];
 }
 
-// 异步获取帧图片，可以一次获取多帧图片
 - (void)centerFrameImageWithAsset:(AVAsset*)asset completion:(void (^)(UIImage *image))completion {
     // AVAssetImageGenerator
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
     imageGenerator.appliesPreferredTrackTransform = YES;
+    CGFloat assetTimeLong = CMTimeGetSeconds(asset.duration);
     
-    // calculate the midpoint time of video
-    Float64 duration = CMTimeGetSeconds([asset duration]);
-    // 取某个帧的时间，参数一表示哪个时间（秒），参数二表示每秒多少帧
-    // 通常来说，600是一个常用的公共参数，苹果有说明:
-    // 24 frames per second (fps) for film, 30 fps for NTSC (used for TV in North America and
-    // Japan), and 25 fps for PAL (used for TV in Europe).
-    // Using a timescale of 600, you can exactly represent any number of frames in these systems
     NSMutableArray* timeArr = [NSMutableArray array];
-    for (float i = 0; i < asset.duration.value / asset.duration.timescale; i+=1) {
+    for (float i = 0; i < assetTimeLong; i+=1) {
         CMTime midpoint = CMTimeMakeWithSeconds(i, 600);
         NSValue *midTime = [NSValue valueWithCMTime:midpoint];
         [timeArr addObject:midTime];

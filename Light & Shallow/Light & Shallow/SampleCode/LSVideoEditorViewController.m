@@ -37,26 +37,22 @@
     [self.player play];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    // 设置UICollectionView为横向滚动
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    // 每一行cell之间的间距
     flowLayout.minimumLineSpacing = 0;
-    // 每一列cell之间的间距
-    // flowLayout.minimumInteritemSpacing = 10;
-    // 设置第一个cell和最后一个cell,与父控件之间的间距
-    //flowLayout.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20);
-    //    flowLayout.minimumLineSpacing = 1;// 根据需要编写
-    //    flowLayout.minimumInteritemSpacing = 1;// 根据需要编写
-    flowLayout.itemSize = CGSizeMake(85, 85);// 该行代码就算不写,item也会有默认尺寸
+    flowLayout.itemSize = CGSizeMake(85, 85);
 
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, KScreenWidth+60, KScreenWidth, 85) collectionViewLayout:flowLayout];
-    
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(-1, KScreenWidth+60+10, KScreenWidth+2, 85) collectionViewLayout:flowLayout];
+    self.collectionView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:.6];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
     [self.view addSubview:self.collectionView];
-    
+    self.collectionView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.collectionView.layer.borderWidth = 1;
+    self.collectionView.layer.masksToBounds = YES;
+    [self.collectionView setContentOffset:CGPointMake(KScreenWidth/2, 0)];
     [self.collectionView registerClass:[LSDisplayCell class] forCellWithReuseIdentifier:@"cell"];
+    self.collectionView.showsHorizontalScrollIndicator = NO;
+    
 
     [self.videoEditor centerFrameImageWithAsset:self.asset completion:^(UIImage *image) {
         [self.images addObject:image];
@@ -70,8 +66,8 @@
     [self.view addSubview:addMusicBtn];
     
     UIButton* addWatermarkBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    addWatermarkBtn.frame = CGRectMake(170, KScreenHeight - 90, 100, 45);
-    [addWatermarkBtn setTitle:@"添加水印" forState:UIControlStateNormal];
+    addWatermarkBtn.frame = CGRectMake(170, KScreenHeight - 90, 45, 45);
+    [addWatermarkBtn setTitle:@"水印" forState:UIControlStateNormal];
     [addWatermarkBtn addTarget:self action:@selector(addWatermark) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addWatermarkBtn];
     
