@@ -41,7 +41,7 @@
 /**
  @brief flashMode and cam orientation
  */
-- (void)changeTorchMode:(AVCaptureTorchMode)torchMode;
+- (void)changeTorchMode;
 - (void)switchCamera;
 
 /**
@@ -51,4 +51,5 @@
 - (void)stopRecord;
 - (void)finishRecord:(void (^)(AVAsset *asset))block;
 
+- (void)changeFilter:(LSFilterType)filter;
 @end

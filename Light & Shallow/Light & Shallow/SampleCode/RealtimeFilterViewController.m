@@ -13,7 +13,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "LSVideoEditorViewController.h"
 #import "LSVideoPreview.h"
-#import "LSOperationView.h"
+//#import "LSOperationView.h"
+#import "LSRecordOperationView.h"
 #import "LSAssetManager.h"
 #import "LSCaptureSessionManager.h"
 #import "LSAVConfiguration.h"
@@ -54,13 +55,14 @@
     [self.view addSubview:self.videoPreview];
     [self.captureSession startCaptureWithVideoPreview:self.videoPreview];
     
-    LSOperationView* operationView = [[LSOperationView alloc] initWithFrame:CGRectMake(0, KScreenHeight - 260, KScreenWidth, 260)];
+    LSRecordOperationView* operationView = [[[NSBundle mainBundle] loadNibNamed:@"LSRecordOperationView" owner:nil options:nil] lastObject];
+    operationView.frame = CGRectMake(0, KScreenHeight - 260, KScreenWidth, 260);
     [self.view addSubview:operationView];
     
     operationView.beginRecordBlock = ^{
         [self.captureSession startRecord];
     };
-    
+
     operationView.endRecordBlock = ^{
         [self.captureSession finishRecord:^(AVAsset *asset) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -70,11 +72,19 @@
             });
         }];
     };
-    
+
     operationView.flipCameraBlock = ^{
         [self.captureSession switchCamera];
     };
     
+    operationView.changeTorchModeBlock = ^{
+        [self.captureSession changeTorchMode];
+    };
+    
+    operationView.changeFilterBlock = ^(int tag) {
+        [self.captureSession changeFilter:tag];
+    };
+
     operationView.ajustCanvasBlock = ^(LSCanvasRatio canvasRatio) {
         self.videoPreview.canvasRatio = canvasRatio;
     };

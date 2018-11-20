@@ -48,9 +48,17 @@ typedef NS_ENUM(NSUInteger, LSPlayerState)
 typedef NS_ENUM(NSUInteger, LSCanvasRatio)
 {
     LSCanvasRatio16X9     = 0,
-    LSCanvasRatio9X16     = 1,
+    LSCanvasRatio4X3      = 1,
     LSCanvasRatio1X1      = 2,
-    LSCanvasRatio4X3      = 3
+    LSCanvasRatio9X16     = 3
+};
+
+typedef NS_ENUM(NSUInteger, LSFilterType)
+{
+    LSFilterTypeNoir        = 0,  // 黑白
+    LSFilterTypeTransfer    = 1,  // 岁月
+    LSFilterTypeMono        = 2,  // 单色
+    LSFilterTypeInstant     = 3  // 怀旧
 };
 
 typedef NS_ENUM(NSUInteger, LSVideoOrientation)

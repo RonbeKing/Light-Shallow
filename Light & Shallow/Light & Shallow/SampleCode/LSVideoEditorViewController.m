@@ -49,7 +49,6 @@
     //    flowLayout.minimumInteritemSpacing = 1;// 根据需要编写
     flowLayout.itemSize = CGSizeMake(85, 85);// 该行代码就算不写,item也会有默认尺寸
 
-    
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, KScreenWidth+60, KScreenWidth, 85) collectionViewLayout:flowLayout];
     
     self.collectionView.delegate = self;
@@ -63,18 +62,6 @@
         [self.images addObject:image];
         [self.collectionView reloadData];
     }];
-//    __block CGFloat time = self.asset.duration.value/self.asset.duration.timescale;
-//    __block CGFloat trackedTime = 0;
-//    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:0.006 repeats:YES block:^(NSTimer * _Nonnull timer) {
-//        if (trackedTime < time) {
-//            [self.collectionView setContentOffset:CGPointMake(85*self.images.count*trackedTime/time, 0)];
-//            trackedTime+=0.01;
-//        }else{
-//            [self.collectionView setContentOffset:CGPointMake(0, 0)];
-//            trackedTime = 0;
-//        }
-//    }];
-    
     
     UIButton* addMusicBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     addMusicBtn.frame = CGRectMake(35, KScreenHeight - 90, 100, 45);

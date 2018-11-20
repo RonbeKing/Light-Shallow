@@ -23,6 +23,8 @@
 		CA903D93218ACDA8005758F9 /* LSVideoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D92218ACDA8005758F9 /* LSVideoEditor.m */; };
 		CA903D96218ADA41005758F9 /* LSAVCompositionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D95218ADA41005758F9 /* LSAVCompositionCommand.m */; };
 		CAA7179321A2CFCE00897079 /* LSDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7179221A2CFCE00897079 /* LSDisplayCell.m */; };
+		CAA7179621A3AA4500897079 /* LSRecordOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7179521A3AA4500897079 /* LSRecordOperationView.m */; };
+		CAA7179821A3B3BC00897079 /* LSRecordOperationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAA7179721A3B3BC00897079 /* LSRecordOperationView.xib */; };
 		CAA7A7EF219D746D00368C74 /* LSOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7A7EE219D746D00368C74 /* LSOperationView.m */; };
 		CAA7A7F2219E704800368C74 /* LSMediaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7A7F1219E704800368C74 /* LSMediaInfo.m */; };
 		CAD04ABE218AF3A100EF760B /* LSCompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD04ABD218AF3A100EF760B /* LSCompositionViewController.m */; };
@@ -87,6 +89,9 @@
 		CA903D95218ADA41005758F9 /* LSAVCompositionCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSAVCompositionCommand.m; sourceTree = "<group>"; };
 		CAA7179121A2CFCE00897079 /* LSDisplayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSDisplayCell.h; sourceTree = "<group>"; };
 		CAA7179221A2CFCE00897079 /* LSDisplayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSDisplayCell.m; sourceTree = "<group>"; };
+		CAA7179421A3AA4500897079 /* LSRecordOperationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSRecordOperationView.h; sourceTree = "<group>"; };
+		CAA7179521A3AA4500897079 /* LSRecordOperationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSRecordOperationView.m; sourceTree = "<group>"; };
+		CAA7179721A3B3BC00897079 /* LSRecordOperationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LSRecordOperationView.xib; sourceTree = "<group>"; };
 		CAA7A7ED219D746D00368C74 /* LSOperationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSOperationView.h; sourceTree = "<group>"; };
 		CAA7A7EE219D746D00368C74 /* LSOperationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSOperationView.m; sourceTree = "<group>"; };
 		CAA7A7F0219E704800368C74 /* LSMediaInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSMediaInfo.h; sourceTree = "<group>"; };
@@ -178,6 +183,11 @@
 			children = (
 				CAFB710421806FCE00755998 /* RealtimeFilterViewController.h */,
 				CAFB70FE21806FCD00755998 /* RealtimeFilterViewController.m */,
+				CAA7A7ED219D746D00368C74 /* LSOperationView.h */,
+				CAA7A7EE219D746D00368C74 /* LSOperationView.m */,
+				CAA7179421A3AA4500897079 /* LSRecordOperationView.h */,
+				CAA7179521A3AA4500897079 /* LSRecordOperationView.m */,
+				CAA7179721A3B3BC00897079 /* LSRecordOperationView.xib */,
 				CA903D7321898360005758F9 /* LSVideoEditorViewController.h */,
 				CA903D7421898360005758F9 /* LSVideoEditorViewController.m */,
 				CAA7179121A2CFCE00897079 /* LSDisplayCell.h */,
@@ -197,8 +207,6 @@
 			children = (
 				CA903D672186B057005758F9 /* LSVideoPreview.h */,
 				CA903D682186B057005758F9 /* LSVideoPreview.m */,
-				CAA7A7ED219D746D00368C74 /* LSOperationView.h */,
-				CAA7A7EE219D746D00368C74 /* LSOperationView.m */,
 				CA903D76218994C5005758F9 /* LSVideoPlayerView.h */,
 				CA903D77218994C5005758F9 /* LSVideoPlayerView.m */,
 				C2A9747F2186DAF400A6B193 /* LSSliderView.h */,
@@ -405,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA903D8E218AB1E9005758F9 /* nnn.mp4 in Resources */,
+				CAA7179821A3B3BC00897079 /* LSRecordOperationView.xib in Resources */,
 				CAFB70D821806F8B00755998 /* LaunchScreen.storyboard in Resources */,
 				CA903D8B218AB1E9005758F9 /* video.mp4 in Resources */,
 				CAFB70D521806F8B00755998 /* Assets.xcassets in Resources */,
@@ -440,6 +449,7 @@
 				CAA7A7EF219D746D00368C74 /* LSOperationView.m in Sources */,
 				CAFB71212181B05600755998 /* LSAVAddWatermarkCommand.m in Sources */,
 				CA903D7B218A9416005758F9 /* LSAVExtractAudioCommand.m in Sources */,
+				CAA7179621A3AA4500897079 /* LSRecordOperationView.m in Sources */,
 				CAA7A7F2219E704800368C74 /* LSMediaInfo.m in Sources */,
 				CA903D7521898360005758F9 /* LSVideoEditorViewController.m in Sources */,
 				CAFB70D021806F8900755998 /* ViewController.m in Sources */,

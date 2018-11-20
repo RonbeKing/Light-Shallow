@@ -157,10 +157,15 @@
     }
 }
 
-- (void)changeTorchMode:(AVCaptureTorchMode)torchMode{
+- (void)changeTorchMode{
     [self changeVideoDevicePropertyInSafety:^(AVCaptureDevice *captureDevice) {
-        if ([self.videoDevice isTorchModeSupported:torchMode]) {
-            [self.videoDevice setTorchMode:torchMode];
+        AVCaptureTorchMode oldTorchMode = self.videoDevice.torchMode;
+        AVCaptureTorchMode newTorchMode = AVCaptureTorchModeOff;
+        if (oldTorchMode == AVCaptureTorchModeOff) {
+            newTorchMode = AVCaptureTorchModeOn;
+        }
+        if ([self.videoDevice isTorchModeSupported:newTorchMode]) {
+            [self.videoDevice setTorchMode:newTorchMode];
         }
     }];
 }
@@ -442,6 +447,25 @@
         _filter = [CIFilter filterWithName:@"CIPhotoEffectInstant"];
     }
     return _filter;
+}
+
+- (void)changeFilter:(LSFilterType)filter{
+    switch (filter) {
+        case LSFilterTypeNoir:
+            _filter = [CIFilter filterWithName:@"CIPhotoEffectNoir"];
+            break;
+        case LSFilterTypeTransfer:
+            _filter = [CIFilter filterWithName:@"CIPhotoEffectTransfer"];
+            break;
+        case LSFilterTypeMono:
+            _filter = [CIFilter filterWithName:@"CIPhotoEffectMono"];
+            break;
+        case LSFilterTypeInstant:
+            _filter = [CIFilter filterWithName:@"CIPhotoEffectInstant"];
+            break;
+        default:
+            break;
+    }
 }
 
 -(CIContext *)context{

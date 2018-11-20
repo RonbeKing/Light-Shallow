@@ -35,7 +35,7 @@
 - (void)initUI{
     
     UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(20, 20, 80, 50);
+    btn.frame = CGRectMake(20, 20, 80, 80);
     [btn setTitle:@"record" forState:UIControlStateNormal];
     [self addSubview:btn];
     [btn addTarget:self action:@selector(recordVideo) forControlEvents:UIControlEventTouchUpInside];
