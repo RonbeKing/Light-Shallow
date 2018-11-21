@@ -6,7 +6,7 @@
 //  Copyright © 2018年 com.TTFD. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "LSMainViewController.h"
 #import "RealtimeFilterViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
@@ -20,38 +20,41 @@
 
 #import "LSVideoEditorViewController.h"
 
-@interface ViewController ()
+@interface LSMainViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *recordBtn;
+@property (weak, nonatomic) IBOutlet UIButton *composeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *imageEditorBtn;
 
 @end
 
-@implementation ViewController
+@implementation LSMainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(100, 100, 80, 45);
-    [btn setTitle:@"视频录制" forState:UIControlStateNormal];
-    [self.view addSubview:btn];
-    btn.backgroundColor = [UIColor cyanColor];
-    [btn addTarget:self action:@selector(jump) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView* bgImgv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60, KScreenWidth, KScreenWidth)];
+    bgImgv.image = [UIImage imageNamed:@"pic_no_live"];
+    [self.view addSubview:bgImgv];
     
-    UIButton* btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn2.frame = CGRectMake(100, 200, 80, 45);
-    [btn2 setTitle:@"视频合成" forState:UIControlStateNormal];
-    [self.view addSubview:btn2];
-    btn2.backgroundColor = [UIColor purpleColor];
-    [btn2 addTarget:self action:@selector(compose) forControlEvents:UIControlEventTouchUpInside];
+    self.recordBtn.backgroundColor = [UIColor cyanColor];
+    [self cornerRadioWithBtn:self.recordBtn];
+    [self.recordBtn addTarget:self action:@selector(jumpToRecord) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton* btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn3.frame = CGRectMake(100, 300, 80, 45);
-    [btn3 setTitle:@"图片处理" forState:UIControlStateNormal];
-    [self.view addSubview:btn3];
-    btn3.backgroundColor = [UIColor blueColor];
-    [btn3 addTarget:self action:@selector(toVideoEditor) forControlEvents:UIControlEventTouchUpInside];
+    self.composeBtn.backgroundColor = [UIColor purpleColor];
+    [self cornerRadioWithBtn:self.composeBtn];
+    [self.composeBtn addTarget:self action:@selector(jumpToCompose) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.imageEditorBtn.backgroundColor = [UIColor magentaColor];
+    [self cornerRadioWithBtn:self.imageEditorBtn];
+    [self.imageEditorBtn addTarget:self action:@selector(JumpToVideoEditor) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
-- (void) jump{
+- (void)cornerRadioWithBtn:(UIButton*)btn{
+    btn.layer.cornerRadius = 8;
+    btn.layer.masksToBounds = YES;
+}
+
+- (void) jumpToRecord{
     RealtimeFilterViewController* vc = [[RealtimeFilterViewController alloc] init];
     [self presentViewController:vc animated:YES completion:nil];
     
@@ -64,34 +67,18 @@
 //    }];
 }
 
-- (void)compose{
+- (void)jumpToCompose{
     
     LSCompositionViewController* compose = [self.storyboard instantiateViewControllerWithIdentifier:@"compose"];
     [self presentViewController:compose animated:YES completion:nil];
-    
-    
-    
-//    NSString* videoURL1 = [[NSBundle mainBundle] pathForResource:@"nnn" ofType:@"mp4"];
-//    AVAsset* videoAsset1 = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:videoURL1] options:nil];
-//
-//    NSString* videoURL2 = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
-//    AVAsset* videoAsset2 = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:videoURL2] options:nil];
-//
-//    LSAVCompositionCommand* command = [[LSAVCompositionCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];
-//    [command performWithAsset:videoAsset2 secondAsset:videoAsset1 completion:^(LSAVCommand *avCommand) {
-//        LSAVExportCommand* export = [[LSAVExportCommand alloc] initWithComposition:avCommand.mutableComposition videoComposition:avCommand.mutableVideoComposition audioMix:avCommand.mutableAudioMix];
-//        [export performWithAsset:nil completion:^(LSAVCommand *avCommand) {
-//            NSLog(@"ddddd");
-//        }];
-//    }];
 }
 
-- (void)toImageProcess{
+- (void)JumpToImageProcess{
     LSImageProcessViewController* imgPro = [[LSImageProcessViewController alloc] init];
     [self presentViewController:imgPro animated:YES completion:nil];
 }
 
-- (void)toVideoEditor{
+- (void)JumpToVideoEditor{
     LSVideoEditorViewController* videoEditor = [[LSVideoEditorViewController alloc] init];
     
     NSString* filePath = [NSString stringWithFormat:@"%@%@",NSHomeDirectory(),@"/Documents/videoTemp"];

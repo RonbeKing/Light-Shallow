@@ -28,7 +28,7 @@
 		CAA7A7F2219E704800368C74 /* LSMediaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7A7F1219E704800368C74 /* LSMediaInfo.m */; };
 		CAD04ABE218AF3A100EF760B /* LSCompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD04ABD218AF3A100EF760B /* LSCompositionViewController.m */; };
 		CAFB70CD21806F8900755998 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70CC21806F8900755998 /* AppDelegate.m */; };
-		CAFB70D021806F8900755998 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70CF21806F8900755998 /* ViewController.m */; };
+		CAFB70D021806F8900755998 /* LSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70CF21806F8900755998 /* LSMainViewController.m */; };
 		CAFB70D321806F8900755998 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAFB70D121806F8900755998 /* Main.storyboard */; };
 		CAFB70D521806F8B00755998 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAFB70D421806F8B00755998 /* Assets.xcassets */; };
 		CAFB70D821806F8B00755998 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAFB70D621806F8B00755998 /* LaunchScreen.storyboard */; };
@@ -98,8 +98,8 @@
 		CAFB70C821806F8900755998 /* Light & Shallow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light & Shallow.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFB70CB21806F8900755998 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CAFB70CC21806F8900755998 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CAFB70CE21806F8900755998 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CAFB70CF21806F8900755998 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CAFB70CE21806F8900755998 /* LSMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSMainViewController.h; sourceTree = "<group>"; };
+		CAFB70CF21806F8900755998 /* LSMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSMainViewController.m; sourceTree = "<group>"; };
 		CAFB70D221806F8900755998 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CAFB70D421806F8B00755998 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAFB70D721806F8B00755998 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -187,8 +187,8 @@
 				CA903D7421898360005758F9 /* LSVideoEditorViewController.m */,
 				CAA7179121A2CFCE00897079 /* LSDisplayCell.h */,
 				CAA7179221A2CFCE00897079 /* LSDisplayCell.m */,
-				CAFB70CE21806F8900755998 /* ViewController.h */,
-				CAFB70CF21806F8900755998 /* ViewController.m */,
+				CAFB70CE21806F8900755998 /* LSMainViewController.h */,
+				CAFB70CF21806F8900755998 /* LSMainViewController.m */,
 				CAD04ABC218AF3A100EF760B /* LSCompositionViewController.h */,
 				CAD04ABD218AF3A100EF760B /* LSCompositionViewController.m */,
 				CA2FC2FE218BE94400C1A55D /* LSImageProcessViewController.h */,
@@ -446,7 +446,7 @@
 				CAA7179621A3AA4500897079 /* LSRecordOperationView.m in Sources */,
 				CAA7A7F2219E704800368C74 /* LSMediaInfo.m in Sources */,
 				CA903D7521898360005758F9 /* LSVideoEditorViewController.m in Sources */,
-				CAFB70D021806F8900755998 /* ViewController.m in Sources */,
+				CAFB70D021806F8900755998 /* LSMainViewController.m in Sources */,
 				CAA7179321A2CFCE00897079 /* LSDisplayCell.m in Sources */,
 				C2A974802186DAF400A6B193 /* LSSliderView.m in Sources */,
 				CAFB710921806FCF00755998 /* RealtimeFilterViewController.m in Sources */,
