@@ -14,6 +14,9 @@
 #import "LSAVCommand.h"
 #import "LSDisplayCell.h"
 
+static NSString* collectionHeaderViewIdentifier = @"collectionHeaderView";
+static NSString* collectionFooterViewIdentifier = @"collectionFooterView";
+
 @interface LSVideoEditorViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,LSVideoPlayerViewDelegate>
 @property (nonatomic, strong) LSVideoEditor* videoEditor;
 @property (nonatomic, strong) LSVideoPlayerView* player;
@@ -40,6 +43,7 @@
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     flowLayout.minimumLineSpacing = 0;
     flowLayout.itemSize = CGSizeMake(85, 85);
+    flowLayout.headerReferenceSize = CGSizeMake(KScreenWidth/2+1, 85);
 
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(-1, KScreenWidth+60+10, KScreenWidth+2, 85) collectionViewLayout:flowLayout];
     self.collectionView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:.6];
@@ -49,10 +53,16 @@
     self.collectionView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.collectionView.layer.borderWidth = 1;
     self.collectionView.layer.masksToBounds = YES;
-    //[self.collectionView setContentOffset:CGPointMake(KScreenWidth/2, 0)];
+  
     [self.collectionView registerClass:[LSDisplayCell class] forCellWithReuseIdentifier:@"cell"];
+    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:collectionHeaderViewIdentifier];
+    [self.collectionView registerClass:[UICollectionElementKindSectionFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:collectionFooterViewIdentifier];
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.bounces = NO;
+    
+    UIView* lineView = [[UIView alloc] initWithFrame:CGRectMake(KScreenWidth/2-1, self.collectionView.frame.origin.y, 2, self.collectionView.frame.size.height)];
+    lineView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:lineView];
     
     [self.videoEditor centerFrameImageWithAsset:self.asset completion:^(UIImage *image) {
         [self.images addObject:image];
@@ -103,6 +113,19 @@
     UIImage* image = self.images[indexPath.row];
     [cell setContentImage:image];
     return cell;
+}
+
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    if (kind == UICollectionElementKindSectionHeader) {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:collectionHeaderViewIdentifier forIndexPath:indexPath];
+        headerView.backgroundColor = [UIColor clearColor];
+        return headerView;
+    }else if (kind == UICollectionElementKindSectionFooter) {
+        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:collectionFooterViewIdentifier forIndexPath:indexPath];
+        footerView.backgroundColor = [UIColor clearColor];
+        return footerView;
+    }
+    return nil;
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
