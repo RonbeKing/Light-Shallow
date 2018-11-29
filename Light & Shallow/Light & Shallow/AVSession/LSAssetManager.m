@@ -75,6 +75,29 @@
     }
 }
 
+#pragma mark -- 获取系统权限
++ (void)getCameraAuth:(void (^)(BOOL))result{
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (granted) {
+                if (result) {
+                    result(YES);
+                }
+            }else{
+                if (result) {
+                    result(NO);
+                }
+            }
+        });
+    }];
+}
+
++ (void)getMicroPhoneAuth:(void (^)(BOOL))result{
+    
+}
+
+#pragma mark -- 输出媒体信息
+
 + (void)printMediaInfoWithAsset:(AVAsset*)asset{
     
     AVAssetTrack *assetVideoTrack = nil;
