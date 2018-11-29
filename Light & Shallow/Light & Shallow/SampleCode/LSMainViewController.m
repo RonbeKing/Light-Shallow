@@ -91,7 +91,7 @@
     
     AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:theFilePath] options:nil];
     
-    NSString *secondVideoPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
+    NSString *secondVideoPath = [[NSBundle mainBundle] pathForResource:@"dance" ofType:@"mp4"];
     AVAsset* asset2 = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:secondVideoPath] options:nil];
     
     videoEditor.asset = asset2;

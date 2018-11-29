@@ -80,13 +80,19 @@
 - (void)play{
     [self.player play];
     self.player.currentItem.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
-    self.player.rate = 1;
     self.playerState = LSPlayerStatePlaying;
 }
 
 - (void)pause{
     [self.player pause];
     self.playerState = LSPlayerStateStop;
+}
+
+- (void)playWithRate:(CGFloat)rate{
+    [self.player play];
+    self.player.currentItem.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
+    self.player.rate = 0.25;
+    self.playerState = LSPlayerStatePlaying;
 }
 
 - (void)seekToTime:(CMTime)time{
@@ -105,7 +111,7 @@
 
 - (void)moviePlayDidEnd:(NSNotification*)notification{
     [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
-        [self.player play];
+        [self play];
     }];
 }
 

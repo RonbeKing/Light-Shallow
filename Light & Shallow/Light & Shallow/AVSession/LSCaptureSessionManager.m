@@ -314,7 +314,7 @@
     /* 注：
      <1>AVNumberOfChannelsKey 通道数  1为单通道 2为立体通道
      <2>AVSampleRateKey 采样率 取值为 8000/44100/96000 影响音频采集的质量
-     <3>AVLinearPCMBitDepthKey 比特率(音频码率) 取值为 8 16 24 32
+     <3>d 比特率(音频码率) 取值为 8 16 24 32
      <4>AVEncoderAudioQualityKey 质量  (需要iphone8以上手机)
      <5>AVEncoderBitRateKey 比特采样率 一般是128000
      */

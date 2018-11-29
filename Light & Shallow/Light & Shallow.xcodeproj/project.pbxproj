@@ -25,6 +25,8 @@
 		CAA7179321A2CFCE00897079 /* LSDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7179221A2CFCE00897079 /* LSDisplayCell.m */; };
 		CAA7179621A3AA4500897079 /* LSRecordOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7179521A3AA4500897079 /* LSRecordOperationView.m */; };
 		CAA7179821A3B3BC00897079 /* LSRecordOperationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAA7179721A3B3BC00897079 /* LSRecordOperationView.xib */; };
+		CAA717D821A7E74200897079 /* sample_clip2.mov in Resources */ = {isa = PBXBuildFile; fileRef = CAA717D721A7E74200897079 /* sample_clip2.mov */; };
+		CAA7182021AD510700897079 /* dance.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CAA7181F21AD510700897079 /* dance.mp4 */; };
 		CAA7A7F2219E704800368C74 /* LSMediaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA7A7F1219E704800368C74 /* LSMediaInfo.m */; };
 		CAD04ABE218AF3A100EF760B /* LSCompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD04ABD218AF3A100EF760B /* LSCompositionViewController.m */; };
 		CAFB70CD21806F8900755998 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFB70CC21806F8900755998 /* AppDelegate.m */; };
@@ -91,6 +93,8 @@
 		CAA7179421A3AA4500897079 /* LSRecordOperationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSRecordOperationView.h; sourceTree = "<group>"; };
 		CAA7179521A3AA4500897079 /* LSRecordOperationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSRecordOperationView.m; sourceTree = "<group>"; };
 		CAA7179721A3B3BC00897079 /* LSRecordOperationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LSRecordOperationView.xib; sourceTree = "<group>"; };
+		CAA717D721A7E74200897079 /* sample_clip2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sample_clip2.mov; sourceTree = "<group>"; };
+		CAA7181F21AD510700897079 /* dance.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = dance.mp4; sourceTree = "<group>"; };
 		CAA7A7F0219E704800368C74 /* LSMediaInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSMediaInfo.h; sourceTree = "<group>"; };
 		CAA7A7F1219E704800368C74 /* LSMediaInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSMediaInfo.m; sourceTree = "<group>"; };
 		CAD04ABC218AF3A100EF760B /* LSCompositionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSCompositionViewController.h; sourceTree = "<group>"; };
@@ -166,11 +170,13 @@
 		CA903D84218AB1E9005758F9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				CAA7181F21AD510700897079 /* dance.mp4 */,
 				CA903D85218AB1E9005758F9 /* Music.m4a */,
 				CA903D87218AB1E9005758F9 /* wantMusic.m4a */,
 				CA903D88218AB1E9005758F9 /* captureMusic.m4a */,
 				CA903D86218AB1E9005758F9 /* video.mp4 */,
 				CA903D89218AB1E9005758F9 /* nnn.mp4 */,
+				CAA717D721A7E74200897079 /* sample_clip2.mov */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -416,6 +422,8 @@
 				CA903D8D218AB1E9005758F9 /* captureMusic.m4a in Resources */,
 				CA903D8C218AB1E9005758F9 /* wantMusic.m4a in Resources */,
 				CAFB70D321806F8900755998 /* Main.storyboard in Resources */,
+				CAA717D821A7E74200897079 /* sample_clip2.mov in Resources */,
+				CAA7182021AD510700897079 /* dance.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,6 +30,7 @@
 
 - (void)play;
 - (void)pause;
+- (void)playWithRate:(CGFloat)rate;
 
 - (void)seekToTime:(CMTime)time;
 
