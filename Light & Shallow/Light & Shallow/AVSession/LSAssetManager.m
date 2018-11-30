@@ -76,24 +76,55 @@
 }
 
 #pragma mark -- 获取系统权限
-+ (void)getCameraAuth:(void (^)(BOOL))result{
+// 相机权限
++ (BOOL)cameraAuthorized{
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if(authStatus == AVAuthorizationStatusAuthorized) {
+        // 客户端授权访问硬件支持的媒体类型
+        return YES;
+    } else if(authStatus == AVAuthorizationStatusNotDetermined){
+        //没有询问是否开启相机
+        return YES;
+    } else if(authStatus == AVAuthorizationStatusDenied){
+        // 明确拒绝用户访问硬件支持的媒体类型的客户
+    } else if(authStatus == AVAuthorizationStatusRestricted){
+        //未授权，家长限制
+        
+    }
+    return NO;
+}
+
+//麦克风权限
++ (BOOL)microPhoneAuthorized{
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+    if(authStatus == AVAuthorizationStatusAuthorized) {
+        // 客户端授权访问硬件支持的媒体类型
+        return YES;
+    } else if(authStatus == AVAuthorizationStatusNotDetermined){
+        //没有询问是否开启相机
+        return YES;
+    } else if(authStatus == AVAuthorizationStatusDenied){
+        // 明确拒绝用户访问硬件支持的媒体类型的客户
+    } else if(authStatus == AVAuthorizationStatusRestricted){
+        //未授权，家长限制
+    }
+    return NO;
+}
+
++ (void)requestCameraAuth:(void (^)(BOOL granted))authorized{
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (granted) {
-                if (result) {
-                    result(YES);
-                }
-            }else{
-                if (result) {
-                    result(NO);
-                }
-            }
-        });
+        if (authorized) {
+            authorized(granted);
+        }
     }];
 }
 
-+ (void)getMicroPhoneAuth:(void (^)(BOOL))result{
-    
++ (void)requestMicroPhoneAuth:(void (^)(BOOL granted))authorized{
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted) {
+        if (authorized) {
+            authorized(granted);
+        }
+    }];
 }
 
 #pragma mark -- 输出媒体信息

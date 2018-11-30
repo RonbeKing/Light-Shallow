@@ -15,8 +15,12 @@ typedef void(^AuthBlock)(AVAuthorizationStatus cerma,PHAuthorizationStatus photo
 @class AVAsset;
 @interface LSAssetManager : NSObject
 
-+ (void)getCameraAuth:(void(^)(BOOL))result;
-+ (void)getMicroPhoneAuth:(void(^)(BOOL))result;
++ (BOOL)cameraAuthorized;
++ (BOOL)microPhoneAuthorized;
+
++ (void)requestCameraAuth:(void(^)(BOOL granted))authorized;
++ (void)requestMicroPhoneAuth:(void(^)(BOOL granted))authorized;
+
 
 + (void)saveVideo:(NSString *)videoUrl toAlbum:(NSString *)albumName completion:(void (^)(NSURL* url, NSError* error))block;
 
