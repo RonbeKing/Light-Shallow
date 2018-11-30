@@ -22,7 +22,7 @@
 @interface LSCaptureSessionManager : NSObject
 
 @property (nonatomic, weak) id <LSCaptureSessionManagerDelegate> delegate;
-
+@property (nonatomic, strong) LSAVConfiguration* config;
 /**
  @brief 初始化capture，用于视频录制
  @param config 录制时的输入输出参数
@@ -38,6 +38,7 @@
  */
 - (void)startCaptureWithVideoPreview:(LSVideoPreview *)videoPreview;
 
+- (void)changePreset:(AVCaptureSessionPreset)preset;
 /**
  @brief flashMode and cam orientation
  */

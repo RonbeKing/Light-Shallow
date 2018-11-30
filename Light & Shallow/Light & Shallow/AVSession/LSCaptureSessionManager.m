@@ -14,8 +14,6 @@
 
 @interface LSCaptureSessionManager ()<AVCaptureVideoDataOutputSampleBufferDelegate,AVCaptureAudioDataOutputSampleBufferDelegate>
 
-@property (nonatomic, strong) LSAVConfiguration* config;
-
 #pragma mark -- AVCaptureSession
 
 @property (nonatomic, strong) AVCaptureSession* captureSession;
@@ -155,6 +153,16 @@
         propertyChange(videoCaptureDevice);
         [videoCaptureDevice unlockForConfiguration];
     }
+}
+
+- (void)changePreset:(AVCaptureSessionPreset)preset{
+    [self changeVideoDevicePropertyInSafety:^(AVCaptureDevice *captureDevice) {
+        if ([self.captureSession canSetSessionPreset:preset]) {
+            [self.captureSession setSessionPreset:preset];
+        }else{
+            [self.captureSession setSessionPreset:AVCaptureSessionPreset1280x720];
+        }
+    }];
 }
 
 - (void)changeTorchMode{

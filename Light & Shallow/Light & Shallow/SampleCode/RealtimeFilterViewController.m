@@ -87,6 +87,27 @@
 
     operationView.ajustCanvasBlock = ^(LSCanvasRatio canvasRatio) {
         self.videoPreview.canvasRatio = canvasRatio;
+        switch (canvasRatio) {
+            case 0:
+                self.captureSession.config.outputSize = CGSizeMake(1280, 720);
+            case 3:
+                self.captureSession.config.outputSize = CGSizeMake(720, 1280);
+                self.captureSession.config.sessionPreset = AVCaptureSessionPreset1280x720;
+                [self.captureSession changePreset:AVCaptureSessionPreset1280x720];
+                break;
+            case 1:
+                self.captureSession.config.outputSize = CGSizeMake(640, 480);
+                self.captureSession.config.sessionPreset = AVCaptureSessionPreset640x480;
+                [self.captureSession changePreset:AVCaptureSessionPreset640x480];
+                break;
+            case 2:
+                self.captureSession.config.outputSize = CGSizeMake(480, 480);
+                self.captureSession.config.sessionPreset = AVCaptureSessionPreset640x480;
+                [self.captureSession changePreset:AVCaptureSessionPreset640x480];
+                break;
+            default:
+                break;
+        }
     };
 }
 
@@ -98,4 +119,5 @@
 - (void)exitVC{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end
