@@ -43,7 +43,7 @@
     
     self.composeBtn.backgroundColor = [UIColor purpleColor];
     [self cornerRadioWithBtn:self.composeBtn];
-    [self.composeBtn addTarget:self action:@selector(JumpToImageProcess) forControlEvents:UIControlEventTouchUpInside];
+    [self.composeBtn addTarget:self action:@selector(jumpToCompose) forControlEvents:UIControlEventTouchUpInside];
     
     self.imageEditorBtn.backgroundColor = [UIColor magentaColor];
     [self cornerRadioWithBtn:self.imageEditorBtn];
@@ -76,28 +76,8 @@
 }
 
 - (void)JumpToImageProcess{
-//    LSImageProcessViewController* imgPro = [[LSImageProcessViewController alloc] init];
-//    [self presentViewController:imgPro animated:YES completion:nil];
-    
-    NSLog(@"came = %d   audio = %d",[LSAssetManager cameraAuthorized],[LSAssetManager microPhoneAuthorized]);
-    
-    
-    
-    [LSAssetManager requestCameraAuth:^(BOOL granted) {
-        if (granted) {
-            NSLog(@"111");
-        }else{
-            NSLog(@"222");
-        }
-    }];
-    
-    [LSAssetManager requestMicroPhoneAuth:^(BOOL granted) {
-        if (granted) {
-            NSLog(@"333");
-        }else{
-            NSLog(@"444");
-        }
-    }];
+    LSImageProcessViewController* imgPro = [[LSImageProcessViewController alloc] init];
+    [self presentViewController:imgPro animated:YES completion:nil];
 }
 
 - (void)JumpToVideoEditor{

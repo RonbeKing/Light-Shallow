@@ -17,10 +17,11 @@ typedef void(^AuthBlock)(AVAuthorizationStatus cerma,PHAuthorizationStatus photo
 
 + (BOOL)cameraAuthorized;
 + (BOOL)microPhoneAuthorized;
++ (BOOL)albumAuthorized;
 
 + (void)requestCameraAuth:(void(^)(BOOL granted))authorized;
 + (void)requestMicroPhoneAuth:(void(^)(BOOL granted))authorized;
-
++ (void)requestAlbumAuth:(void(^)(BOOL granted))authorized;
 
 + (void)saveVideo:(NSString *)videoUrl toAlbum:(NSString *)albumName completion:(void (^)(NSURL* url, NSError* error))block;
 
