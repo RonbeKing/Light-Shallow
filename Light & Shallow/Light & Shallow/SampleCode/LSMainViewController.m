@@ -47,7 +47,7 @@
     
     self.imageEditorBtn.backgroundColor = [UIColor magentaColor];
     [self cornerRadioWithBtn:self.imageEditorBtn];
-    [self.imageEditorBtn addTarget:self action:@selector(JumpToVideoEditor) forControlEvents:UIControlEventTouchUpInside];
+    [self.imageEditorBtn addTarget:self action:@selector(JumpToImageProcess) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -57,16 +57,16 @@
 }
 
 - (void) jumpToRecord{
-    RealtimeFilterViewController* vc = [[RealtimeFilterViewController alloc] init];
-    [self presentViewController:vc animated:YES completion:nil];
+//    RealtimeFilterViewController* vc = [[RealtimeFilterViewController alloc] init];
+//    [self presentViewController:vc animated:YES completion:nil];
     
-//    NSString* audioURL = [[NSBundle mainBundle] pathForResource:@"nnn" ofType:@"mp4"];
-//    AVAsset* audioAsset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:audioURL] options:nil];
-//
-//    LSAVExtractAudioCommand* audioCommand = [[LSAVExtractAudioCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];
-//    [audioCommand performWithAsset:audioAsset completion:^(LSAVCommand *avCommand) {
-//
-//    }];
+    NSString* audioURL = [[NSBundle mainBundle] pathForResource:@"nnn" ofType:@"mp4"];
+    AVAsset* audioAsset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:audioURL] options:nil];
+
+    LSAVExtractAudioCommand* audioCommand = [[LSAVExtractAudioCommand alloc] initWithComposition:nil videoComposition:nil audioMix:nil];
+    [audioCommand performWithAsset:audioAsset completion:^(LSAVCommand *avCommand) {
+        
+    }];
 }
 
 - (void)jumpToCompose{

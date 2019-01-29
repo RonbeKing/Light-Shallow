@@ -15,16 +15,21 @@ typedef void(^AuthBlock)(AVAuthorizationStatus cerma,PHAuthorizationStatus photo
 @class AVAsset;
 @interface LSAssetManager : NSObject
 
+#pragma mark -- 验证是否具有媒体权限
 + (BOOL)cameraAuthorized;
 + (BOOL)microPhoneAuthorized;
 + (BOOL)albumAuthorized;
 
+#pragma mark -- 请求媒体权限
 + (void)requestCameraAuth:(void(^)(BOOL granted))authorized;
 + (void)requestMicroPhoneAuth:(void(^)(BOOL granted))authorized;
 + (void)requestAlbumAuth:(void(^)(BOOL granted))authorized;
 
+#pragma mark -- 保存视频到指定相册
 + (void)saveVideo:(NSString *)videoUrl toAlbum:(NSString *)albumName completion:(void (^)(NSURL* url, NSError* error))block;
 
+#pragma mark -- 打印媒体信息
+/*you can check the class 'LSMediaInfo' for the log info*/
 + (void)printMediaInfoWithAsset:(AVAsset*)asset;
 
 @end
