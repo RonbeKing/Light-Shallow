@@ -23,6 +23,7 @@
 @property (nonatomic, assign) BOOL circlePlay;
 @property (nonatomic, assign, readonly) LSPlayerState playerState;
 @property (nonatomic, strong, readonly) AVPlayerItem* currentPlayItem;
+@property (nonatomic, assign) BOOL isUsingRemoteCommand;
 @property (nonatomic,   weak)id <LSVideoPlayerViewDelegate> delegate;
 - (instancetype)initWithAsset:(AVAsset *)asset frame:(CGRect)frame;
 

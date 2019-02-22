@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import <AVFoundation/AVFoundation.h>
 @interface AppDelegate ()
 
 @end
@@ -19,6 +19,10 @@
     // Override point for customization after application launch.
     application.statusBarStyle = UIStatusBarStyleLightContent;
     [application setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [audioSession setActive:YES error:nil];
     return YES;
 }
 

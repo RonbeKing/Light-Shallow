@@ -35,6 +35,7 @@ static NSString* collectionFooterViewIdentifier = @"collectionFooterView";
     self.videoEditor = [[LSVideoEditor alloc] init];
     
     self.player = [[LSVideoPlayerView alloc] initWithAsset:self.asset frame:CGRectMake(0, 40, KScreenWidth, KScreenWidth)];
+    self.player.isUsingRemoteCommand = YES;
     self.player.delegate = self;
     [self.view addSubview:self.player];
     [self.player play];
