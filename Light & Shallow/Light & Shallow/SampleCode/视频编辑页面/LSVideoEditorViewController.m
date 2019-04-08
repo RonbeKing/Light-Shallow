@@ -166,7 +166,12 @@ static NSString* collectionFooterViewIdentifier = @"collectionFooterView";
 }
 
 - (void)back{
+    [self.player destroy];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)dealloc{
+    NSLog(@"-- video editor view controller dealloc");
 }
 
 - (void)didReceiveMemoryWarning {

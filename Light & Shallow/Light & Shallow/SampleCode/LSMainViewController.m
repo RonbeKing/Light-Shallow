@@ -43,7 +43,7 @@
     
     self.composeBtn.backgroundColor = [UIColor purpleColor];
     [self cornerRadioWithBtn:self.composeBtn];
-    [self.composeBtn addTarget:self action:@selector(jumpToCompose) forControlEvents:UIControlEventTouchUpInside];
+    [self.composeBtn addTarget:self action:@selector(JumpToVideoEditor) forControlEvents:UIControlEventTouchUpInside];
     
     self.imageEditorBtn.backgroundColor = [UIColor magentaColor];
     [self cornerRadioWithBtn:self.imageEditorBtn];
@@ -57,9 +57,10 @@
 }
 
 - (void) jumpToRecord{
-//    RealtimeFilterViewController* vc = [[RealtimeFilterViewController alloc] init];
-//    [self presentViewController:vc animated:YES completion:nil];
+    RealtimeFilterViewController* vc = [[RealtimeFilterViewController alloc] init];
+    [self presentViewController:vc animated:YES completion:nil];
     
+    /* q提取音频
     NSString* audioURL = [[NSBundle mainBundle] pathForResource:@"nnn" ofType:@"mp4"];
     AVAsset* audioAsset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:audioURL] options:nil];
 
@@ -67,6 +68,7 @@
     [audioCommand performWithAsset:audioAsset completion:^(LSAVCommand *avCommand) {
         
     }];
+     */
 }
 
 - (void)jumpToCompose{

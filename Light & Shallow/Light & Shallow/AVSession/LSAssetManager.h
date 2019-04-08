@@ -29,7 +29,9 @@ typedef void(^AuthBlock)(AVAuthorizationStatus cerma,PHAuthorizationStatus photo
 + (void)saveVideo:(NSString *)videoUrl toAlbum:(NSString *)albumName completion:(void (^)(NSURL* url, NSError* error))block;
 
 #pragma mark -- 打印媒体信息
-/*you can check the class 'LSMediaInfo' for the log info*/
+/*you can check the class 'LSMediaInfo' for the log information*/
 + (void)printMediaInfoWithAsset:(AVAsset*)asset;
+
+#pragma mark -- 打印图片头EXIF信息
 
 @end

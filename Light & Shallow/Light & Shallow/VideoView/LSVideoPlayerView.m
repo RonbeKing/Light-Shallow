@@ -105,6 +105,15 @@
     }
 }
 
+- (void)removeMediaPlayerRemoteCommands{
+    MPRemoteCommandCenter* commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
+    [[commandCenter playCommand] removeTarget:self];
+    if (@available(iOS 9.1, *)) {
+        [[commandCenter pauseCommand] removeTarget:self];
+    }
+    [[commandCenter changePlaybackPositionCommand] removeTarget:self];
+}
+
 - (void)updateRemoteInfoCenter{
     if (!self.player) {
         return;
@@ -169,12 +178,22 @@
     [self.player seekToTime:time];
 }
 
+- (void)destroy{
+    [self pause];
+    self.player = nil;
+    if (self.isUsingRemoteCommand) {
+        [self removeMediaPlayerRemoteCommands];
+    }
+}
+
 #pragma mark -- 通知响应事件
 
 - (void)moviePlayDidEnd:(NSNotification*)notification{
-    [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
-        [self play];
-    }];
+    if (self.circlePlay) {
+        [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+            [self play];
+        }];
+    }
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
@@ -230,6 +249,10 @@
 }
 
 -(void)dealloc{
+    NSLog(@"player view dealloc");
+    if (self.isUsingRemoteCommand) {
+        [self removeMediaPlayerRemoteCommands];
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.currentPlayItem];
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
 }

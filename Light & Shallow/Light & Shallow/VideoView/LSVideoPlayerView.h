@@ -36,4 +36,6 @@
 - (void)seekToTime:(CMTime)time;
 
 - (void)replaceItemWithAsset:(AVAsset *)asset;
+
+- (void)destroy;
 @end
