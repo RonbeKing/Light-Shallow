@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		C2A974802186DAF400A6B193 /* LSSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A9747E2186DAF400A6B193 /* LSSliderView.m */; };
 		CA2FC300218BE94400C1A55D /* LSImageProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2FC2FF218BE94400C1A55D /* LSImageProcessViewController.m */; };
-		CA4E033022200341007D2853 /* cover3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CA4E032F22200341007D2853 /* cover3.jpg */; };
+		CA4E033022200341007D2853 /* cover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CA4E032F22200341007D2853 /* cover.jpg */; };
 		CA903D692186B057005758F9 /* LSVideoPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D682186B057005758F9 /* LSVideoPreview.m */; };
 		CA903D6D2186EB50005758F9 /* LSAVConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D6C2186EB50005758F9 /* LSAVConfiguration.m */; };
 		CA903D702188639C005758F9 /* LSAVAddMusicCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = CA903D6F2188639C005758F9 /* LSAVAddMusicCommand.m */; };
@@ -68,7 +68,7 @@
 		C2A9747F2186DAF400A6B193 /* LSSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSSliderView.h; sourceTree = "<group>"; };
 		CA2FC2FE218BE94400C1A55D /* LSImageProcessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSImageProcessViewController.h; sourceTree = "<group>"; };
 		CA2FC2FF218BE94400C1A55D /* LSImageProcessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSImageProcessViewController.m; sourceTree = "<group>"; };
-		CA4E032F22200341007D2853 /* cover3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover3.jpg; sourceTree = "<group>"; };
+		CA4E032F22200341007D2853 /* cover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover.jpg; sourceTree = "<group>"; };
 		CA903D672186B057005758F9 /* LSVideoPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSVideoPreview.h; sourceTree = "<group>"; };
 		CA903D682186B057005758F9 /* LSVideoPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSVideoPreview.m; sourceTree = "<group>"; };
 		CA903D6B2186EB50005758F9 /* LSAVConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSAVConfiguration.h; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 				CA903D86218AB1E9005758F9 /* video.mp4 */,
 				CA903D89218AB1E9005758F9 /* nnn.mp4 */,
 				CAA717D721A7E74200897079 /* sample_clip2.mov */,
-				CA4E032F22200341007D2853 /* cover3.jpg */,
+				CA4E032F22200341007D2853 /* cover.jpg */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -448,7 +448,7 @@
 				CAFB70D321806F8900755998 /* Main.storyboard in Resources */,
 				CAA717D821A7E74200897079 /* sample_clip2.mov in Resources */,
 				CAA7182021AD510700897079 /* dance.mp4 in Resources */,
-				CA4E033022200341007D2853 /* cover3.jpg in Resources */,
+				CA4E033022200341007D2853 /* cover.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

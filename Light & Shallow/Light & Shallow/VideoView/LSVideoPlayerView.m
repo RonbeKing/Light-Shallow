@@ -14,9 +14,9 @@
 @property (nonatomic, strong) AVPlayerLayer* playerLayer;
 @property (nonatomic, strong) AVPlayer* player;
 @property (nonatomic, strong) AVPlayerItem* currentPlayItem;
-@property (nonatomic, assign) CMTime duration;
-@property (nonatomic, assign) CMTime currentTime;
-
+//@property (nonatomic, assign) CMTime duration;
+//@property (nonatomic, assign) CMTime currentTime;
+@property (nonatomic, assign) CGFloat currentProgress;
 @property (nonatomic, assign) LSPlayerState playerState;
 @end
 
@@ -29,6 +29,7 @@
         self.backgroundColor = [UIColor blackColor];
         self.asset = asset;
         self.currentPlayItem = [AVPlayerItem playerItemWithAsset:asset];
+        [self.currentPlayItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
         [self configPlayer];
     }
     return self;
@@ -52,12 +53,9 @@
     [self.layer addSublayer:self.playerLayer];
     self.playerState = LSPlayerStateReadyToPlay;
     __weak typeof(self) weakSelf = self;
-    [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 100) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+    [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, NSEC_PER_SEC) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
         if ([weakSelf.delegate respondsToSelector:@selector(LSVideoPlayerDidPlayedToTime:)]) {
             [weakSelf.delegate LSVideoPlayerDidPlayedToTime:time];
-        }
-        if (weakSelf.isUsingRemoteCommand) {
-            [weakSelf updateRemoteInfoCenter];
         }
     }];
 
@@ -120,30 +118,26 @@
     }
     MPNowPlayingInfoCenter* infoCenter = [MPNowPlayingInfoCenter defaultCenter];
     NSMutableDictionary* info = [NSMutableDictionary dictionary];
-    // 歌曲名
+    // title
     [info setObject:@"歌曲名称" forKey:MPMediaItemPropertyTitle];
     [info setObject:@"专辑名称" forKey:MPMediaItemPropertyAlbumTitle];
-    // 封面图片
+    // cover image
     MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithBoundsSize:CGSizeMake(250, 250) requestHandler:^UIImage * _Nonnull(CGSize size) {
-        UIImage* image = [UIImage imageNamed:@"cover3.jpg"];
+        UIImage* image = [UIImage imageNamed:@"cover.jpg"];
         return image;
     }];
     [info setObject:artwork forKey:MPMediaItemPropertyArtwork];
     // 设置进度
     NSNumber* duration = @(CMTimeGetSeconds(self.player.currentItem.duration));
     NSNumber* currentTime = @(CMTimeGetSeconds(self.player.currentItem.currentTime));
-    if (!duration || !currentTime) {
-        return;
-    }
+//    if (!duration || !currentTime) {
+//        return;
+//    }
     [info setObject:duration forKey:MPMediaItemPropertyPlaybackDuration];
     [info setObject:currentTime forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
     [info setObject:@(self.player.rate) forKey:MPNowPlayingInfoPropertyPlaybackRate];
     
     infoCenter.nowPlayingInfo = info;
-}
-
-- (void)updateRemoteProgress{
-    
 }
 
 #pragma mark -- 视频控制事件
@@ -157,21 +151,30 @@
 }
 
 - (void)play{
-    [self.player play];
     self.player.currentItem.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
+    [self.player play];
     self.playerState = LSPlayerStatePlaying;
+    if (self.isUsingRemoteCommand) {
+        [self updateRemoteInfoCenter];
+    }
 }
 
 - (void)pause{
     [self.player pause];
     self.playerState = LSPlayerStateStop;
+    if (self.isUsingRemoteCommand) {
+        [self updateRemoteInfoCenter];
+    }
 }
 
 - (void)playWithRate:(CGFloat)rate{
-    [self.player play];
     self.player.currentItem.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
-    self.player.rate = 0.25;
+    self.player.rate = rate;
+    [self.player play];
     self.playerState = LSPlayerStatePlaying;
+    if (self.isUsingRemoteCommand) {
+        [self updateRemoteInfoCenter];
+    }
 }
 
 - (void)seekToTime:(CMTime)time{
@@ -197,7 +200,22 @@
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-    
+    if ([keyPath isEqualToString:@"status"]) {
+        AVPlayerItemStatus status = [change[NSKeyValueChangeNewKey]intValue];
+        switch (status) {
+            case AVPlayerItemStatusFailed:
+                break;
+            case AVPlayerItemStatusReadyToPlay:
+                [self updateRemoteInfoCenter];
+                break;
+            case AVPlayerItemStatusUnknown:
+                break;
+            default:
+                break;
+        }
+    }
+    //移除监听（观察者）
+    [object removeObserver:self forKeyPath:@"status"];
 }
 
 - (void)didEnterBackground{
