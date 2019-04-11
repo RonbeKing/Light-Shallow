@@ -14,9 +14,11 @@
 @property (nonatomic, strong) AVPlayerLayer* playerLayer;
 @property (nonatomic, strong) AVPlayer* player;
 @property (nonatomic, strong) AVPlayerItem* currentPlayItem;
-//@property (nonatomic, assign) CMTime duration;
-//@property (nonatomic, assign) CMTime currentTime;
-@property (nonatomic, assign) CGFloat currentProgress;
+
+// indicating index of 'currentPlayItem' in the 'videoQueue'
+@property (nonatomic, assign) int currentItemIndex;
+
+
 @property (nonatomic, assign) LSPlayerState playerState;
 @end
 
@@ -29,7 +31,6 @@
         self.backgroundColor = [UIColor blackColor];
         self.asset = asset;
         self.currentPlayItem = [AVPlayerItem playerItemWithAsset:asset];
-        [self.currentPlayItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
         [self configPlayer];
     }
     return self;
@@ -41,6 +42,24 @@
         self.videoURL = videoURL;
         self.currentPlayItem = [AVPlayerItem playerItemWithURL:videoURL];
         [self configPlayer];
+    }
+    return self;
+}
+
+- (instancetype)initWithVideoQueue:(NSMutableArray *)videoQueue frame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor blackColor];
+        if (videoQueue.count) {
+            self.videoQueue = videoQueue;
+            if ([[videoQueue firstObject] isKindOfClass:[AVAsset class]]) {
+                self.currentPlayItem = [AVPlayerItem playerItemWithAsset:videoQueue.firstObject];
+                [self configPlayer];
+            }else{
+                return nil;
+            }
+        }else{
+            return nil;
+        }
     }
     return self;
 }
@@ -59,6 +78,8 @@
         }
     }];
 
+    [self.currentPlayItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+    
     // Add gestures
     UITapGestureRecognizer* doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
     doubleTap.numberOfTapsRequired = 2;
@@ -127,7 +148,7 @@
         return image;
     }];
     [info setObject:artwork forKey:MPMediaItemPropertyArtwork];
-    // 设置进度
+    // set screen progress
     NSNumber* duration = @(CMTimeGetSeconds(self.player.currentItem.duration));
     NSNumber* currentTime = @(CMTimeGetSeconds(self.player.currentItem.currentTime));
 //    if (!duration || !currentTime) {
@@ -177,6 +198,36 @@
     }
 }
 
+- (void)playNext{
+    if (!self.videoQueue.count) {
+        return;
+    }
+    ++self.currentItemIndex >= self.videoQueue.count ?self.currentItemIndex=0 : 1;
+    AVAsset* nextAsset = [self.videoQueue objectAtIndex:self.currentItemIndex];
+    self.currentPlayItem = [AVPlayerItem playerItemWithAsset:nextAsset];
+    [self replaceItemWithAsset:nextAsset];
+    
+//    if ([self.delegate respondsToSelector:@selector(LSVideoPlayer:readyToPlayVideoOfIndex:)]) {
+//        [self.delegate LSVideoPlayer:self readyToPlayVideoOfIndex:self.currentItemIndex];
+//    }
+    [self play];
+}
+
+- (void)playPrevious{
+    if (!self.videoQueue.count) {
+        return;
+    }
+    --self.currentItemIndex < 0 ? self.currentItemIndex = (int)self.videoQueue.count - 1 : 1;
+    AVAsset* preAsset = [self.videoQueue objectAtIndex:self.currentItemIndex];
+    self.currentPlayItem = [AVPlayerItem playerItemWithAsset:preAsset];
+    [self replaceItemWithAsset:preAsset];
+    
+//    if ([self.delegate respondsToSelector:@selector(LSVideoPlayer:readyToPlayVideoOfIndex:)]) {
+//        [self.delegate LSVideoPlayer:self readyToPlayVideoOfIndex:self.currentItemIndex];
+//    }
+    [self play];
+}
+
 - (void)seekToTime:(CMTime)time{
     [self.player seekToTime:time];
 }
@@ -192,10 +243,14 @@
 #pragma mark -- 通知响应事件
 
 - (void)moviePlayDidEnd:(NSNotification*)notification{
-    if (self.circlePlay) {
+    if (self.singleCirclePlay) {
         [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
             [self play];
         }];
+    }else{
+        if (self.videoQueue.count) {
+            [self playNext];
+        }
     }
 }
 
@@ -207,6 +262,9 @@
                 break;
             case AVPlayerItemStatusReadyToPlay:
                 [self updateRemoteInfoCenter];
+                if ([self.delegate respondsToSelector:@selector(LSVideoPlayer:readyToPlayVideoOfIndex:)]) {
+                    [self.delegate LSVideoPlayer:self readyToPlayVideoOfIndex:self.currentItemIndex];
+                }
                 break;
             case AVPlayerItemStatusUnknown:
                 break;
@@ -246,6 +304,7 @@
     self.currentPlayItem = [AVPlayerItem playerItemWithAsset:asset];
     [self.player replaceCurrentItemWithPlayerItem:self.currentPlayItem];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.currentPlayItem];
+    [self.currentPlayItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     [self play];
 }
 

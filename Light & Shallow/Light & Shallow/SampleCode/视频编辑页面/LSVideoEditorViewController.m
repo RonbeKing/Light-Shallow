@@ -24,6 +24,7 @@ static NSString* collectionFooterViewIdentifier = @"collectionFooterView";
 @property (nonatomic, strong) UICollectionView* collectionView;
 @property (nonatomic, strong) NSMutableArray* images;
 
+@property (nonatomic, strong) NSMutableArray* videoQueue;
 @end
 
 @implementation LSVideoEditorViewController
@@ -34,8 +35,27 @@ static NSString* collectionFooterViewIdentifier = @"collectionFooterView";
     self.images = [NSMutableArray array];
     self.videoEditor = [[LSVideoEditor alloc] init];
     
-    self.player = [[LSVideoPlayerView alloc] initWithAsset:self.asset frame:CGRectMake(0, 40, KScreenWidth, KScreenWidth)];
+//    self.player = [[LSVideoPlayerView alloc] initWithAsset:self.asset frame:CGRectMake(0, 40, KScreenWidth, KScreenWidth)];
+    
+    NSMutableArray* videoQueue = [NSMutableArray array];
+    self.videoQueue = videoQueue;
+    NSString *firstVideoPath = [[NSBundle mainBundle] pathForResource:@"nnn" ofType:@"mp4"];
+    AVAsset* asset1 = [AVAsset assetWithURL:[NSURL fileURLWithPath:firstVideoPath]] ;
+    
+    NSString *secondVideoPath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
+    AVAsset* asset2 = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:secondVideoPath] options:nil];
+    
+    NSString *thirdVideoPath = [[NSBundle mainBundle] pathForResource:@"dance" ofType:@"mp4"];
+    AVAsset* asset3 = [AVAsset assetWithURL:[NSURL fileURLWithPath:thirdVideoPath]] ;
+    
+    [videoQueue addObject:asset1];
+    [videoQueue addObject:asset2];
+    [videoQueue addObject:asset3];
+    
+    self.player = [[LSVideoPlayerView alloc] initWithVideoQueue:videoQueue frame:CGRectMake(0, 40, KScreenWidth, KScreenWidth)];
+    
     self.player.isUsingRemoteCommand = YES;
+    self.player.singleCirclePlay = NO;
     self.player.delegate = self;
     [self.view addSubview:self.player];
     [self.player play];
@@ -65,11 +85,6 @@ static NSString* collectionFooterViewIdentifier = @"collectionFooterView";
     lineView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:lineView];
     
-    [self.videoEditor centerFrameImageWithAsset:self.asset completion:^(UIImage *image) {
-        [self.images addObject:image];
-        [self.collectionView reloadData];
-    }];
-    
     UIButton* addMusicBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     addMusicBtn.frame = CGRectMake(35, KScreenHeight - 90, 100, 45);
     [addMusicBtn setTitle:@"add music" forState:UIControlStateNormal];
@@ -96,12 +111,24 @@ static NSString* collectionFooterViewIdentifier = @"collectionFooterView";
     [self.view addSubview:backBtn];
 }
 
+#pragma mark -- LSVideoPlayerDelegate
+
 - (void)LSVideoPlayerDidPlayedToTime:(CMTime)time{
     if (self.player.playerState == LSPlayerStatePlaying) {
         CGFloat currentTime = time.value*1.0/time.timescale;
         CGFloat timeLong = self.asset.duration.value*1.0/self.asset.duration.timescale;
         [self.collectionView setContentOffset:CGPointMake(85*self.images.count*currentTime/timeLong, 0)];
     }
+}
+
+- (void)LSVideoPlayer:(LSVideoPlayerView *)player readyToPlayVideoOfIndex:(NSInteger)index{
+    // we need to get all images of the video to played
+    AVAsset* asset = [self.videoQueue objectAtIndex:index];
+    [self.images removeAllObjects];
+    [self.videoEditor centerFrameImageWithAsset:asset completion:^(UIImage *image) {
+        [self.images addObject:image];
+        [self.collectionView reloadData];
+    }];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
