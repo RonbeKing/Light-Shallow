@@ -142,6 +142,9 @@
 - (void)removeMediaPlayerRemoteCommands{
     MPRemoteCommandCenter* commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
     [[commandCenter playCommand] removeTarget:self];
+    [[commandCenter pauseCommand] removeTarget:self];
+    [[commandCenter nextTrackCommand] removeTarget:self];
+    [[commandCenter previousTrackCommand] removeTarget:self];
     if (@available(iOS 9.1, *)) {
         [[commandCenter pauseCommand] removeTarget:self];
     }
