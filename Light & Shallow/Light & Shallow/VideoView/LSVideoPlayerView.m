@@ -157,8 +157,9 @@
     MPNowPlayingInfoCenter* infoCenter = [MPNowPlayingInfoCenter defaultCenter];
     NSMutableDictionary* info = [NSMutableDictionary dictionary];
     // title
-    [info setObject:@"歌曲名称" forKey:MPMediaItemPropertyTitle];
-    [info setObject:@"专辑名称" forKey:MPMediaItemPropertyAlbumTitle];
+    
+    [info setObject:[NSString stringWithFormat:@"歌曲%d",self.currentItemIndex] forKey:MPMediaItemPropertyTitle];
+    [info setObject:[NSString stringWithFormat:@"专辑%d",self.currentItemIndex] forKey:MPMediaItemPropertyAlbumTitle];
     // cover image
     MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithBoundsSize:CGSizeMake(250, 250) requestHandler:^UIImage * _Nonnull(CGSize size) {
         UIImage* image = [UIImage imageNamed:@"cover.jpg"];
