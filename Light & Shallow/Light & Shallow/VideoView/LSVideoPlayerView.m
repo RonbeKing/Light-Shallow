@@ -146,9 +146,8 @@
     [[commandCenter nextTrackCommand] removeTarget:self];
     [[commandCenter previousTrackCommand] removeTarget:self];
     if (@available(iOS 9.1, *)) {
-        [[commandCenter pauseCommand] removeTarget:self];
+        [[commandCenter changePlaybackPositionCommand] removeTarget:self];
     }
-    [[commandCenter changePlaybackPositionCommand] removeTarget:self];
 }
 
 - (void)updateRemoteInfoCenter{
