@@ -98,6 +98,7 @@
 
 - (void)addMediaPlayerRemoteCommands{
     MPRemoteCommandCenter* commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
+    
     MPRemoteCommand* pauseCommand = [commandCenter pauseCommand];
     [pauseCommand setEnabled:YES];
     [pauseCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
@@ -109,6 +110,20 @@
     [playCommand setEnabled:YES];
     [playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
         [self play];
+        return MPRemoteCommandHandlerStatusSuccess;
+    }];
+    
+    MPRemoteCommand* playNextCommand = [commandCenter nextTrackCommand];
+    [playNextCommand setEnabled:YES];
+    [playNextCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        [self playNext];
+        return MPRemoteCommandHandlerStatusSuccess;
+    }];
+    
+    MPRemoteCommand* playPreCommand = [commandCenter previousTrackCommand];
+    [playPreCommand setEnabled:YES];
+    [playPreCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) {
+        [self playPrevious];
         return MPRemoteCommandHandlerStatusSuccess;
     }];
     
@@ -151,9 +166,6 @@
     // set screen progress
     NSNumber* duration = @(CMTimeGetSeconds(self.player.currentItem.duration));
     NSNumber* currentTime = @(CMTimeGetSeconds(self.player.currentItem.currentTime));
-//    if (!duration || !currentTime) {
-//        return;
-//    }
     [info setObject:duration forKey:MPMediaItemPropertyPlaybackDuration];
     [info setObject:currentTime forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
     [info setObject:@(self.player.rate) forKey:MPNowPlayingInfoPropertyPlaybackRate];
@@ -206,10 +218,6 @@
     AVAsset* nextAsset = [self.videoQueue objectAtIndex:self.currentItemIndex];
     self.currentPlayItem = [AVPlayerItem playerItemWithAsset:nextAsset];
     [self replaceItemWithAsset:nextAsset];
-    
-//    if ([self.delegate respondsToSelector:@selector(LSVideoPlayer:readyToPlayVideoOfIndex:)]) {
-//        [self.delegate LSVideoPlayer:self readyToPlayVideoOfIndex:self.currentItemIndex];
-//    }
     [self play];
 }
 
@@ -221,10 +229,6 @@
     AVAsset* preAsset = [self.videoQueue objectAtIndex:self.currentItemIndex];
     self.currentPlayItem = [AVPlayerItem playerItemWithAsset:preAsset];
     [self replaceItemWithAsset:preAsset];
-    
-//    if ([self.delegate respondsToSelector:@selector(LSVideoPlayer:readyToPlayVideoOfIndex:)]) {
-//        [self.delegate LSVideoPlayer:self readyToPlayVideoOfIndex:self.currentItemIndex];
-//    }
     [self play];
 }
 
