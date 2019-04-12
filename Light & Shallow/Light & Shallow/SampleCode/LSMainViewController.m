@@ -72,7 +72,6 @@
 }
 
 - (void)jumpToCompose{
-    
     LSCompositionViewController* compose = [self.storyboard instantiateViewControllerWithIdentifier:@"compose"];
     [self presentViewController:compose animated:YES completion:nil];
 }
@@ -84,21 +83,11 @@
 
 - (void)JumpToVideoEditor{
     LSVideoEditorViewController* videoEditor = [[LSVideoEditorViewController alloc] init];
-    
-    NSString* filePath = [NSString stringWithFormat:@"%@%@",NSHomeDirectory(),@"/Documents/videoTemp"];
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    BOOL isDirectory = YES;
-    if (![fileManager fileExistsAtPath:filePath isDirectory:&isDirectory]) {
-        [fileManager createDirectoryAtPath:filePath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-    //NSString* theFilePath = [filePath stringByAppendingString:@"/test.mp4"];
-    //AVAsset* asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:theFilePath] options:nil];
-    
-    NSString *secondVideoPath = [[NSBundle mainBundle] pathForResource:@"dance" ofType:@"mp4"];
-    AVAsset* asset2 = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:secondVideoPath] options:nil];
-    
-    videoEditor.asset = asset2;
     [self presentViewController:videoEditor animated:YES completion:nil];
+}
+
+- (void)JumpToVideoProcess{
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -124,6 +124,7 @@ static NSString* collectionFooterViewIdentifier = @"collectionFooterView";
 - (void)LSVideoPlayer:(LSVideoPlayerView *)player readyToPlayVideoOfIndex:(NSInteger)index{
     // we need to get all images of the video to played
     AVAsset* asset = [self.videoQueue objectAtIndex:index];
+    self.asset = asset;
     [self.images removeAllObjects];
     [self.videoEditor centerFrameImageWithAsset:asset completion:^(UIImage *image) {
         [self.images addObject:image];
@@ -137,7 +138,6 @@ static NSString* collectionFooterViewIdentifier = @"collectionFooterView";
 
 - (LSDisplayCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     LSDisplayCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    
     UIImage* image = self.images[indexPath.row];
     [cell setContentImage:image];
     return cell;
