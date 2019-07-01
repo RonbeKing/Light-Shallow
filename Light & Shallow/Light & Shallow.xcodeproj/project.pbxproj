@@ -665,7 +665,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G6S3USNXX8;
+				DEVELOPMENT_TEAM = 9649UC8LF5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Light & Shallow/Config/PrefixHeader.pch";
 				INFOPLIST_FILE = "Light & Shallow/Info.plist";
@@ -674,7 +674,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "LS.Light---Shallow";
+				PRODUCT_BUNDLE_IDENTIFIER = "LS.Light---Shadow";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -685,7 +685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G6S3USNXX8;
+				DEVELOPMENT_TEAM = 9649UC8LF5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Light & Shallow/Config/PrefixHeader.pch";
 				INFOPLIST_FILE = "Light & Shallow/Info.plist";
@@ -694,7 +694,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "LS.Light---Shallow";
+				PRODUCT_BUNDLE_IDENTIFIER = "LS.Light---Shadow";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

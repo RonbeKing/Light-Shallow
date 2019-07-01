@@ -93,6 +93,9 @@
     // video output
     AVCaptureVideoDataOutput* output = [[AVCaptureVideoDataOutput alloc] init];
     output.alwaysDiscardsLateVideoFrames = YES;
+    output.videoSettings = @{
+                             (NSString*)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)
+                             };
     if ([self.captureSession canAddOutput:output]) {
         [self.captureSession addOutput:output];
     }

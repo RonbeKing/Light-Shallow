@@ -21,6 +21,7 @@
 
 @interface LSCaptureSessionManager : NSObject
 
+@property (nonatomic, strong, readonly) AVCaptureSession* captureSession;
 @property (nonatomic, weak) id <LSCaptureSessionManagerDelegate> delegate;
 @property (nonatomic, strong) LSAVConfiguration* config;
 /**
