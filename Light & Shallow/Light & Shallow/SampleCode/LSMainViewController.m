@@ -17,7 +17,6 @@
 
 #import "LSCompositionViewController.h"
 #import "LSImageProcessViewController.h"
-
 #import "LSVideoEditorViewController.h"
 
 #import "LSAssetManager.h"
@@ -43,11 +42,11 @@
     
     self.composeBtn.backgroundColor = [UIColor purpleColor];
     [self cornerRadioWithBtn:self.composeBtn];
-    [self.composeBtn addTarget:self action:@selector(JumpToVideoEditor) forControlEvents:UIControlEventTouchUpInside];
+    [self.composeBtn addTarget:self action:@selector(jumpToCompose) forControlEvents:UIControlEventTouchUpInside];
     
     self.imageEditorBtn.backgroundColor = [UIColor magentaColor];
     [self cornerRadioWithBtn:self.imageEditorBtn];
-    [self.imageEditorBtn addTarget:self action:@selector(JumpToImageProcess) forControlEvents:UIControlEventTouchUpInside];
+    [self.imageEditorBtn addTarget:self action:@selector(JumpToVideoEditor) forControlEvents:UIControlEventTouchUpInside];
     
 }
 

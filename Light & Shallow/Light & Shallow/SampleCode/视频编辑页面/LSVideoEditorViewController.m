@@ -52,6 +52,7 @@ static NSString* collectionFooterViewIdentifier = @"collectionFooterView";
     [videoQueue addObject:asset2];
     [videoQueue addObject:asset3];
     
+    self.asset = asset1;
     self.player = [[LSVideoPlayerView alloc] initWithVideoQueue:videoQueue frame:CGRectMake(0, 40, KScreenWidth, KScreenWidth)];
     
     self.player.isUsingRemoteCommand = YES;

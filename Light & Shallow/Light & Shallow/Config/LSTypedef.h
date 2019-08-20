@@ -58,14 +58,14 @@ typedef NS_ENUM(NSUInteger, LSFilterType)
     LSFilterTypeNoir        = 0,  // 黑白
     LSFilterTypeTransfer    = 1,  // 岁月
     LSFilterTypeMono        = 2,  // 单色
-    LSFilterTypeInstant     = 3  // 怀旧
+    LSFilterTypeInstant     = 3   // 怀旧
 };
 
 typedef NS_ENUM(NSUInteger, LSVideoOrientation)
 {
-    LSVideoOrientationPortrait     = 0,
-    LSVideoOrientationLandscapeRight     = 1,
-    LSVideoOrientationPortraitUpsideDown      = 2,
-    LSVideoOrientationLandscapeLeft      = 3
+    LSVideoOrientationPortrait            = 0,
+    LSVideoOrientationLandscapeRight      = 1,
+    LSVideoOrientationPortraitUpsideDown  = 2,
+    LSVideoOrientationLandscapeLeft       = 3
 };
 #endif /* LSTypedef_h */

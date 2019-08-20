@@ -18,7 +18,7 @@
 // indicating index of 'currentPlayItem' in the 'videoQueue'
 @property (nonatomic, assign) int currentItemIndex;
 
-
+@property (nonatomic, assign) BOOL didPlayEnd;
 @property (nonatomic, assign) LSPlayerState playerState;
 @end
 
@@ -187,6 +187,7 @@
 }
 
 - (void)play{
+    self.didPlayEnd = NO;
     self.player.currentItem.audioTimePitchAlgorithm = AVAudioTimePitchAlgorithmVarispeed;
     [self.player play];
     self.playerState = LSPlayerStatePlaying;
@@ -250,6 +251,7 @@
 #pragma mark -- 通知响应事件
 
 - (void)moviePlayDidEnd:(NSNotification*)notification{
+    self.didPlayEnd = YES;
     if (self.singleCirclePlay) {
         [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
             [self play];
@@ -326,7 +328,13 @@
 
 - (void)doubleTap:(UITapGestureRecognizer*)tap{
     if (self.playerState != LSPlayerStatePlaying) {
-        [self play];
+        if (self.didPlayEnd) {
+            [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+                [self play];
+            }];
+        }else{
+            [self play];
+        }
     }else{
         [self pause];
     }
